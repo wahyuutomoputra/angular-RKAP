@@ -1,0 +1,98 @@
+<div *ngIf="addVisible">
+  <form action="Submit" (submit)="save($event)">
+    <dx-button icon="fa fa-ban" text="Cancel" (onClick)="cancel()"></dx-button>
+    <dx-button class="pull-right" icon="fa fa-save" text="Save" validationGroup="userData" [useSubmitBehavior]="true">
+    </dx-button>
+    <div class="m-2"></div>
+    <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+    <div class="m-2"></div>
+    <dx-form [(formData)]="user" validationGroup="userData">
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item itemType="group" [colCount]="3">
+            <dxi-item dataField="siteCodeExist" [editorOptions]="{ disabled: false }" [colSpan]="2">
+              <dxo-label text="Site Code"></dxo-label>
+            </dxi-item>
+            <dxi-item [colSpan]="1">
+              <dx-button icon="search" (onClick)="showInfo()"></dx-button>
+            </dxi-item>
+          </dxi-item>
+          <dxi-item dataField="roleId" editorType="dxSelectBox" [editorOptions]="{items: roles, value:'', displayExpr: 'roleName', valueExpr: 'id'}">            
+            <dxo-label text="User Role"></dxo-label>
+            <dxi-validation-rule type="required" message="User Role is required"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="userId">
+            <dxo-label text="User ID"></dxo-label>
+            <dxi-validation-rule type="required" message="User ID is required"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="name">
+            <dxo-label text="Name"></dxo-label>
+            <dxi-validation-rule type="required" message="Name is required"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="languageDefaultId" editorType="dxSelectBox" [editorOptions]="{items: languages, value:'', displayExpr: 'language', valueExpr: 'id'}">
+            <dxo-label text="Language"></dxo-label>
+            <dxi-validation-rule type="required" message="User Role is required"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="locationTypeId" editorType="dxSelectBox" [editorOptions]="{items: locations, value:'', displayExpr: 'name', valueExpr: 'id'}">
+            <dxo-label text="Location"></dxo-label>
+            <dxi-validation-rule type="required" message="User Role is required"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="address"><dxo-label text="Address"></dxo-label></dxi-item>
+          <dxi-item dataField="city"><dxo-label text="City"></dxo-label></dxi-item>
+          <dxi-item dataField="province"><dxo-label text="Province"></dxo-label></dxi-item>
+          <dxi-item dataField="country"><dxo-label text="Country"></dxo-label></dxi-item>
+          <dxi-item dataField="postalCode"><dxo-label text="Postal Code"></dxo-label></dxi-item>
+          <dxi-item dataField="telephone1"><dxo-label text="Phone 1"></dxo-label></dxi-item>
+          <dxi-item dataField="telephone2"><dxo-label text="Phone 2"></dxo-label></dxi-item>
+          <dxi-item dataField="facsimile"><dxo-label text="Faximile"></dxo-label></dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="email"><dxo-label text="Email"></dxo-label>            
+              <dxi-validation-rule type="required" message="Email is required"></dxi-validation-rule>
+              <dxi-validation-rule type="email" message="Email is invalid"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="passwd" editorType="dxTextBox" [editorOptions]="{ mode: 'password', disabled: isEdit }">
+              <dxo-label text="Password"></dxo-label>
+              <dxi-validation-rule type="required" message="Password is required"></dxi-validation-rule>
+              <dxi-validation-rule type="pattern" pattern= "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" message="Password must be at least 8 characters, must contain both uppercase letters (A-Z) and lowercase letters (a-z), and must contain a number (0-9)"></dxi-validation-rule>   
+          </dxi-item>
+          <dxi-item *ngIf = "!isEdit" dataField="repasswd" editorType="dxTextBox" [editorOptions]="{ mode: 'password' }">
+              <dxo-label text="Confirm Password"></dxo-label>
+              <dxi-validation-rule type="required" message="Confirm Password is required"></dxi-validation-rule>
+              <dxi-validation-rule type="compare" [comparisonTarget]="passwdCompare" message="Password and Confirm Password do not match"></dxi-validation-rule>
+          </dxi-item>
+
+        <dxi-item itemType="group" [colCount]="2">
+          <dxi-item dataField="photoUrl" [template]="'photoTemplate'" >
+            <dxo-label text="Photo"></dxo-label>
+          </dxi-item>
+        </dxi-item>
+          <dxi-item dataField="formUser">
+            <dxo-label text="Form User"></dxo-label>
+          </dxi-item>
+          <dxi-item>
+            <dx-file-uploader name="file" uploadMode="useButtons" uploadUrl="" selectButtonText="Browse" labelText="">
+            </dx-file-uploader>
+          </dxi-item>
+          <dxi-item dataField="status" editorType="dxCheckBox">
+            <dxo-label text="Active"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="ldap" editorType="dxRadioGroup" [editorOptions]="{items: ldap, layout: 'horizontal'}">
+            <dxo-label text="Option"></dxo-label>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+      <div *dxTemplate="let data of 'photoTemplate'">
+        <img src="" onError="this.src='/assets/img/default.png'" width="125px" height="150px" class="form-avatar" />
+        <dx-file-uploader name="file" uploadMode="useButtons" uploadUrl="" selectButtonText="Upload Photo"
+          labelText="">
+        </dx-file-uploader>
+      </div>
+    </dx-form>
+    <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save()" (onHideConf)="onHideConf()"
+      (onSaveConf)="onSaveConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+  </form>
+</div>
+<div *ngIf="isShowInfo">
+  <app-search-site [siteSearchVsb]="siteSearchVsb" (onHideSiteSearch)="onHideSiteSearch($event, $event2)"></app-search-site>
+</div>

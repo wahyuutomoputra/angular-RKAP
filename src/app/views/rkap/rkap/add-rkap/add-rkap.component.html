@@ -1,0 +1,133 @@
+<div *ngIf="addVisible">
+    <form action="Submit" (submit)="save($event)" style="margin-left:100px; margin-right: 100px; margin-bottom: 30px; margin-top: 30px;">
+    
+        <dx-form [(formData)]="role" validationGroup="roleData" (onFieldDataChanged)="form_fieldDataChanged($event)">
+
+          <dxi-item itemType="group" [colCount]="1">
+              
+              <dxi-item name="ProgramKerja" dataField="prkid" [label]="{ text: 'Program Kerja' }" editorType="dxSelectBox" [editorOptions]="{readOnly: isDetail, items: daftarProker, displayExpr: 'nama_program', valueExpr: 'prkid' }" [validationRules]="[{type: 'required', message: 'Program Kerja harus diisi' }]"></dxi-item>
+
+              <dxi-item name="NoProgramKerja" dataField="no_prk" [label]="{ text: 'No Program Kerja' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'No Program Kerja harus diisi' }]"></dxi-item>
+              <dxi-item name="Deskripsi" dataField="deskripsi" [label]="{ text: 'Deskripsi' }" editorType="dxTextArea" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Deskripsi harus diisi' }]"></dxi-item>
+              <dxi-item name="JenisAnggaran" dataField="jenis_anggaran" [label]="{ text: 'Jenis Anggaran' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Jenis Anggaran harus diisi' }]"></dxi-item>
+              <dxi-item name="TipeRKAP" dataField="tipe_rkap" [label]="{ text: 'Tipe RKAP' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Tipe RKAP harus diisi' }]"></dxi-item>
+              <dxi-item name="NoKontrakExisting" dataField="no_kontrak_existing" [label]="{ text: 'No Kontrak Existing' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'No Kontrak Existing harus diisi' }]"></dxi-item>
+              <dxi-item name="Tanggal Akhir Kontrak" dataField="tgl_akhir_kontrak" [label]="{ text: 'Tanggal Akhir Kontrak' }" editorType="dxDateBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Tanggal Akhir Kontrak harus diisi' }]"></dxi-item>
+              <dxi-item name="NilaiKontrak" dataField="nilai_kontrak" [label]="{ text: 'Nilai Kontrak' }" editorType="dxNumberBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message:'Nilai Kontrak harus diisi' }]"></dxi-item>
+              <dxi-item name="UsulanAnggaran" dataField="usulan_anggaran" [label]="{ text: 'Usulan Anggaran' }" editorType="dxNumberBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Usulan Anggaran harus diisi' }]"></dxi-item>
+              <dxi-item name="PortofolioProduk" dataField="gid" [label]="{ text: 'Portofolio Produk' }" editorType="dxSelectBox" [editorOptions]="{readOnly: isDetail, items: daftarPortofolio, displayExpr: 'nama', valueExpr: 'gid' }" [validationRules]="[{type: 'required', message: 'Portofolio Produk harus diisi' }]"></dxi-item>
+              <dxi-item name="Prioritas" dataField="prioritas" [label]="{ text: 'Prioritas' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Prioritas harus diisi' }]"></dxi-item>
+              <dxi-item name="NiIO" dataField="no_io" [label]="{ text: 'No IO' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'No IO harus diisi' }]"></dxi-item>
+              <dxi-item name="PlanTglMulaiSPP" dataField="plan_tgl_mulai" [label]="{ text: 'Plan Tanggal Mulai SPP' }" editorType="dxDateBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Plan tanggal mulai SPP harus diisi' }]"></dxi-item>
+              <dxi-item name="PlanTglAkhirSPP" dataField="plan_tgl_akhir" [label]="{ text: 'Plan Tanggal Akhir SPP' }" editorType="dxDateBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Plan tanggal akhir SPP harus diisi' }]"></dxi-item>
+              <dxi-item name="IndikatorOutcome" dataField="indikator_outcome" [label]="{ text: 'Indikator Outcome' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Indikator outcome harus diisi' }]"></dxi-item>
+              <dxi-item name="Lokasi" dataField="lokasi" [label]="{ text: 'Lokasi' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Lokasi harus diisi' }]"></dxi-item>
+              <dxi-item name="Sasaran" dataField="deptid" [label]="{ text: 'Departemen' }" editorType="dxSelectBox" [editorOptions]="{readOnly: isDetail, items: daftarDepartemen, displayExpr: 'dept_name', valueExpr: 'deptid' }" [validationRules]="[{type: 'required', message: 'Sasaran harus diisi' }]"></dxi-item>
+              <dxi-item name="JenisOca" dataField="jenis_oca" [label]="{ text: 'Jenis Oca' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Jenis Oca harus diisi' }]"></dxi-item>
+              <dxi-item name="NilaiRKAP" dataField="nilai_rkap" [label]="{ text: 'Nilai RKAP' }" editorType="dxNumberBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Nilai RKAP harus diisi' }]"></dxi-item>
+              <dxi-item name="MataUangKontrak" dataField="mata_uang_kontrak" [label]="{ text: 'Mata Uang Kontrak' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Mata uang kontrak harus diisi' }]"></dxi-item>
+              <dxi-item name="Profile" dataField="riskid" [label]="{ text: 'Risiko' }" editorType="dxSelectBox" [editorOptions]="{readOnly: isDetail, items: daftarProfilRisiko, displayExpr: 'risiko', valueExpr: 'riskid' }" [validationRules]="[{type: 'required', message: 'Sasaran harus diisi' }]"></dxi-item>
+              <dxi-item name="MataUang" dataField="mata_uang" [label]="{ text: 'Mata Uang' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Mata uang harus diisi' }]"></dxi-item> 
+              <dxi-item itemType="group" [label]="{ text: 'Dokumen' }">
+                  <dx-file-uploader
+                          selectButtonText="Select"
+                          uploadMode="useForm">
+                  </dx-file-uploader>
+              </dxi-item>
+            </dxi-item>
+          
+           <!--  <dxi-item itemType="group" itemType="group" caption="Indikator" [colCount]="1">
+              <dxi-item itemType="group" [colCount]="2">
+                <dxi-item itemType="group" itemType="group" caption="Indikator Input" [colCount]="1">
+                    <dxi-item name="Indikator" dataField="indikator" [label]="{ text: 'Indikator Input' }" editorType="dxTextArea" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Indikator input harus diisi' }]"></dxi-item>
+                    <dxi-item name="Nilai" dataField="nilai" [label]="{ text: 'Nilai' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Nilai harus diisi' }]"></dxi-item>
+                    <dxi-item name="Satuan" dataField="satuanid" [label]="{ text: 'Satuan' }" editorType="dxSelectBox" [editorOptions]="{readOnly: isDetail, items: daftarSatuan, displayExpr: 'satuan', valueExpr: 'satuanid' }" [validationRules]="[{type: 'required', message: 'Satuan harus diisi' }]"></dxi-item>
+                    <dxi-item name="Departemen" dataField="deptid" [label]="{ text: 'Departemen' }" editorType="dxSelectBox" [editorOptions]="{readOnly: isDetail, items: daftarDepartemen, displayExpr: 'dept_name', valueExpr: 'deptid' }" [validationRules]="[{type: 'required', message: 'Departemen harus diisi' }]"></dxi-item>
+                </dxi-item>
+
+                <dxi-item itemType="group" itemType="group" caption="Indikator Output" [colCount]="1">
+                    <dxi-item name="Indikator" dataField="indikator" [label]="{ text: 'Indikator Output' }" editorType="dxTextArea" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Indikator output harus diisi' }]"></dxi-item>
+                    <dxi-item name="Nilai" dataField="nilai" [label]="{ text: 'Nilai' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Nilai harus diisi' }]"></dxi-item>
+                    <dxi-item name="Satuan" dataField="satuanid" [label]="{ text: 'Satuan' }" editorType="dxSelectBox" [editorOptions]="{readOnly: isDetail, items: daftarSatuan, displayExpr: 'satuan', valueExpr: 'satuanid' }" [validationRules]="[{type: 'required', message: 'Satuan harus diisi' }]"></dxi-item>
+                </dxi-item>
+              </dxi-item>
+            </dxi-item> -->
+
+           
+
+        </dx-form>
+        <dx-form [(formData)]="rab" validationGroup="roleData">
+           <dxi-item itemType="group" itemType="group" caption="RAB" [colCount]="2">
+              <dxi-item itemType="group" itemType="group">
+                <dxi-item name="Rincian" dataField="rincian" [label]="{ text: 'Rincian' }" editorType="dxTextArea" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Rincian harus diisi' }]"></dxi-item>
+                <dxi-item name="Volume" dataField="volume" [label]="{ text: 'Volume' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Volume harus diisi' }]"></dxi-item>
+                <dxi-item name="Nilai" dataField="nilai" [label]="{ text: 'Nilai' }" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Nilai harus diisi' }]"></dxi-item>
+                <dxi-item name="Satuan" dataField="satuanid" [label]="{ text: 'Satuan' }" editorType="dxSelectBox" [editorOptions]="{readOnly: isDetail, items: daftarSatuan, displayExpr: 'satuan', valueExpr: 'satuanid' }" [validationRules]="[{type: 'required', message: 'Satuan harus diisi' }]"></dxi-item>
+              </dxi-item>
+              <dxi-item itemType="group" itemType="group">
+                  <dxi-item></dxi-item>
+              </dxi-item>
+            </dxi-item>
+        </dx-form>
+        Indikator Input
+        <dx-data-grid 
+            id="indikatorInput"
+            [dataSource]="daftarIndikatorInput"
+            keyExpr="indid"
+            [allowColumnReordering]="true"
+            [showBorders]="true"
+            (onRowUpdated)="indikatorInputUpdated($event)"
+            (onRowRemoved)="indikatorInputRemoved($event)"
+            (onRowInserted)="indikatorInputInserted($event)"
+            >
+            
+            <dxo-paging [enabled]="true"></dxo-paging>
+            <dxo-editing 
+                 mode="row"
+                 [allowUpdating]="true"
+                 [allowDeleting]="true"
+                 [allowAdding]="true">
+            </dxo-editing>
+            <!-- <dxi-column dataField="indid" caption="Indikator Id" [editorOptions]="{readOnly: true}"></dxi-column> -->
+            <dxi-column dataField="indikator" caption="Indikator"></dxi-column>
+            <dxi-column dataField="nilai" caption="Nilai"></dxi-column>
+            <dxi-column
+                dataField="deptid"
+                caption="Departemen"
+                [width]="125">         
+                <dxo-lookup
+                    [dataSource]="daftarDepartemen"
+                    displayExpr="dept_name"
+                    valueExpr="deptid">
+                </dxo-lookup>
+           </dxi-column>
+           <dxi-column
+                dataField="satuanid"
+                caption="Satuan"
+                [width]="125">         
+                <dxo-lookup
+                    [dataSource]="daftarSatuan"
+                    displayExpr="satuan"
+                    valueExpr="satuanid">
+                </dxo-lookup>
+           </dxi-column>
+        </dx-data-grid>
+
+        <dx-button *ngIf="!isDetail" icon="fa fa-ban" text="Cancel" type="danger" (onClick)="cancel()"></dx-button>
+        <dx-button *ngIf="!isDetail" class="pull-right" icon="fa fa-save" text="Save" type="success" validationGroup="roleData" [useSubmitBehavior]="true"></dx-button>
+        
+        <br>
+        <br>
+
+        <app-form-confirmation 
+          [isSave]="isSave" 
+          [isCancel]="isCancel" 
+          [confVisible]="confVisible" 
+            (onYesConf)="save()" 
+            (onHideConf)="onHideConf()"
+            (onSaveConf)="onSaveConf()" 
+            (onCancelConf)="onCancelConf()">
+        </app-form-confirmation>
+      </form>
+    </div>
+    

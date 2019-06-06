@@ -1,0 +1,82 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <div class="long-title">
+        <h3><strong>Executive Dashboard</strong></h3>
+      </div>
+    </div>
+    <div id="form-container" style="margin-left: 20px; margin-right: 20px;">
+      <div class="row">
+        <div class="col-md-4">
+          <dx-chart
+            id="customer-chart"
+            title="Customer Growth"
+            [dataSource]="customers"
+            palette="soft"
+            [equalBarWidth]=false
+          >
+            <dxo-size [height]="200"></dxo-size>
+            <dxo-tooltip [enabled]="true"></dxo-tooltip>
+            <dxo-common-series-settings argumentField="regionOffice" valueField="customer" type="bar"></dxo-common-series-settings>
+            <dxo-series-template nameField="regionOffice"></dxo-series-template>
+          </dx-chart>
+        </div>
+        <div class="col-md-4">
+          <dx-chart
+            id="energy-chart"
+            title="Energy Consumption"
+            [dataSource]="customers"
+            palette="soft"
+            [equalBarWidth]=false
+          >
+            <dxo-size [height]="200"></dxo-size>
+            <dxo-tooltip [enabled]="true"></dxo-tooltip>
+            <dxo-common-series-settings argumentField="regionOffice" valueField="energyConsumption" type="bar"></dxo-common-series-settings>
+            <dxo-series-template nameField="regionOffice"></dxo-series-template>
+          </dx-chart>
+        </div>
+        <div class="col-md-4">
+          <dx-chart
+            id="power-chart"
+            title="Power"
+            [dataSource]="customers"
+            palette="soft"
+            [equalBarWidth]=false
+          >
+            <dxo-size [height]="200"></dxo-size>
+            <dxo-tooltip [enabled]="true"></dxo-tooltip>
+            <dxo-common-series-settings argumentField="regionOffice" valueField="power" type="bar"></dxo-common-series-settings>
+            <dxo-series-template nameField="regionOffice"></dxo-series-template>
+          </dx-chart>
+        </div>
+      </div>
+      <br><br>
+      <div class="row">
+        <div class="col-md-12">
+          <dx-data-grid
+            id="gridContainer"
+            [dataSource]="customers">
+            <dxi-column dataField="regionOffice"></dxi-column>
+            <dxi-column dataField="customer"></dxi-column>
+            <dxi-column dataField="energyConsumption"></dxi-column>
+            <dxi-column dataField="power"></dxi-column>
+            <dxo-summary>
+              <dxi-total-item
+                column="customer"
+                summaryType="sum">
+              </dxi-total-item>
+              <dxi-total-item
+                column="energyConsumption"
+                summaryType="sum">
+              </dxi-total-item>
+              <dxi-total-item
+                column="power"
+                summaryType="sum">
+              </dxi-total-item>
+            </dxo-summary>
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,282 @@
+<div *ngIf="popupVisible">
+  <dx-popup class="popup" [width]="1200" [height]="600" [showTitle]="true" title="Detail Instantaneous Data" [dragEnabled]="false"
+    [closeOnOutsideClick]="false" [(visible)]="popupVisible" (onHiding)="hide()" (onShowing)="show()">
+    <div *dxTemplate="let data of 'content'">
+      <div id="scrollview-demo">
+        <dx-scroll-view #scrollView id="scrollview" [showScrollbar]="scrollbarMode">
+          <div id="form-container" style="margin-left:20px; margin-right: 20px; margin-top: 20px;">
+            <dx-form id="form" [formData]="detail" [colCount]="2">
+              <dxi-item itemType="group">
+                <dxi-item dataField="Site">
+                  <p>{{detailMerk.siteCodeExist}} - {{detailMerk.siteName}}</p>
+                </dxi-item>
+                <dxi-item dataField="location">
+                  <p>{{detailMerk.locationCode}} - {{detailMerk.locationName}}</p>
+                </dxi-item>
+                <!-- <dxi-item dataField="Tarif/ Power">
+                  <p>{{detailMerk.tariff}} / {{detailMerk.power}}</p>
+                </dxi-item> -->
+                <dxi-item dataField="meterNo">
+                  <p>{{detailMerk.assetCode}}</p>
+                </dxi-item>
+                <dxi-item dataField="Meter Brand / BrandType">
+                  <p>{{detailMerk.brandName}} / {{detailMerk.brandTypeName}}</p>
+                </dxi-item>
+              </dxi-item>
+
+              <dxi-item itemType="group">
+                <dxi-item dataField="CT Primary">
+                  <p>{{detailMerk.ctPrimary}}</p>
+                </dxi-item>
+                <dxi-item dataField="CT Secondary">
+                  <p>{{detailMerk.ctSecondary}}</p>
+                </dxi-item>
+                <dxi-item dataField="PT Primary">
+                  <p>{{detailMerk.ptPrimary}}</p>
+                </dxi-item>
+                <dxi-item dataField="PT Secondary">
+                  <p>{{detailMerk.ptSecondary}}</p>
+                </dxi-item>
+              </dxi-item>
+            </dx-form>
+          </div>
+          <div class="card-body">
+            <p style="border-top: 2px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+          </div>
+          <div class="row" style="padding: 20px;">
+            <div class="col-6">
+              <span class="">Date</span>
+            </div>
+            <div class="col-6">
+              <span class="">Frequency : {{detail.frequency}}</span>
+            </div>
+          </div>
+          <div class="row" style="padding: 20px; padding-bottom:20px;">
+            <div class="col-6">
+              <canvas #myCanvas id="myCanvas" [width]="350" [height]="350" style="background-color:white"></canvas>
+            </div>
+            <div class="col-6">
+              <div class="">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr class='header' style="background-color:silver">
+                      <td>Item</td>
+                      <td>Phase R</td>
+                      <td>Phase S</td>
+                      <td>Phase T</td>
+                      <td>Total</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Voltage (V)</td>
+                      <td>{{detail.voltageL1}}</td>
+                      <td>{{detail.voltageL2}}</td>
+                      <td>{{detail.voltageL3}}</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Voltage Angle</td>
+                      <td>{{detail.voltageAngelL1}}</td>
+                      <td>{{detail.voltageAngelL2}}</td>
+                      <td>{{detail.voltageAngelL3}}</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Current (A)</td>
+                      <td>{{detail.currentL1}}</td>
+                      <td>{{detail.currentL2}}</td>
+                      <td>{{detail.currentL3}}</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Current Angle</td>
+                      <td>{{detail.currentAngelL1}}</td>
+                      <td>{{detail.currentAngelL2}}</td>
+                      <td>{{detail.currentAngelL3}}</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Power Factor</td>
+                      <td>{{detail.powerFactorL1}}</td>
+                      <td>{{detail.powerFactorL2}}</td>
+                      <td>{{detail.powerFactorL3}}</td>
+                      <td>{{detail.powerFactorTotal}}</td>
+                    </tr>
+                    <tr>
+                      <td>Active Power (kW)</td>
+                      <td>{{detail.kwhExportR1}}</td>
+                      <td>{{detail.kwhExportR2}}</td>
+                      <td>{{detail.kwhExportR3}}</td>
+                      <td>{{detail.kwhExportTotal}}</td>
+                    </tr>
+                    <tr>
+                      <td>Active Power Dir</td>
+                      <td>{{detail.kwhImportR1}}</td>
+                      <td>{{detail.kwhImportR2}}</td>
+                      <td>{{detail.kwhImportR3}}</td>
+                      <td>{{detail.kwhImportTotal}}</td>
+                    </tr>
+                    <tr>
+                      <td>Reactive Power (kVAr)</td>
+                      <td>{{detail.kvarhExportR1}}</td>
+                      <td>{{detail.kvarhExportR2}}</td>
+                      <td>{{detail.kvarhExportR3}}</td>
+                      <td>{{detail.kvarhExportTotal}}</td>
+                    </tr>
+                    <tr>
+                      <td>Reactive Power Dir</td>
+                      <td>{{detail.kvarhImportR1}}</td>
+                      <td>{{detail.kvarhImportR2}}</td>
+                      <td>{{detail.kvarhImportR3}}</td>
+                      <td>{{detail.kvarhImportTotal}}</td>
+                    </tr>
+                    <tr>
+                      <td>Reactive Power (kVA)</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <p style="border-top: 2px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+          </div>
+          <div class="container">
+            <div class="row" style="padding: 20px;">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding:0px">
+                <div class="short-div">
+                  <label>Max Demand (kVA)</label>
+                  <div class="">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr class='header' style="background-color:silver">
+                          <td>Item</td>
+                          <td>Rate 1</td>
+                          <td>Rate 2</td>
+                          <td>Rate 3</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Max Demand (kVA)</td>
+                          <td>{{detail.kvaMaxR1}}</td>
+                          <td>{{detail.kvaMaxR2}}</td>
+                          <td>{{detail.kvaMaxR3}}</td>
+                        </tr>
+                        <tr>
+                          <td>Max Demand Time</td>
+                          <td>{{detail.timeKvaR1}}</td>
+                          <td>{{detail.timeKvaR2}}</td>
+                          <td>{{detail.timeKvaR3}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="short-div">
+                  <label>Absolute Stand</label>
+                  <div class="">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr class='header' style="background-color:silver">
+                          <td>Item</td>
+                          <td>Rate 1</td>
+                          <td>Rate 2</td>
+                          <td>Rate 3</td>
+                          <td>Rate 4</td>
+                          <td>Rate 5</td>
+                          <td>Total</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Abs kWh</td>
+                          <td>{{detail.kwhAbsR1}}</td>
+                          <td>{{detail.kwhAbsR2}}</td>
+                          <td>{{detail.kwhAbsR3}}</td>
+                          <td>{{detail.kwhAbsR4}}</td>
+                          <td>{{detail.kwhAbsR5}}</td>
+                          <td>{{detail.kwhAbsTotal}}</td>
+                        </tr>
+                        <tr>
+                          <td>Abs kVArh</td>
+                          <td>{{detail.kvarhAbsR1}}</td>
+                          <td>{{detail.kvarhAbsR2}}</td>
+                          <td>{{detail.kvarhAbsR3}}</td>
+                          <td>{{detail.kvarhAbsR4}}</td>
+                          <td>{{detail.kvarhAbsR5}}</td>
+                          <td>{{detail.kvarhAbsTotal}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 ">
+                <label>Exim Stand</label>
+                <div class="">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr class='header' style="background-color:silver">
+                        <td>Item</td>
+                        <td>Rate 1</td>
+                        <td>Rate 2</td>
+                        <td>Rate 3</td>
+                        <td>Rate 4</td>
+                        <td>Rate 5</td>
+                        <td>Total</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Export kWh</td>
+                        <td>{{detail.kwhExportR1}}</td>
+                        <td>{{detail.kwhExportR2}}</td>
+                        <td>{{detail.kwhExportR3}}</td>
+                        <td>{{detail.kwhExportR4}}</td>
+                        <td>{{detail.kwhExportR5}}</td>
+                        <td>{{detail.kwhExportTotal}}</td>
+                      </tr>
+                      <tr>
+                        <td>Import kWh</td>
+                        <td>{{detail.kwhImportR1}}</td>
+                        <td>{{detail.kwhImportR2}}</td>
+                        <td>{{detail.kwhImportR3}}</td>
+                        <td>{{detail.kwhImportR4}}</td>
+                        <td>{{detail.kwhImportR5}}</td>
+                        <td>{{detail.kwhImportTotal}}</td>
+                      </tr>
+                      <tr>
+                        <td>Export kVAr</td>
+                        <td>{{detail.kvarhExportR1}}</td>
+                        <td>{{detail.kvarhExportR2}}</td>
+                        <td>{{detail.kvarhExportR3}}</td>
+                        <td>{{detail.kvarhExportR4}}</td>
+                        <td>{{detail.kvarhExportR5}}</td>
+                        <td>{{detail.kvarhExportTotal}}</td>
+                      </tr>
+                      <tr>
+                        <td>Import kVAr</td>
+                        <td>{{detail.kvarhImportR1}}</td>
+                        <td>{{detail.kvarhImportR2}}</td>
+                        <td>{{detail.kvarhImportR3}}</td>
+                        <td>{{detail.kvarhImportR4}}</td>
+                        <td>{{detail.kvarhImportR5}}</td>
+                        <td>{{detail.kvarhImportTotal}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </dx-scroll-view>
+      </div>
+    </div>
+  </dx-popup>
+</div>

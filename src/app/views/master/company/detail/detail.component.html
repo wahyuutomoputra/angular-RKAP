@@ -1,0 +1,97 @@
+<!-- <div class="progress" *ngIf="!isLoaded">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+    style="width:100%">
+  </div>
+</div> -->
+<dx-popup class="popup" [height]="600" width="75%" [showTitle]="true" title="Company Detail" [dragEnabled]="false" [closeOnOutsideClick]="false"
+  [(visible)]="popupVisible" (onHiding)="hide()">
+    <div *dxTemplate="let data of 'content'">
+  <dx-scroll-view #scrollView
+        id="scrollview">
+    <dx-form [(formData)]="company">
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <!-- <dxi-item dataField="company Code" caption="Company Code">
+            <p>{{company?.companyCode}}</p>
+          </dxi-item> -->
+          <dxi-item dataField="name" caption="Company Name">
+            <p>{{company?.name}}</p>
+          </dxi-item>
+          <dxi-item dataField="shortName" caption="Short Name">
+            <p>{{company?.shortName}}</p>
+          </dxi-item>
+          <dxi-item dataField="address" caption="Address">
+            <p>{{company?.address}}</p>
+          </dxi-item>
+          <dxi-item dataField="city" caption="City">
+            <p>{{company?.city}}</p>
+          </dxi-item>
+          <dxi-item dataField="province" caption="Province">
+            <p>{{company?.province}}</p>
+          </dxi-item>
+          <dxi-item dataField="country" caption="Country">
+            <p>{{company?.country}}</p>
+          </dxi-item>
+          <dxi-item dataField="postalCode" caption="Postal Code">
+            <p>{{company?.postalCode}}</p>
+          </dxi-item>
+         </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="phone1" caption="Phone 1">
+            <p>{{company?.telephone1}}</p>
+          </dxi-item>
+          <dxi-item dataField="phone2" caption="Phone 2">
+            <p>{{company?.telephone2}}</p>
+          </dxi-item>
+          <dxi-item dataField="faximile" caption="Faximile">
+            <p>{{company?.facsimile}}</p>
+          </dxi-item>
+          <dxi-item dataField="email" caption="Email">
+            <p>{{company?.email}}</p>
+          </dxi-item>
+          <dxi-item dataField="timezone" caption="Time Zone">
+            <p>{{company?.timeZone}}</p>
+          </dxi-item>
+          <dxi-item dataField="photoUrl" caption="Photo">
+            <img src="{{company?.photoUrl}}">
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+      
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group">
+        <dxi-item dataField="MapLocation">
+          <dx-map [zoom]="11" [height]="300" width="50%" [controls]="true" [markerIconSrc]="mapMarkerUrl" [markers]="markers">
+          </dx-map>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="active" caption="Active">
+            <p>{{company?.activationCode}}</p>
+          </dxi-item>
+          <dxi-item dataField="description" caption="Description">
+            <p>{{company?.description}}</p>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="registerDate" caption="Register Date">
+            <p>{{company?.createdDate | date:'MM/dd/yyyy'}}</p>
+          </dxi-item>
+          <dxi-item dataField="registerBy" caption="Register By">
+            <p>{{company?.createdBy}}</p>
+          </dxi-item>
+          <dxi-item dataField="LastModifiedBy" caption="Last Modified By">
+            <p>{{company?.modifiedBy}}</p>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dx-form>
+  </dx-scroll-view>  
+</div>
+</dx-popup>

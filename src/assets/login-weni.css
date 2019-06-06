@@ -1,0 +1,141 @@
+.form-signin
+{
+    max-width: 100%;
+    padding: 25px;
+    margin: 0 auto !important;
+
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+    margin-left: 20px;
+
+}
+input[type="checkbox"]{
+    padding-top: 3px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin: 20px auto;
+    top: 50%;
+    padding: 15px 0px 15px 0px;
+    background-color: rgba(247,247,247,.87);
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+    z-index: 2 !important;
+    border-radius: 4px !important;
+}
+.account-wall::before{
+    margin: 0 auto;
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    width: 150px;
+    height: auto;
+    margin: 0 auto 10px;
+    display: block;
+    border-radius: 50%;
+}
+.need-help
+{
+    margin-top: 10px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+#register-btn{
+    text-align: center !important;
+    margin-top: 20px !important;
+}
+.text-center.need-help{
+    text-align: center !important;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+p.text-center{
+    margin-bottom: 0px;
+}
+.form-group label{
+    font-weight: 600;
+    font-size: 16px;
+}
+div.back{
+ position: fixed;
+ z-index: 0;
+ width: 100vw;
+ height: 100vh;
+ overflow: visible !important;
+ background-size: auto ;
+ background-image: url('/../../../../assets/img/wall62.jpg');
+ background-position: 30% 30% !important;
+/*  -webkit-filter: blur(5px);
+ -moz-filter: blur(5px);
+ -o-filter: blur(5px);
+ -ms-filter: blur(5px);
+ filter: blur(5px); */
+ display: block;
+}
+h2.text-center{
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+h1.text-center{
+    text-transform: uppercase;
+}
+.row.copyright{
+    font-size: 15px;
+    text-align: center;
+    opacity: .9;
+    color: #fff !important;
+}
+.link-footer:hover{
+    text-decoration: none;
+    color: #fff !important;
+
+}
+.link-footer{
+    text-decoration: none;
+    color: #fff !important;
+    text-shadow: 0px 0px 1px 0px rgba(0,0,0,.4);
+}
+.alert-login{
+    width: 100px!important;
+}

@@ -1,0 +1,27 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Substation</strong>
+    </div>
+    <div class="card-body">
+      <div id="data-grid-demo">
+        <dx-data-grid id="gridContainer" [dataSource]="dataSource" keyExpr="tikurId" [showRowLines]="true" [showBorders]="true">
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-editing mode="form" [allowUpdating]="false" [allowAdding]="true">
+          </dxo-editing>
+          <dxo-selection mode="multiple"></dxo-selection>
+          <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+          <dxi-column dataField="tikurId" caption="Tikur Id" [allowEditing]="false"></dxi-column>
+          <dxi-column dataField="tikurIdLength" caption="Id Length"></dxi-column>
+          <dxi-column dataField="validation" caption="Validation"></dxi-column>
+          <dxi-column dataField="substationCode" caption="Substantion Code"></dxi-column>
+          <dxi-column dataField="generationName" caption="Generation Name"></dxi-column>
+          <dxi-column dataField="transmissionName" caption="Transmission Name"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </div>
+  </div>
+</div>

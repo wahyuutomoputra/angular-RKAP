@@ -1,0 +1,68 @@
+<div class="progress" *ngIf="!isLoaded">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+        style="width:100%">
+    </div>
+</div>
+<div *ngIf="isLoaded">
+    <div id="form-container" style="margin-left:20px; margin-right: 20px; margin-top: 20px;">
+        <dx-form id="form" [colCount]="2" [formData]="detailUsers">
+            <dxi-item dataField="Site">
+                <p>{{detailUsers.site.name}}</p>
+            </dxi-item>
+            <dxi-item dataField="User Role">
+                <p>{{detailUsers.role.roleName}}</p>
+            </dxi-item>
+            <dxi-item dataField="User ID">
+                <p>{{detailUsers.userId}}</p>
+            </dxi-item>
+            <dxi-item dataField="Name">
+                <p>{{detailUsers.name}}</p>
+            </dxi-item>
+            <dxi-item dataField="Company">
+                <p>{{detailUsers.kantor.name}}</p>
+            </dxi-item>
+            <dxi-item dataField="Language">
+                <p>{{detailUsers.bahasa.language}}</p>
+            </dxi-item>
+            <dxi-item dataField="Location">
+                <p>{{detailUsers.location.name}}</p>
+            </dxi-item>
+            <dxi-item dataField="Address">
+                <p>{{detailUsers.address}}</p>
+            </dxi-item>
+            <dxi-item dataField="City">
+                <p>{{detailUsers.city}}</p>
+            </dxi-item>
+            <dxi-item dataField="Province">
+                <p>{{detailUsers.province}}</p>
+            </dxi-item>
+            <dxi-item dataField="Country">
+                <p>{{detailUsers.country}}</p>
+            </dxi-item>
+            <dxi-item dataField="Postal Code">
+                <p>{{detailUsers.postalCode}}</p>
+            </dxi-item>
+            <dxi-item dataField="Phone 1">
+                <p>{{detailUsers.telephone1}}</p>
+            </dxi-item>
+            <dxi-item dataField="Phone 2">
+                <p>{{detailUsers.telephone2}}</p>
+            </dxi-item>
+            <dxi-item dataField="Faximile">
+                <p>{{detailUsers.facsimile}}</p>
+            </dxi-item>
+            <dxi-item dataField="Email">
+                <p>{{detailUsers.email}}</p>
+            </dxi-item>
+            <dxi-item dataField="Photo">
+                <p>{{detailUsers.photoUrl}}</p>
+            </dxi-item>
+            <dxi-item dataField="Form User">
+                <p>{{detailUsers.formUser}}</p>
+            </dxi-item>
+            <dxi-item dataField="Status">
+                <p>{{detailUsers.statususer}}</p>
+            </dxi-item>
+        </dx-form>
+    </div>
+</div>

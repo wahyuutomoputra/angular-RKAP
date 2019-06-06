@@ -1,0 +1,195 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Event Monitoring</strong>
+      <span *ngIf="isDetail" class="pull-right">
+        <dx-button id="btnBack" text="< Back" (onClick)="back()"></dx-button>
+      </span>
+    </div>
+    <div *ngIf="!isDetail">
+      <div id="form-container" style="margin-right: 20px; margin-left: 20px;">
+        <dx-form id="form" itemType="group" sssClass="first-group" [colCount]="2" [formData]="search">
+          <dxi-item itemType="group" [colCount]="2">
+            <dxi-item dataField="Site" [editorOptions]="{ disabled: false }"></dxi-item>
+            <dxi-item>
+              <dx-button icon="search" (onClick)="showInfo()"></dx-button>
+            </dxi-item>
+            <!-- <dxi-item dataField="Location" [editorOptions]="{ disabled: false }"></dxi-item>
+            <dxi-item>
+              <dx-button icon="search" (onClick)="showInfoLocation()"></dx-button>
+            </dxi-item>
+            <dxi-item dataField="Asset" [editorOptions]="{ disabled: false }"></dxi-item>
+            <dxi-item>
+              <dx-button icon="search" (onClick)="showInfoAsset()"></dx-button>
+            </dxi-item> -->
+          </dxi-item>
+          <dxi-item itemType="group">
+            <dxi-item dataField="MonthPeriode" caption="Period" editorType="dxDateBox" 
+            [editorOptions]= "{ value: defValue, displayFormat: 'MM/yyyy', width: '70%', maxZoomLevel:'year',
+                        minZoomLevel:'century', min:minimums, max:maximums}">
+              <dxi-validation-rule type="required" message="Month Period is required"></dxi-validation-rule>
+            </dxi-item>
+          </dxi-item>
+        </dx-form>
+        <div style="padding-bottom:20px;">
+          <dx-button text="Search" style="float:right;" type="default" (onClick)="Submit()"></dx-button>
+        </div>
+      </div>
+      <div class="card-body">
+        <p style="border-top: 2px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </div>
+      <div class="card-body">
+        <div [hidden]="isGetEvent"></div>
+        <div id="data-grid-demo">
+          <dx-data-grid #grid id="gridContainer" [dataSource]="okButtonOptions" keyExpr="siteCode" [showRowLines]="true" [showBorders]="true"
+            [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true" [(selectedRowKeys)]="selectedRows"
+            (onSelectionChanged)="selectionChangedHandler()" (onToolbarPreparing)="buttonGetDataEvents($event)" (onContentReady)="contentReady($event)">
+            <dxo-editing mode="form" [allowUpdating]="false" [allowAdding]="false" [allowDeleting]="false" [allowResizing]="true">
+            </dxo-editing>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50]" [showInfo]="true">
+            </dxo-pager>
+            <!-- <dxo-search-panel [visible]="true" placeholder="Search.."></dxo-search-panel> -->
+            <dxo-export [enabled]="true" fileName="Event Data" [allowExportSelectedData]="false"></dxo-export>
+            <dxi-column name="No" cellTemplate="NoTemplate" caption="No" width='35px'></dxi-column>
+            <div *dxTemplate="let data of 'NoTemplate'">
+              <a>
+                {{ data.component.pageIndex() * data.component.pageSize() + data.rowIndex + 1 }}
+              </a>
+            </div>
+            <dxo-selection [selectAllMode]="allMode" [showCheckBoxesMode]="checkBoxesMode" mode="multiple" width='55px'>
+            </dxo-selection>
+            <dxi-column dataField="siteCodeExist" dataType="string" caption="Site Code" [allowEditing]="false" width='85px'></dxi-column>
+            <dxi-column dataField="siteName" dataType="string" caption="Site Name" [allowEditing]="false" width='150px'></dxi-column>
+            <dxi-column dataField="locationCode" dataType="string" caption="Location Code" width='125px'></dxi-column>
+            <dxi-column dataField="locationName" dataType="string" caption="Location Name" width='225px'></dxi-column>
+            <dxi-column dataField="meterCode" dataType="string" caption="Meter Code" width='110px'></dxi-column>
+            <dxi-column dataField="periode" dataType="string" caption="Period" width='85px'></dxi-column>
+            <dxi-column dataField="lastEvent" dataType="datetime" format="M/d/yyyy HH:mm" caption="Event Last Date" width='120px'></dxi-column>
+            <dxi-column dataField="eventCategory" dataType="string" caption="Event Category" width='110px'></dxi-column>
+            <dxi-column dataField="eventName" dataType="string" caption="Message" width='250px'></dxi-column>
+
+            <dxi-column [fixed]="true" dataField="meterCode" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false"
+              cellTemplate="mainTemplate"></dxi-column>
+            <div *dxTemplate="let data of 'mainTemplate'">
+              <div (click)="showMenu(data.value)" class="text-center">
+                <i class="fa fa-th-large" id="btn{{data.value}}"></i>
+              </div>
+            </div>
+          </dx-data-grid>
+          <app-context [menuVisible]="menuVisible" [target]="target" [contextItems]="contextItems" (onHideMenu)="onHideMenu()" (itemClick)="itemClick($event)"></app-context>
+          <app-confirmation [text]="text" [confVisible]="confVisible" [detail]="detail" (onHideConf)="onHideConf()"></app-confirmation>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isDetail">
+      <app-detailevent [detailEvents]="detailEvents" (onHideEvent)="onHideEvent()"></app-detailevent>
+    </div>
+  </div>
+</div>
+
+<div id="popup1">
+  <dx-popup class="popup" width="500" height="auto" [showTitle]="true" title="Find By Site Code" [dragEnabled]="false" [closeOnOutsideClick]="true"
+    [(visible)]="sitePopup">
+    <div *dxTemplate="let data of 'content'">
+      <div class="card-body">
+        <div id="data-grid-demo">
+          <dx-data-grid id="gridContainer" [dataSource]="searchSiteById" keyExpr="id" [showRowLines]="true" [showBorders]="true">
+            <dxo-remote-operations [filtering]="true">
+            </dxo-remote-operations>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxi-column dataField="siteCodeExist" caption="Site Code" width="100px"></dxi-column>
+            <dxi-column dataField="unit" caption="Unit" width="100px" [allowFiltering]="false"></dxi-column>
+            <dxi-column dataField="name" caption="Site Name" [allowFiltering]="false"></dxi-column>
+
+            <dxi-column [fixed]="true" dataField="siteCodeExist" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false" cellTemplate="siteTemplate"></dxi-column>
+            <div *dxTemplate="let data of 'siteTemplate'">
+              <div (click)="getIdSite(data.value)" class="text-center">
+                <i class="fa fa-thumb-tack" id="btn{{data.value}}"></i>
+              </div>
+            </div>
+
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </dx-popup>
+</div>
+
+<!-- < this pop up location> -->
+<!-- <div id="popup2">
+  <dx-popup class="popup" width="500" height="auto" [showTitle]="true" title="Location Popup" [dragEnabled]="false" [closeOnOutsideClick]="true"
+    [(visible)]="locationPopup">
+    <div *dxTemplate="let data of 'content'">
+      <div class="card-body">
+        <div id="data-grid-demo">
+          <dx-data-grid id="gridContainer" [dataSource]="searchLocationById" keyExpr="id" [showRowLines]="true" [showBorders]="true">
+            <dxo-remote-operations [filtering]="true">
+            </dxo-remote-operations>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxi-column dataField="locationCode" caption="Location Code"></dxi-column>
+            <dxi-column dataField="name" caption="Location Name" [allowFiltering]="false"></dxi-column>
+            <dxi-column [fixed]="true" dataField="locationCode" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false"
+              cellTemplate="locTemplate"></dxi-column>
+            <div *dxTemplate="let data of 'locTemplate'">
+              <div (click)="getIdLoc(data.value)" class="text-center">
+                <i class="fa fa-thumb-tack" id="btn{{data.value}}"></i>
+              </div>
+            </div>
+
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </dx-popup>
+</div> -->
+<!-- < this pop up asset> -->
+<!-- <div id="popup3">
+  <dx-popup class="popup" width="500" height="auto" [showTitle]="true" title="Asset Popup" [dragEnabled]="false" [closeOnOutsideClick]="true"
+    [(visible)]="assetPopup">
+    <div *dxTemplate="let data of 'content'">
+      <div class="card-body">
+        <div id="data-grid-demo">
+          <dx-data-grid id="gridContainer" [dataSource]="searchAssetById" keyExpr="id" [showRowLines]="true" [showBorders]="true">
+            <dxo-remote-operations [filtering]="true">
+            </dxo-remote-operations>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxi-column dataField="assetCode" caption="Asset Code"></dxi-column>
+            <dxi-column [fixed]="true" dataField="assetCode" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false"
+              cellTemplate="assetTemplate"></dxi-column>
+            <div *dxTemplate="let data of 'assetTemplate'">
+              <div (click)="getIdAsset(data.value)" class="text-center">
+                <i class="fa fa-thumb-tack" id="btn{{data.value}}"></i>
+              </div>
+            </div>
+
+
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </dx-popup>
+</div> -->
+
+<div id="popupMessageEvent">
+  <dx-popup class="popup" width="auto" height="auto" [showTitle]="true" title="Get Event" [dragEnabled]="false" [closeOnOutsideClick]="true"
+    [(visible)]="msgPopupEvent">
+    <div *dxTemplate="let data of 'content'">
+      <div class="card-body">
+        <p style="text-align:center">Are you sure want to send</p>
+        <p style="text-align:center">Get Event command to</p>
+        <p style="text-align:center">selected location?</p>
+      </div>
+      <dx-button text="Yes" style="float:left; margin-bottom:15px; width:80px;" (onClick)="getDataEvent()"></dx-button>
+      <dx-button text="Cancel" style="float:right; margin-bottom:15px; width:80px;" (onClick)="close()"></dx-button>
+    </div>
+  </dx-popup>
+</div>

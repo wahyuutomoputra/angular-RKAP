@@ -1,0 +1,18 @@
+{
+    "notification" : "الحساب",
+    "setting" : {
+        "profile" : "الملف الشخصي",
+        "logout" : "الخروج"
+    },
+    "menu": {
+        "dashboard": "لوحة القيادة",
+        "master": {
+            "title": "رئيس",
+            "company": "شركة",
+            "site": "موقع",
+            "location": "موقعك",
+            "asset": "الأصول",
+            "substation": "محطة فرعية"
+        }
+    }
+}

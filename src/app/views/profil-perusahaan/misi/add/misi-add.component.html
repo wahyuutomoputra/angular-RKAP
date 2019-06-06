@@ -1,0 +1,45 @@
+<dx-popup
+    class="popup"
+    [width]="500"
+    [height]="330"
+    [showTitle]="false"
+    title="Misi"
+    [(visible)]="addVisible">
+
+    <div class="card" id="new47">
+    
+    <div class="card-header">
+      <strong>Misi</strong>
+    </div>
+
+    <div class="card-body">
+    <form action="Submit" (submit)="save($event)">
+    <dx-form [(formData)]="role" validationGroup="roleData">
+      <dxi-item itemType="group" [colCount]="1">
+        <dxi-item itemType="group">
+          <dxi-item name="txtMisi" dataField="misi" caption="Misi" editorType="dxTextArea" [editorOptions]="{height: 90}" [validationRules]="[{type: 'required', message: 'Misi harus diisi' }]"></dxi-item>
+          <dxi-item name="txtUrutan" dataField="urutan" caption="Urutan" editorType="dxNumberBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Urutan harus diisi' }]"></dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item itemType="empty"></dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dx-form>
+
+    <dx-tree-list
+      [dataSource]="menuTree"
+      itemsExpr="items">
+    </dx-tree-list>
+
+    <br> 
+
+    <dx-button *ngIf="!isDetail" icon="fa fa-ban" text="Cancel" type="danger" (onClick)="cancel()"></dx-button>
+    <dx-button *ngIf="!isDetail" class="pull-right" icon="fa fa-save" text="Save" type="success" validationGroup="roleData" [useSubmitBehavior]="true"></dx-button>
+
+    <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save()" (onHideConf)="onHideConf()"
+      (onSaveConf)="onSaveConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+  </form>
+  </div>
+  </div>
+
+  </dx-popup>

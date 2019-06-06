@@ -1,0 +1,115 @@
+<h1>TabComponent</h1>
+<dx-form [(formData)]="location">
+  <dxi-item itemType="tabbed">
+    <dxi-tab title="Location">
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="LocationId">
+            <p>{{location.LocationId}}</p>
+          </dxi-item>
+          <dxi-item dataField="LocationCode"></dxi-item>
+          <dxi-item dataField="LocationName"></dxi-item>
+          <dxi-item dataField="LocationType" editorType="dxSelectBox" [editorOptions]="{ items: LocationTypes, value: '' }">
+            <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="Site"></dxi-item>
+          <dxi-item dataField="Province" editorType="dxSelectBox" [editorOptions]="{ items: Provinces, value: '' }"></dxi-item>
+          <dxi-item dataField="City" editorType="dxSelectBox" [editorOptions]="{ items: Cities, value: '' }"></dxi-item>
+          <dxi-item dataField="Address"></dxi-item>
+          <dxi-item dataField="PostalCode"></dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="Phone1"></dxi-item>
+          <dxi-item dataField="Phone2"></dxi-item>
+          <dxi-item dataField="Faxcimile"></dxi-item>
+          <dxi-item dataField="Email"></dxi-item>
+          <dxi-item dataField="Photo">
+            <img src="../../../../../assets/img/avatars/8.jpg">
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="Tariff"></dxi-item>
+          <dxi-item dataField="Capacity"></dxi-item>
+          <dxi-item dataField="Unit" editorType="dxSelectBox" [editorOptions]="{ items: Units, value: '' }"></dxi-item>
+          <dxi-item dataField="CTRatio"></dxi-item>
+          <dxi-item dataField="CTPrimary"></dxi-item>
+          <dxi-item dataField="CTSecondary"></dxi-item>
+          <dxi-item dataField="PTRatio"></dxi-item>
+          <dxi-item dataField="PTPrimary"></dxi-item>
+          <dxi-item dataField="PTSecondary"></dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="Substation"></dxi-item>
+          <dxi-item dataField="ContractNo"></dxi-item>
+          <dxi-item dataField="MeterFactor"></dxi-item>
+          <dxi-item dataField="kWhFactor"></dxi-item>
+          <dxi-item dataField="kVArhFactor"></dxi-item>
+          <dxi-item dataField="TrfLosesFact"></dxi-item>
+          <dxi-item dataField="MutationDate"></dxi-item>
+          <dxi-item dataField="MutationCode"></dxi-item>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group">
+        <dxi-item dataField="LocationMap">
+          <dx-map [zoom]="11" [height]="440" width="100%" [controls]="true" [markerIconSrc]="mapMarkerUrl" [markers]="markers">
+          </dx-map>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="Status"></dxi-item>
+          <dxi-item dataField="Desctription"></dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="RegisterDate">
+            <p>{{location.RegisterDate}}</p>
+          </dxi-item>
+          <dxi-item dataField="RegisterBy">
+            <p>{{location.RegisterBy}}</p>
+          </dxi-item>
+          <dxi-item dataField="LastModifiedBy">
+            <p>{{location.LastModifiedBy}}</p>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dxi-tab>
+    <dxi-tab colCount="2" title="Meter">
+      <dxi-item dataField="Meter"></dxi-item>
+    </dxi-tab>
+    <dxi-tab colCount="2" title="Comm Device">
+      <dxi-item dataField="CommDevice"></dxi-item>
+    </dxi-tab>
+    <dxi-tab colCount="2" title="Sim Card">
+      <dxi-item dataField="SimCard"></dxi-item>
+    </dxi-tab>
+    <dxi-tab colCount="2" title="Load Profile">
+      <dxi-item dataField="LoadProfile"></dxi-item>
+    </dxi-tab>
+    <dxi-tab colCount="2" title="Billing">
+      <dxi-item dataField="Billing"></dxi-item>
+    </dxi-tab>
+    <dxi-tab colCount="2" title="Instant">
+      <dxi-item dataField="Instant"></dxi-item>
+    </dxi-tab>
+    <dxi-tab colCount="2" title="Meter Event">
+      <dxi-item dataField="MeterEvent"></dxi-item>
+    </dxi-tab>
+    <dxi-tab colCount="2" title="Comm Event">
+      <dxi-item dataField="CommEvent"></dxi-item>
+    </dxi-tab>
+    <dxi-tab colCount="2" title="Location Log">
+      <dxi-item dataField="LocationLog"></dxi-item>
+    </dxi-tab>
+  </dxi-item>
+</dx-form>

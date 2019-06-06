@@ -1,0 +1,109 @@
+<div *ngIf="addVisible">
+
+  <form action="Submit" (submit)="save($event)">
+    <dx-button icon="fa fa-ban" text="Cancel" (onClick)="cancel()"></dx-button>
+    <dx-button class="pull-right" icon="fa fa-save" text="Save" validationGroup="customerData" [useSubmitBehavior]="true">
+    </dx-button>
+
+    <div class="m-2"></div>
+    <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+    <div class="m-2"></div>
+
+    <dx-form [(formData)]="site">
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="companyName">
+            <dxo-label text="Company Name"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="siteCodeExist">
+            <dxo-label text="Site Code"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="siteTypeId" [template]="'siteTypeTemplate'" [isRequired]="true">
+            <dxo-label text="Site Type"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="siteName">
+            <dxo-label text="Site Name"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="shortName">
+            <dxo-label text="Short Name"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="parentSiteName">
+            <dxo-label text="Parent Site"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="address">
+            <dxo-label text="Address"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="city">
+            <dxo-label text="City"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="province">
+            <dxo-label text="Province"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="country">
+            <dxo-label text="Country"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="postalCode">
+            <dxo-label text="Postal Code"></dxo-label>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="telephone1">
+            <dxo-label text="Phone 1"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="telephone2">
+            <dxo-label text="Phone 2"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="facsimile">
+            <dxo-label text="Faximile"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="email">
+            <dxo-label text="Email"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="timeZone">
+            <dxo-label text="Time Zone"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="photoUrl">
+            <dxo-label text="Photo Url"></dxo-label>
+          </dxi-item>
+          <!-- <dxi-item>
+            <dx-file-uploader name="file" uploadMode="useButtons" uploadUrl="http://10.14.153.41:1366/asset/v2/upload" selectButtonText="Upload Photo"
+              labelText="">
+            </dx-file-uploader>
+          </dxi-item> -->
+          <dxi-item dataField="photo">
+            <dx-file-uploader selectButtonText="Select photo" labelText="" accept="image/*" uploadMode="useForm">
+            </dx-file-uploader>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group">
+        <dxi-item dataField="MapLocation">
+          <dx-map [zoom]="11" [height]="300" width="50%" [controls]="true" [markerIconSrc]="mapMarkerUrl" [markers]="markers">
+          </dx-map>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+        <dxi-item dataField="description"></dxi-item>
+      </dxi-item>
+
+      <div *dxTemplate="let data of 'siteTypeTemplate'">
+        <dx-select-box id="selectBoxSite" [isValid]="isValidSite" [dataSource]="siteTypes" [(value)]="data.component.option('formData')[data.dataField]"
+          displayExpr="name" valueExpr="id">
+        </dx-select-box>
+      </div>
+
+    </dx-form>
+
+    <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save()" (onHideConf)="onHideConf()"
+      (onSaveConf)="onSaveConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+
+  </form>
+</div>

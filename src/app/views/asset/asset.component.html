@@ -1,0 +1,106 @@
+<div [hidden]="addVisible">
+  <div class="animated fadeIn">
+    <div class="card" id="new47">
+      <div class="card-header">
+        <strong>Asset</strong>
+      </div>
+      <div class="card-body">
+        <div id="data-grid-demo">
+
+          <div id="form-container" style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;">
+            <dx-form id="form" itemType="group" sssClass="first-group" [formData]="search" [colCount]="4">
+              <dxi-item dataField="SiteCodeExist" [editorOptions]="{ disabled: false }" [colSpan]="2">
+                <dxo-label text="Site"></dxo-label>
+              </dxi-item>
+              <dxi-item [colSpan]="1">
+                <dx-button icon="search" (onClick)="showInfo()"></dx-button>
+              </dxi-item>
+              <dxi-item [colSpan]="1">
+                <dx-button text="Search" (onClick)="doSearch()" type="default"></dx-button>
+              </dxi-item>
+            </dx-form>
+            <div *ngIf="isShowInfo">
+              <app-search-site [siteSearchVsb]="siteSearchVsb" (onHideSiteSearch)="onHideSiteSearch($event, $event2)"></app-search-site>
+            </div>
+          </div>
+
+          <dx-data-grid id="gridContainer" 
+          [dataSource]="gridDataSource" 
+          keyExpr="id" 
+          [showRowLines]="true" 
+          [showBorders]="true" 
+          [columnHidingEnabled]="false"
+          [rowAlternationEnabled]="true" 
+          [columnAutoWidth]="true" 
+          (onToolbarPreparing)="addNewButton($event)" 
+          (onContentReady)="contentReady($event)"
+          (onExporting)="exporting($event)">
+
+            <dxo-remote-operations [paging]="true">
+            </dxo-remote-operations>
+
+            <dxo-editing mode="form" [allowUpdating]="false" [allowAdding]="false" [allowDeleting]="false" [allowResizing]="true">
+              <dxo-popup title="Asset Add/Edit" [showTitle]="true"></dxo-popup>
+            </dxo-editing>
+
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true" [showNavigationButtons]="true">
+            </dxo-pager>
+            <dxo-export [enabled]="true" fileName="Asset" [allowExportSelectedData]="false"></dxo-export>
+            <dxo-selection mode="multiple" width="55px"></dxo-selection>
+            <dxi-column dataField="assetTypeName" caption="Asset Type" dataType="string"></dxi-column>
+            <dxi-column dataField="assetCode" caption="Asset Code" dataType="string"></dxi-column>
+            <dxi-column dataField="locationCode" caption="Location Code" dataType="string"></dxi-column>
+            <dxi-column dataField="locationName" caption="Location Name" dataType="string"></dxi-column>
+            <dxi-column dataField="siteCodeExist" caption="Site Code" dataType="string"></dxi-column>
+            <dxi-column dataField="siteName" caption="Site Name" dataType="string"></dxi-column>
+            <dxi-column dataField="brandName" caption="Brand" dataType="string"></dxi-column>
+            <dxi-column dataField="brandTypeName" caption="Type" dataType="string"></dxi-column>
+            <dxi-column dataField="installDate" caption="Install Date" dataType="date" format="MM/dd/yyyy"></dxi-column>
+            <dxi-column dataField="status" caption="Status"></dxi-column>
+
+            <dxi-column dataField="id" [fixed]="true" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false" [allowExporting]="false" cellTemplate="cellTemplate"></dxi-column>
+            <div *dxTemplate="let data of 'cellTemplate'">
+              <div (click)="showMenu(data.value)" class="text-center">
+                <i class="fa fa-th-large" id="btn{{data.value}}"></i>
+              </div>
+            </div>
+          </dx-data-grid>
+          <app-context [menuVisible]="menuVisible" [target]="target" [contextItems]="contextItems" (onHideMenu)="onHideMenu()" (itemClick)="itemClick($event)"></app-context>
+          <app-confirmation [text]="text" [confVisible]="confVisible" [detail]="detail" (onHide)="onHide()"></app-confirmation>
+          <dx-popup class="popup" [width]="400" [height]="150" [showTitle]="true" title="Change Site Confirmation" [dragEnabled]="false"
+            [closeOnOutsideClick]="false" [(visible)]="confChangeSite">
+            <div *dxTemplate="let data of 'content'">
+              <p>Are You Sure Want To Change Selected Assets to Site {{siteNameChange}} ?</p>
+              <div class="row">
+                <dx-button class="col-6" text="No" (onClick)="cancelChangeSite()"></dx-button>
+                <dx-button class="col-6" text="Yes" (onClick)="onChangeSite()"></dx-button>
+              </div>
+            </div>
+          </dx-popup>
+
+          <app-asset-detail [popupVisible]="popupVisible" [asset]="detail" (onHideDetail)="onHideDetail()"></app-asset-detail>
+          <app-progress [progressVisible]="progressVisible" [progressContent]="progressContent" [progressTitle]="progressTitle" (onHide)="onHide()"></app-progress>
+        </div>
+        <div class="d-table">
+          <div class="d-table-cell">
+            <div class="dx-field">
+              <div class="dx-field-label">Change Site</div>
+              <div class="dx-field-value">
+                <dx-select-box [items]="userSites" displayExpr="name" valueExpr="siteCodeExist" [searchEnabled]="true" (onValueChanged)="onValueChanged($event)"></dx-select-box>
+              </div>
+            </div>
+          </div>
+          <div class="d-table-cell">
+            <dx-button text="Go" (onClick)="changeSite()"></dx-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="addVisible">
+  <app-asset-edit [addVisible]="addVisible" [editId]="editId" (onHideAddAsset)="onHideAddAsset()"></app-asset-edit>
+</div>

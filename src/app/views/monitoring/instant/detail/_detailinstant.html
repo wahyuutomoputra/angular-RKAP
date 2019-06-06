@@ -1,0 +1,170 @@
+<div class="progress" *ngIf="!isLoaded">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+    style="width:100%">
+  </div>
+</div>
+<div *ngIf="isLoaded">
+  <div id="form-container" style="margin-left:20px; margin-right: 20px; margin-top: 20px;">
+    <dx-form id="form" [formData]="detailInstants">
+    <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+      <dxi-item itemType="group">
+        <dxi-item dataField="Site"><p>{{detailInstants.siteCodeExist}} - {{detailInstants.siteName}}</p></dxi-item>
+        <dxi-item dataField="location"><p>{{detailInstants.locationCode}} - {{detailInstants.locationName}}</p></dxi-item>
+        <dxi-item dataField="Tariff / Power"><p>{{detailInstantsHeader.location.tariff}} / {{detailInstantsHeader.location.power}}</p></dxi-item>
+        <dxi-item dataField="meterNo"><p>{{detailInstants.meterCode}}</p></dxi-item>
+        <dxi-item dataField="Meter Brand / Type"><p>{{detailInstantsHeader.assetMeter.brandName}} / {{detailInstantsHeader.assetMeter.brandTypeName}}</p></dxi-item>
+      </dxi-item>
+      
+      <dxi-item itemType="group">
+        <dxi-item dataField="{{detailInstantsHeader.assetCommunication.assetTypeName}} No"><p>{{detailInstantsHeader.assetCommunication.assetCode}}</p></dxi-item>
+        <dxi-item dataField="{{detailInstantsHeader.assetCommunication.assetTypeName}} Brand / Type"><p>{{detailInstantsHeader.assetCommunication.brandName}} / {{detailInstantsHeader.assetCommunication.brandTypeName}}</p></dxi-item>
+        <dxi-item dataField="SIM Card"><p>{{detailInstantsHeader.assetSim.assetCode}}</p></dxi-item>
+        <dxi-item dataField="IP Address"><p>{{detailInstantsHeader.assetSim.dynamicData.IP.attributeValue}}</p></dxi-item>
+    </dxi-item>
+  </dxi-item>
+    </dx-form>
+  </div>
+  <div class="card-body">
+    <div id="data-grid-demo">
+      <dx-data-grid id="gridContainer" [dataSource]="detailInstantsPopup" keyExpr="id" [showRowLines]="true" [showBorders]="true"
+        [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true" style="max-width: 985px">
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50]" [showInfo]="true">
+        </dxo-pager>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <!-- <dxo-header-filter [visible]="true"></dxo-header-filter> -->
+        <dxo-export [enabled]="true" fileName="Instant Detail" [allowExportSelectedData]="false"></dxo-export>
+        <dxi-column name="No" cellTemplate="NoTemplate" caption="No" width='35px'></dxi-column>
+        <div *dxTemplate="let data of 'NoTemplate'">
+          <a>
+            {{ data.component.pageIndex() * data.component.pageSize() + data.rowIndex + 1 }}
+          </a>
+        </div>
+        <dxi-column width="100" dataField="readDate" dataType="datetime" format="M/d/yyyy HH:mm" caption="Date"></dxi-column>
+        <dxi-column dataField="voltageL1" caption="VR"></dxi-column>
+        <dxi-column dataField="voltageL2" caption="VS"></dxi-column>
+        <dxi-column dataField="voltageL3" caption="VT"></dxi-column>
+
+        <dxi-column dataField="voltageAngelL1" caption="V Angel R"></dxi-column>
+        <dxi-column dataField="voltageAngelL2" caption="V Angel S"></dxi-column>
+        <dxi-column dataField="voltageAngelL3" caption="V Angel T"></dxi-column>
+
+        <dxi-column dataField="currentL1" caption="IR"></dxi-column>
+        <dxi-column dataField="currentL2" caption="IS"></dxi-column>
+        <dxi-column dataField="currentL3" caption="IT"></dxi-column>
+        <dxi-column dataField="currentN" caption="IN"></dxi-column>
+
+        <dxi-column dataField="currentAngelL1" caption="I Angel R"></dxi-column>
+        <dxi-column dataField="currentAngelL2" caption="I Angel S"></dxi-column>
+        <dxi-column dataField="currentAngelL3" caption="I Angel T"></dxi-column>
+
+        <dxi-column dataField="powerFactorL1" caption="PF1"></dxi-column>
+        <dxi-column dataField="powerFactorL2" caption="PF2"></dxi-column>
+        <dxi-column dataField="powerFactorL3" caption="PF3"></dxi-column>
+        <dxi-column dataField="powerFactorTotal" caption="PF Total"></dxi-column>
+
+        <dxi-column dataField="activePowerL1" caption="kW1"></dxi-column>
+        <dxi-column dataField="activePowerL2" caption="kW2"></dxi-column>
+        <dxi-column dataField="activePowerL3" caption="kW3"></dxi-column>
+        <dxi-column dataField="activePowerTotal" caption="kW Total"></dxi-column>
+
+        <dxi-column dataField="reactivePowerL1" caption="kVAr1"></dxi-column>
+        <dxi-column dataField="reactivePowerL2" caption="kVAr2"></dxi-column>
+        <dxi-column dataField="reactivePowerL3" caption="kVAr3"></dxi-column>
+        <dxi-column dataField="reactivePowerTotal" caption="kVAr Total"></dxi-column>
+
+        <dxi-column dataField="apparentPowerL1" caption="kVA1"></dxi-column>
+        <dxi-column dataField="apparentPowerL2" caption="kVA2"></dxi-column>
+        <dxi-column dataField="apparentPowerL3" caption="kVA3"></dxi-column>
+        <dxi-column dataField="apparentPowerTotal" caption="kVA Total"></dxi-column>
+
+        <dxi-column dataField="kwhExportR1" caption="kWh Export R1"></dxi-column>
+        <dxi-column dataField="kwhExportR2" caption="kWh Export R2"></dxi-column>
+        <dxi-column dataField="kwhExportR3" caption="kWh Export R3"></dxi-column>
+        <dxi-column dataField="kwhExportR4" caption="kWh Export R4"></dxi-column>
+        <dxi-column dataField="kwhExportR5" caption="kWh Export R5"></dxi-column>
+        <dxi-column dataField="kwhExportTotal" caption="kWh Export Total"></dxi-column>
+
+        <dxi-column dataField="kwhImportR1" caption="kWh Import R1"></dxi-column>
+        <dxi-column dataField="kwhImportR2" caption="kWh Import R2"></dxi-column>
+        <dxi-column dataField="kwhImportR3" caption="kWh Import R3"></dxi-column>
+        <dxi-column dataField="kwhImportR4" caption="kWh Import R4"></dxi-column>
+        <dxi-column dataField="kwhImportR5" caption="kWh Import R5"></dxi-column>
+        <dxi-column dataField="kwhImportTotal" caption="kWh Import Total"></dxi-column>
+
+        <dxi-column dataField="kwhAbsR1" caption="kWh Abs R1"></dxi-column>
+        <dxi-column dataField="kwhAbsR2" caption="kWh Abs R2"></dxi-column>
+        <dxi-column dataField="kwhAbsR3" caption="kWh Abs R3"></dxi-column>
+        <dxi-column dataField="kwhAbsR4" caption="kWh Abs R4"></dxi-column>
+        <dxi-column dataField="kwhAbsR5" caption="kWh Abs R5"></dxi-column>
+        <dxi-column dataField="kwhAbsTotal" caption="kWh Abs Total"></dxi-column>
+
+        <dxi-column dataField="kvarhExportR1" caption="kVArh Export R1"></dxi-column>
+        <dxi-column dataField="kvarhExportR2" caption="kVArh Export R2"></dxi-column>
+        <dxi-column dataField="kvarhExportR3" caption="kVArh Export R3"></dxi-column>
+        <dxi-column dataField="kvarhExportR4" caption="kVArh Export R4"></dxi-column>
+        <dxi-column dataField="kvarhExportR5" caption="kVArh Export R5"></dxi-column>
+        <dxi-column dataField="kvarhExportTotal" caption="kVArh Export Total"></dxi-column>
+
+        <dxi-column dataField="kvarhImportR1" caption="kVArh Import R1"></dxi-column>
+        <dxi-column dataField="kvarhImportR2" caption="kVArh Import R2"></dxi-column>
+        <dxi-column dataField="kvarhImportR3" caption="kVArh Import R3"></dxi-column>
+        <dxi-column dataField="kvarhImportR4" caption="kVArh Import R4"></dxi-column>
+        <dxi-column dataField="kvarhImportR5" caption="kVArh Import R5"></dxi-column>
+        <dxi-column dataField="kvarhImportTotal" caption="kVArh Import Total"></dxi-column>
+
+        <dxi-column dataField="kvarhAbsR1" caption="kVArh Abs R1"></dxi-column>
+        <dxi-column dataField="kvarhAbsR2" caption="kVArh Abs R2"></dxi-column>
+        <dxi-column dataField="kvarhAbsR3" caption="kVArh Abs R3"></dxi-column>
+        <dxi-column dataField="kvarhAbsR4" caption="kVArh Abs R4"></dxi-column>
+        <dxi-column dataField="kvarhAbsR5" caption="kVArh Abs R5"></dxi-column>
+        <dxi-column dataField="kvarhAbsTotal" caption="kVArh Abs Total"></dxi-column>
+
+        <dxi-column dataField="kvahExportR1" caption="kVAh Export R1"></dxi-column>
+        <dxi-column dataField="kvahExportR2" caption="kVAh Export R2"></dxi-column>
+        <dxi-column dataField="kvahExportR3" caption="kVAh Export R3"></dxi-column>
+        <dxi-column dataField="kvahExportR4" caption="kVAh Export R4"></dxi-column>
+        <dxi-column dataField="kvahExportR5" caption="kVAh Export R5"></dxi-column>
+        <dxi-column dataField="kvahExportTotal" caption="kVAh Export Total"></dxi-column>
+
+        <dxi-column dataField="kvahImportR1" caption="kVAh Import R1"></dxi-column>
+        <dxi-column dataField="kvahImportR2" caption="kVAh Import R2"></dxi-column>
+        <dxi-column dataField="kvahImportR3" caption="kVAh Import R3"></dxi-column>
+        <dxi-column dataField="kvahImportR4" caption="kVAh Import R4"></dxi-column>
+        <dxi-column dataField="kvahImportR5" caption="kVAh Import R5"></dxi-column>
+        <dxi-column dataField="kvahImportTotal" caption="kVAh Import Total"></dxi-column>
+
+        <dxi-column dataField="kvahAbsR1" caption="kVAh Abs R1"></dxi-column>
+        <dxi-column dataField="kvahAbsR2" caption="kVAh Abs R2"></dxi-column>
+        <dxi-column dataField="kvahAbsR3" caption="kVAh Abs R3"></dxi-column>
+        <dxi-column dataField="kvahAbsR4" caption="kVAh Abs R4"></dxi-column>
+        <dxi-column dataField="kvahAbsR5" caption="kVAh Abs R5"></dxi-column>
+        <dxi-column dataField="kvahAbsTotal" caption="kVAh Abs Total"></dxi-column>
+
+        <dxi-column dataField="kwhInstant" caption="kWh Instant"></dxi-column>
+        <dxi-column dataField="kvarhInstant" caption="kVArh Instant"></dxi-column>
+        <dxi-column dataField="kvahInstant" caption="kVAh Instant"></dxi-column>
+
+        <dxi-column dataField="kvaMaxR1" caption="kVA Max R1"></dxi-column>
+        <dxi-column dataField="timeKvaR1" caption="Time kVA R1"></dxi-column>
+        <dxi-column dataField="kvaMaxR2" caption="kVA Max R2"></dxi-column>
+        <dxi-column dataField="timeKvaR2" caption="Time kVA R2"></dxi-column>
+        <dxi-column dataField="kvaMaxR3" caption="kVA Max R3"></dxi-column>
+        <dxi-column dataField="timeKvaR3" caption="Time kVA R3"></dxi-column>
+
+        <dxi-column dataField="frequency" caption="Hz"></dxi-column>
+
+        <dxi-column [fixed]="true" dataField="id" caption="Instantaneous Data" width="55px" [allowFiltering]="false" [allowSorting]="false"
+          cellTemplate="cellTemplate"></dxi-column>
+        <div *dxTemplate="let data of 'cellTemplate'">
+          <div (click)="showMenu(data.value)" class="text-center">
+            <i class="fa fa-th-large" id="btn{{data.value}}"></i>
+          </div>
+        </div>
+      </dx-data-grid>
+      <app-context [menuVisible]="menuVisible" [target]="target" [contextItems]="contextItems" (onHideMenu)="onHideMenu()" (itemClick)="itemClick($event)"></app-context>
+      <app-detailpopup [popupVisible]="popupVisible" [detail]="detail" [detailInstants]="detailInstants" [detailMerk]="detailMerk"
+        (onHidePopup)="onHidePopup()"></app-detailpopup>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div *ngIf="addVisible">
+  <form action="Submit" (submit)="save($event)" style="margin-left:100px; margin-right: 100px; margin-bottom: 30px; margin-top: 30px;">
+    <dx-button *ngIf="!isDetail" icon="fa fa-ban" text="Cancel" type="danger" (onClick)="cancel()"></dx-button>
+    <dx-button *ngIf="!isDetail" class="pull-right" icon="fa fa-save" text="Save" type="success" validationGroup="roleData" [useSubmitBehavior]="true">
+    </dx-button>
+
+    <!-- class="m-2" => add margin by 0.5rem -->
+    <div class="m-2"></div>
+    <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+    <div class="m-2"></div>
+
+    <dx-form [(formData)]="role" validationGroup="roleData">
+      <dxi-item itemType="group" [colCount]="1">
+        <dxi-item itemType="group">
+          <dxi-item name="cboSasaran" dataField="sid" editorType="dxSelectBox" [label]="{ text: 'Sasaran' }" [editorOptions]="{readOnly: isDetail, items: daftarSasaran, displayExpr: 'sasaran', valueExpr: 'sid' }" [validationRules]="[{type: 'required', message: 'Sasaran harus dipilih' }]" ></dxi-item>
+          <dxi-item name="cboRjpp" dataField="rjppid" editorType="dxSelectBox" [label]="{ text: 'RJPP' }" [editorOptions]="{readOnly: isDetail, items: daftarRjpp, displayExpr: 'periode', valueExpr: 'rjppid' }" [validationRules]="[{type: 'required', message: 'RJPP harus dipilih' }]" ></dxi-item>
+          <dxi-item name="txtNamaProgram" dataField="nama_program" caption="Nama Program" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Keterangan harus diisi' }]"></dxi-item>
+          <dxi-item name="txtPlanExecute" dataField="plan_execute" caption="Plan Execute" editorType="dxDateBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Keterangan harus diisi' }]"></dxi-item>
+          <dxi-item name="txtPIC" dataField="pic" caption="PIC" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Keterangan harus diisi' }]"></dxi-item>
+          <dxi-item name="txtIndikator_hasil" dataField="indikator_hasil" caption="Indikator Hasil" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Keterangan harus diisi' }]"></dxi-item>
+          <dxi-item name="cboPortofolioProduk" dataField="gid" editorType="dxSelectBox" [label]="{ text: 'Portofolio Produk' }" [editorOptions]="{readOnly: isDetail, items: daftarPortofolioProduk, displayExpr: 'nama', valueExpr: 'gid' }" [validationRules]="[{type: 'required', message: 'Portofolio Produk harus dipilih' }]" ></dxi-item>
+          <dxi-item name="txtIndikatorSatuan" dataField="indikator_satuan" caption="Indikator Satuan" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Keterangan harus diisi' }]"></dxi-item>
+          <dxi-item name="txtIndikatorSatuan" dataField="kode_program" caption="Kode Program" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Keterangan harus diisi' }]"></dxi-item>
+          <dxi-item name="txtIndikatorSatuan" dataField="deskripsi" caption="Deskripsi" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Keterangan harus diisi' }]"></dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item itemType="empty"></dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dx-form>
+    <!-- <br>
+    <p>Menu Access :</p> -->
+    <dx-tree-list
+      [dataSource]="menuTree"
+      itemsExpr="items"
+      keyExpr="menuId"
+      parentIdExpr="menuParent"
+      [showRowLines]="true"
+      [columnAutoWidth]="true"
+      [rowAlternationEnabled]="true"
+      autoExpandAll="true"
+      (onToolbarPreparing)="toolbarPreparing($event)"
+      (onCellClick)="cellClick($event)"
+      (onRowUpdated)="rowUpdated($event)">
+      <dxo-editing
+        mode="batch"
+        [allowAdding]="false"
+        [allowUpdating]="!isDetail"
+        [allowDeleting]="false">
+      </dxo-editing>
+      <!-- <dxi-column dataField="text" caption="Menu" [allowEditing]="false"></dxi-column>
+      <dxi-column dataField="read"></dxi-column>
+      <dxi-column dataField="write"></dxi-column> -->
+    </dx-tree-list>
+    <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save()" (onHideConf)="onHideConf()"
+      (onSaveConf)="onSaveConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+  </form>
+</div>

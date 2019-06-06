@@ -1,0 +1,32 @@
+<dx-popup class="popup" [width]="356" [height]="175" [showTitle]="true" title="Confirmation" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="confVisible" (onHiding)="hide()">
+    <div *dxTemplate="let data of 'content'">
+        <div *ngIf="isDisconnect">
+            <p>Are you sure to disconnect ?</p>
+        </div>
+        <div *ngIf="isReconnect">
+            <p>Are you sure to reconnect ?</p>
+        </div>
+        <div *ngIf="isSave">
+            <p>Are you sure the data is correct ?</p>
+        </div>
+        <div *ngIf="isCancel">
+            <p>Anda yakin mau membatalkan ?</p>
+        </div>
+        <div *ngIf="isDelete">
+            <p>Are you sure want to delete {{text}} ?</p>
+        </div>
+        <div *ngIf="isActive">
+            <p>Are you sure want to Active {{text}} ?</p>
+        </div>
+        <div *ngIf="isDeactive">
+            <p>Are you sure want to Deactive {{text}} ?</p>
+        </div>
+        <div class="row">
+            <div class="col-1"></div>
+            <dx-button class="col-4" text="No" (onClick)="no()"></dx-button>
+            <div class="col-2"></div>
+            <dx-button class="col-4" text="Yes" (onClick)="yes()"></dx-button>
+            <div class="col-1"></div>
+        </div>
+    </div>
+</dx-popup>

@@ -1,0 +1,344 @@
+<div class="animated fadeIn">
+    <div class="card" id="Commissioning">
+        <div class="card-header">
+            <strong>Commisioning</strong>
+        </div>
+        <div class="card-body">
+
+            <dx-button text="Cancel" icon="close" (onClick)="cancel($event)" style="margin-bottom: 15px; width: 120px">
+            </dx-button>
+            <dx-button text="Active" [disabled]="enablebtnAction" [visible]="btnActive" icon="check" (onClick)="active()" style="margin-bottom: 15px; float: right; width: 120px">
+            </dx-button>
+            <dx-button text="Deactive" [visible]="btnDeactive" icon="check" (onClick)="deactive()" style="margin-bottom: 15px; float: right; width: 120px">
+            </dx-button>
+            <dx-button text="Test" [visible]="btnTest" icon="refresh" (onClick)="testCommisioning()" style="margin-bottom: 15px; margin-right: 5px; float: right; width: 120px">
+            </dx-button>
+
+            <!-- <dx-load-panel #loadPanel shadingColor="rgba(0,0,0,0.4)" [position]="{ of: '#commisioning' }" [(visible)]="loadingVisible" [showIndicator]="true" [showPane]="true" [shading]="true" [closeOnOutsideClick]="false" (onShown)="onShown()" (onHidden)="onHidden()">
+            </dx-load-panel> -->
+
+            <dx-form>
+                <dxi-item itemType="tabbed">
+                    <dxi-tab title="AMR Data">
+                        <dx-form [formData]="search">
+                            <dxi-item itemType="group" [colCount]="2">
+                                <dxi-item [colSpan]="1" dataField="location" [editorOptions]="{ disabled: false, readOnly: true }"></dxi-item>
+                                <dxi-item [colSpan]="1">
+                                    <dx-button icon="search" (onClick)="showInfoLocation()"></dx-button>
+                                </dxi-item>
+                                <dxi-item [colSpan]="1" dataField="Meter" [editorOptions]="{disabled: false, readOnly: true }"> </dxi-item>
+                                <dxi-item [colSpan]="1">
+                                    <dx-button icon="search" (onClick)="showInfoMeter()" [disabled]="btnMeter"></dx-button>
+                                </dxi-item>
+                                <dxi-item [colSpan]="1" dataField="commDevice" [editorOptions]="{disabled: false, readOnly: true }"> </dxi-item>
+                                <dxi-item [colSpan]="1">
+                                    <dx-button icon="search" (onClick)="showInfocommDevice()" [disabled]="btnCommDevice"></dx-button>
+                                </dxi-item>
+                                <dxi-item [colSpan]="1" dataField="simCard" [editorOptions]="{disabled: false, readOnly: true }"> </dxi-item>
+                                <dxi-item [colSpan]="1">
+                                    <dx-button icon="search" (onClick)="showInfosimCard()" [disabled]="btnSim"></dx-button>
+                                </dxi-item>
+                            </dxi-item>
+                        </dx-form>
+                    </dxi-tab>
+
+                    <dxi-tab title="Location">
+                        <dx-form [(formData)]="Location">
+                            <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="LocationCode"><p>{{location?.locationCode}}</p></dxi-item>
+                                    <dxi-item dataField="LocationName"><p>{{location?.locationName}}</p></dxi-item>                                    
+                                    <dxi-item dataField="LocationType"><p>{{location?.locationType.name}}</p></dxi-item>
+                                    <dxi-item dataField="Site"><p>{{location?.site.siteCodeExist}} {{location?.site.siteName}}</p></dxi-item>
+                                    <dxi-item dataField="Address"><p>{{location?.address}}</p></dxi-item>
+                                    <dxi-item dataField="City"><p>{{location?.city}}</p></dxi-item>
+                                    <dxi-item dataField="Province"><p>{{location?.province}}</p></dxi-item>
+                                    <dxi-item dataField="PostalCode"><p>{{location?.postalCode}}</p></dxi-item>
+                                </dxi-item>
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="Phone 1"><p>{{location?.telephone1}}</p></dxi-item>
+                                    <dxi-item dataField="Phone 2"><p>{{location?.telephone2}}</p></dxi-item>
+                                    <dxi-item dataField="Faximile"><p>{{location?.facsimile}}</p></dxi-item>
+                                    <dxi-item dataField="Email"><p>{{location?.email}}</p></dxi-item>
+                                    <dxi-item dataField="Status"><p>{{location?.status}}</p></dxi-item>
+                                    <dxi-item dataField="Photo"><img src={{location?.photoUrl}}></dxi-item>
+                                </dxi-item>
+                            </dxi-item>
+                            <dxi-item>
+                                <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+                            </dxi-item>
+                            <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="Tariff"><p>{{location?.tariff}}</p></dxi-item>
+                                    <dxi-item dataField="Capacity"><p>{{location?.power}}</p></dxi-item>
+                                    <dxi-item dataField="P Unit"><p>{{location?.punit}}</p></dxi-item>
+                                    <dxi-item dataField="CT Ratio"><p>{{location?.dynamic.CT_RATIO}}</p></dxi-item>
+                                    <dxi-item dataField="CT Primary"><p>{{location?.dynamic.CT_PRIMARY}}</p></dxi-item>
+                                    <dxi-item dataField="CT Secondary"><p>{{location?.dynamic.CT_SECONDARY}}</p></dxi-item>
+                                    <dxi-item dataField="PT Ratio"><p>{{location?.dynamic.PT_RATIO}}</p></dxi-item>
+                                    <dxi-item dataField="PT Primary"><p>{{location?.dynamic.PT_PRIMARY}}</p></dxi-item>
+                                    <dxi-item dataField="PT Secondary"><p>{{location?.dynamic.PT_SECONDARY}}</p></dxi-item>
+                                </dxi-item>
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="Substation"><p>{{location?.substation}}</p></dxi-item>
+                                    <dxi-item dataField="ContractNo"><p>{{location?.dynamic.NO_CONTRACT}}</p></dxi-item>                                    
+                                    <dxi-item dataField="MeterFactor"><p>{{location?.dynamic.FACTOR_METER}}</p></dxi-item>
+                                    <dxi-item dataField="kWhFactor"><p>{{location?.dynamic.FACTOR_KWH}}</p></dxi-item>
+                                    <dxi-item dataField="kVArhFactor"><p>{{location?.dynamic.FACTOR_KVARH}}</p></dxi-item>
+                                    <dxi-item dataField="TrfLosesFact"><p>{{location?.dynamic.FACTOR_LOSES_TRF}}</p></dxi-item>
+                                    <dxi-item dataField="MutationDate"><p>{{location?.mutationDate | date:'MM/dd/yyyy'}}</p></dxi-item>
+                                    <dxi-item dataField="MutationCode"><p>{{location?.mutationCode}}</p></dxi-item>
+                                </dxi-item>
+                            </dxi-item>
+                            <dxi-item>
+                                <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+                            </dxi-item>
+                            <dxi-item itemType="group" cssClass="second-group">
+                                <dxi-item dataField="LocationMap">
+                                    <dx-map [zoom]="11" [height]="300" width="50%" [controls]="true" [markerIconSrc]="mapMarkerUrl" [markers]="markers">
+                                    </dx-map>
+                                </dxi-item>
+                            </dxi-item>
+                            <dxi-item>
+                                <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+                            </dxi-item>
+                            <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="Description"><p>{{location?.locationType.description}}</p></dxi-item>
+                                    <dxi-item dataField="Appendix"><p>{{location?.locationType.appendix}}</p></dxi-item>
+                                </dxi-item>
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="RegisterDate"><p>{{location?.registrationDate | date:'MM/dd/yyyy'}}</p></dxi-item>
+                                    <dxi-item dataField="RegisterBy"><p>{{location?.registrationBy}}</p></dxi-item>
+                                    <dxi-item dataField="LastModifiedDate"><p>{{location?.modifiedDate | date:'MM/dd/yyyy'}}</p></dxi-item>
+                                    <dxi-item dataField="LastModifiedBy"><p>{{location?.modifiedBy}}</p></dxi-item>
+                                </dxi-item>
+                            </dxi-item>
+                        </dx-form>
+                    </dxi-tab>
+
+                    <dxi-tab title="Meter">
+                        <dx-form [(formData)]="AssetMeter">
+                            <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="MeterCode"><p>{{assetMeter?.assetCode}}</p></dxi-item>
+                                    <dxi-item dataField="MeterBrand"><p>{{assetMeter?.brandName}}</p></dxi-item>
+                                    <dxi-item dataField="BrandType"><p>{{assetMeter?.brandTypeName}}</p></dxi-item>
+                                    <dxi-item dataField="Site"><p>{{assetMeter?.siteCodeExist}} {{assetMeter?.siteName}}</p></dxi-item>
+                                </dxi-item>
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="Status"><p>{{assetMeter?.status}}</p></dxi-item>
+                                    <dxi-item dataField="Description"><p>{{assetMeter?.description}}</p></dxi-item>
+                                    <dxi-item dataField="photoUrl"><img src="{{assetMeter?.photoUrl}}"></dxi-item>
+                                </dxi-item>
+                            </dxi-item>
+                            <dxi-item>
+                                <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+                            </dxi-item>
+                            <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="MeterClass"><p>{{assetMeter?.dynamicData.METER_CLASS.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="MeterProtocol"><p>{{assetMeter?.dynamicData.METER_PROTOCOL.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="MeterChannel"><p>{{assetMeter?.dynamicData.METER_CHANNEL_GROUP.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="ServicePlans"><p>{{assetMeter?.dynamicData.SERVICE_PLANS.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="PhysicalAddress"><p>{{assetMeter?.dynamicData.PHYSICALADDRESS.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="LogicalAddress"><p>{{assetMeter?.dynamicData.LOGICALADDRESS.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="AuthLevel"><p>{{assetMeter?.dynamicData.AUTHENTICATION_LEVEL.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="CertificateID"><p>{{assetMeter?.dynamicData.CERTIFICATE_ID.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="CertificateDate"><p>{{assetMeter?.dynamicData.CERTIFICATE_DATE.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="CertificateFile"><p>{{assetMeter?.dynamicData.CERTIFICATE_FILE.attributeValue}}</p></dxi-item>
+                                </dxi-item>
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="InstallDate"><p>{{assetMeter?.installDate | date:'MM/dd/yyyy'}}</p></dxi-item>
+                                    <dxi-item dataField="RegistrationDate"><p>{{assetMeter?.registrationDate | date:'MM/dd/yyyy'}}</p></dxi-item>
+                                    <dxi-item dataField="RegistrationBy"><p>{{assetMeter?.registrationBy}}</p></dxi-item>
+                                    <dxi-item dataField="ActivationDate"><p>{{assetMeter?.activationDate | date:'MM/dd/yyyy'}}</p></dxi-item>
+                                    <dxi-item dataField="ActivationBy"><p>{{assetMeter?.activationBy}}</p></dxi-item>
+                                    <dxi-item dataField="DeactivationDate"><p>{{assetMeter?.deactivationDate | date:'MM/dd/yyyy'}}</p></dxi-item>
+                                    <dxi-item dataField="DeactivationBy"><p>{{assetMeter?.deactivationBy}}</p></dxi-item>
+                                </dxi-item>
+                            </dxi-item>
+                        </dx-form>
+                    </dxi-tab>
+                    <dxi-tab title="Comm Device">
+                        <dx-form [(formData)]="AssetCommDevice">
+                            <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="CommDeviceCode"><p>{{assetCommDevice?.assetCode}}</p></dxi-item>
+                                    <dxi-item dataField="CommDeviceType"><p>{{assetCommDevice?.assetTypeName}}</p></dxi-item>
+                                    <dxi-item dataField="Brand"><p>{{assetCommDevice?.brandName}}</p></dxi-item>
+                                    <dxi-item dataField="BrandType"><p>{{assetCommDevice?.brandTypeName}}</p></dxi-item>
+                                    <dxi-item dataField="Site"><p>{{assetCommDevice?.siteCodeExist}} {{assetCommDevice?.siteName}}</p></dxi-item>
+                                    <dxi-item dataField="Status"><p>{{assetCommDevice?.status}}</p></dxi-item>
+                                    <dxi-item dataField="Description"><p>{{assetCommDevice?.description}}</p></dxi-item>
+                                </dxi-item>
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="CommunicationType" [visible]="ismodem"><p>{{assetCommDevice?.dynamicData.COMMUNICATION_TYPE.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="ConnectionType" [visible]="ismodem"><p>{{assetCommDevice?.dynamicData.CONNECTION_TYPE.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="CommunicationPort"><p>{{assetCommDevice?.dynamicData.COMMUNICATION_PORT.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="ConnectionnPort"><p>{{assetCommDevice?.dynamicData.CONNECTION_PORT.attributeValue}}</p></dxi-item>
+                                    <dxi-item dataField="IP Address" [visible]="!ismodem"><p>{{assetSim?.dynamicData.IP.attributeValue}}</p></dxi-item>
+                                </dxi-item>
+                            </dxi-item>
+                            <dxi-item>
+                            </dxi-item>
+                        </dx-form>
+                    </dxi-tab>
+
+                    <dxi-tab title="Sim Card">
+                        <dx-form [(formData)]="AssetSim">
+                            <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="SIM Card No"><p>{{assetSim?.assetCode}}</p></dxi-item>
+                                    <dxi-item dataField="Provider"><p>{{assetSim?.brandName}}</p></dxi-item>
+                                    <dxi-item dataField="IP Address"><p>{{assetSim?.dynamicData.IP.attributeValue}}</p></dxi-item>
+                                </dxi-item>
+                                <dxi-item itemType="group">
+                                    <dxi-item dataField="Site"><p>{{assetSim?.siteCodeExist}} {{assetSim?.siteName}}</p></dxi-item>
+                                    <dxi-item dataField="Status"><p>{{assetSim?.status}}</p></dxi-item>
+                                    <dxi-item dataField="Description"><p>{{assetSim?.description}}</p></dxi-item>
+                                </dxi-item>
+                            </dxi-item>
+                            <dxi-item>
+                            </dxi-item>
+                        </dx-form>
+                    </dxi-tab>
+                </dxi-item>
+            </dx-form>
+            <app-form-confirmation [isSave]="isSave" [isActive]="isActive" [isDeactive]="isDeactive" [isCancel]="isCancel" [confVisible]="confVisible" [text]="text" (onYesConf)="save()" (onHideConf)="onHideConf()" (onSaveConf)="onSaveConf()" (onCancelConf)="onCancelConf()"
+                (onActiveConf)="onActiveConf()" (onDeactiveConf)="onDeactiveConf()"></app-form-confirmation>
+        </div>
+    </div>
+</div>
+
+<!-- < this pop up location> -->
+<div id="popup1">
+    <dx-popup class="popup" width="800" height="auto" [showTitle]="true" title="Location Popup" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="locationPopup">
+        <div *dxTemplate="let data of 'content'">
+            <div class="card-body">
+                <div id="data-grid-demo">
+                    <dx-data-grid id="gridContainer" [dataSource]="searchLocationById" keyExpr="id" [showRowLines]="true" [showBorders]="true">
+                        <dxo-remote-operations [filtering]="true">
+                        </dxo-remote-operations>
+                        <dxo-filter-row [visible]="true"></dxo-filter-row>
+                        <dxo-header-filter [visible]="true"></dxo-header-filter>
+                        <dxo-paging [pageSize]="10"></dxo-paging>
+                        <dxo-pager [showInfo]="true"></dxo-pager>
+                        <dxi-column [width]="110" dataField="locationCode" caption="Location Code"></dxi-column>
+                        <dxi-column dataField="name" caption="Location Name" [allowFiltering]="false"></dxi-column>
+                        <dxi-column [width]="100" dataField="locationType.name" caption="Location Type" [allowFiltering]="false"></dxi-column>
+                        <dxi-column dataField="site.siteName" caption="Site" [allowFiltering]="false"></dxi-column>
+                        <dxi-column [width]="80" dataField="status" caption="Status" [allowFiltering]="false"></dxi-column>
+                        <dxi-column [fixed]="true" dataField="locationCode" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false" cellTemplate="locationTemplate"></dxi-column>
+                        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+                        <dxo-scrolling mode="virtual"></dxo-scrolling>
+                        <dxo-sorting mode="none"></dxo-sorting>
+                        <div *dxTemplate="let data of 'locationTemplate'">
+                            <div (click)="getIdLoc(data.value)" class="text-center">
+                                <i class="fa fa-thumb-tack" id="btn{{data.value}}"></i>
+                            </div>
+                        </div>
+                    </dx-data-grid>
+                </div>
+            </div>
+        </div>
+    </dx-popup>
+</div>
+
+<!-- < this pop up meter> -->
+<div id="popup2">
+    <dx-popup class="popup" width="800" height="auto" [showTitle]="true" title="Meter Popup" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="meterPopup">
+        <div *dxTemplate="let data of 'content'">
+            <div class="card-body">
+                <div id="data-grid-demo">
+                    <dx-data-grid id="gridContainer" [dataSource]="searchMeterById" keyExpr="id" [showRowLines]="true" [showBorders]="true">
+                        <dxo-remote-operations [filtering]="true">
+                        </dxo-remote-operations>
+                        <dxo-filter-row [visible]="true"></dxo-filter-row>
+                        <dxo-header-filter [visible]="true"></dxo-header-filter>
+                        <dxo-paging [pageSize]="10"></dxo-paging>
+                        <dxi-column [width]="150" dataField="assetCode" caption="Meter Code"></dxi-column>
+                        <dxi-column dataField="assetTypeName" caption="Asset Type"> </dxi-column>
+                        <dxi-column dataField="brandName" caption="Brand" [allowFiltering]="false"></dxi-column>
+                        <dxi-column dataField="brandTypeName" caption="Type" [allowFiltering]="false"></dxi-column>
+                        <dxi-column [width]="80" dataField="status" caption="Status" [allowFiltering]="false"></dxi-column>
+                        <dxi-column [fixed]="true" dataField="id" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false" cellTemplate="meterTemplate"></dxi-column>
+                        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+                        <dxo-scrolling mode="virtual"></dxo-scrolling>
+                        <dxo-sorting mode="none"></dxo-sorting>
+                        <div *dxTemplate="let data of 'meterTemplate'">
+                            <div (click)="getIdMeter(data.value)" class="text-center">
+                                <i class="fa fa-thumb-tack" id="btn{{data.value}}"></i>
+                            </div>
+                        </div>
+                    </dx-data-grid>
+                </div>
+            </div>
+        </div>
+    </dx-popup>
+</div>
+
+<!-- < this pop up Communication Device> -->
+<div id="popup3">
+    <dx-popup class="popup" width="800" height="auto" [showTitle]="true" title="Communication Device Popup" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="commDevicePopup">
+        <div *dxTemplate="let data of 'content'">
+            <div class="card-body">
+                <div id="data-grid-demo">
+                    <dx-data-grid id="gridContainer" [dataSource]="searchCommDeviceById" keyExpr="id" [showRowLines]="true" [showBorders]="true">
+                        <dxo-remote-operations [filtering]="true">
+                        </dxo-remote-operations>
+                        <dxo-filter-row [visible]="true"></dxo-filter-row>
+                        <dxo-header-filter [visible]="true"></dxo-header-filter>
+                        <dxo-paging [pageSize]="10"></dxo-paging>
+                        <dxi-column [width]="150" dataField="assetCode" caption="Comm Device Code"></dxi-column>
+                        <dxi-column dataField="assetTypeName" caption="Device Type" [allowFiltering]="false"></dxi-column>
+                        <dxi-column dataField="brandName" caption="Brand" [allowFiltering]="false"></dxi-column>
+                        <dxi-column dataField="brandTypeName" caption="Type" [allowFiltering]="false"></dxi-column>
+                        <dxi-column [width]="80" dataField="status" caption="Status" [allowFiltering]="false"></dxi-column>
+                        <dxi-column [fixed]="true" dataField="id" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false" cellTemplate="commDeviceTemplate"></dxi-column>
+                        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+                        <dxo-scrolling mode="virtual"></dxo-scrolling>
+                        <dxo-sorting mode="none"></dxo-sorting>
+                        <div *dxTemplate="let data of 'commDeviceTemplate'">
+                            <div (click)="getIdCommDevice(data.value)" class="text-center">
+                                <i class="fa fa-thumb-tack" id="btn{{data.value}}"></i>
+                            </div>
+                        </div>
+                    </dx-data-grid>
+                </div>
+            </div>
+        </div>
+    </dx-popup>
+</div>
+
+<!-- < this pop up SIM> -->
+<div id="popup4">
+    <dx-popup class="popup" width="800" height="auto" [showTitle]="true" title="SimCard Popup" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="simPopup">
+        <div *dxTemplate="let data of 'content'">
+            <div class="card-body">
+                <div id="data-grid-demo">
+                    <dx-data-grid id="gridContainer" [dataSource]="searchSimById" keyExpr="id" [showRowLines]="true" [showBorders]="true">
+                        <dxo-remote-operations [filtering]="true">
+                        </dxo-remote-operations>
+                        <dxo-filter-row [visible]="true"></dxo-filter-row>
+                        <dxo-header-filter [visible]="true"></dxo-header-filter>
+                        <dxo-paging [pageSize]="5"></dxo-paging>
+                        <dxi-column dataField="assetCode" caption="SIM Card"></dxi-column>
+                        <dxi-column dataField="assetTypeName" caption="Asset Type" [allowFiltering]="false"></dxi-column>
+                        <dxi-column dataField="brandName" caption="Provider" [allowFiltering]="false"></dxi-column>
+                        <dxi-column [width]="80" dataField="status" caption="Status" [allowFiltering]="false"></dxi-column>
+                        <dxi-column [fixed]="true" dataField="id" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false" cellTemplate="simTemplate"></dxi-column>
+                        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+                        <dxo-scrolling mode="virtual"></dxo-scrolling>
+                        <dxo-sorting mode="none"></dxo-sorting>
+                        <div *dxTemplate="let data of 'simTemplate'">
+                            <div (click)="getIdSim(data.value)" class="text-center">
+                                <i class="fa fa-thumb-tack" id="btn{{data.value}}"></i>
+                            </div>
+                        </div>
+                    </dx-data-grid>
+                </div>
+            </div>
+        </div>
+    </dx-popup>
+</div>

@@ -1,0 +1,34 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Disconnect</strong>
+    </div>
+    <div class="card-body">
+      <form action="Submit" (submit)="save($event)">
+        <!-- START FORM -->
+        <dx-form [(formData)]="disconnect" validationGroup="dataValidation" [alignItemLabels]="true" [alignItemLabelsInAllGroups]="true">
+          
+          <dxi-item dataField="meterId">
+            <dxo-label text="Meter Id"></dxo-label>
+            <p>{{disconnect.meterId}}</p>
+          </dxi-item>
+          <dxi-item itemType="group" cssClass="first-group" [colCount]="3">
+            <dxi-item dataField="status">
+              <dxo-label text="Meter Status"></dxo-label>
+              <p>{{disconnect.status}}</p>
+            </dxi-item>
+            <dxi-item>
+              <dx-button icon="fa fa-close" text="Disconnect" (onClick)="disconnecting($event)">
+              </dx-button>
+              <dx-button icon="fa fa-check" text="Reconnect" (onClick)="reconnecting($event)">
+              </dx-button>
+            </dxi-item>
+          </dxi-item>
+        </dx-form>
+        <!-- END FORM -->
+        <app-form-confirmation [isSave]="isSave" [isDisconnect]="isDisconnect" [isReconnect]="isReconnect" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save($event)" (onHideConf)="onHideConf()"
+          (onSaveConf)="onSaveConf()"></app-form-confirmation>
+      </form>
+    </div>
+  </div>
+</div>

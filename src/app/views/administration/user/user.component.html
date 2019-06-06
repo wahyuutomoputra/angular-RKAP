@@ -1,0 +1,71 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Users <span *ngIf="isAdd || isEdit">Add / Edit</span></strong>
+      <span *ngIf="isDetail" class="pull-right">
+        <dx-button id="btnBack" text="Back" (onClick)="back()"></dx-button>
+      </span>
+    </div>
+    <div class="card-body">
+      <div [hidden]="isDetail || isAdd">
+      <div id="form-container" style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;">
+        <dx-form id="form" itemType="group" sssClass="first-group" [formData]="search" [colCount]="4">
+          <dxi-item dataField="siteCode" [editorOptions]="{ disabled: false }" [colSpan]="2">
+            <dxo-label text="Site Code"></dxo-label>
+          </dxi-item>
+          <dxi-item [colSpan]="1">
+            <dx-button icon="search" (onClick)="showInfo()"></dx-button>
+          </dxi-item>
+          <dxi-item [colSpan]="1">
+            <dx-button text="Search" (onClick)="doSearch()" type="default"></dx-button>
+          </dxi-item>
+        </dx-form>
+        <div *ngIf="isShowInfo">
+          <app-search-site [siteSearchVsb]="siteSearchVsb" (onHideSiteSearch)="onHideSiteSearch($event, $event2)"></app-search-site>
+        </div>
+      </div>
+        <div id="data-grid-demo" style="margin-top: 20px;">
+          <dx-data-grid id="gridContainer" keyExpr="id" [dataSource]="users" keyExpr="id" [showRowLines]="true" [showBorders]="true" [columnHidingEnabled]="false"
+            [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true">
+            <dxo-remote-operations [paging]="true">
+            </dxo-remote-operations>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true" [showNavigationButtons]="true">
+            </dxo-pager>
+            <dxo-export [enabled]="true" fileName="User" [allowExportSelectedData]="false"></dxo-export>
+            <dxi-column [width]="125" dataField="name" caption="Name" [allowEditing]="false"></dxi-column>
+            <dxi-column [width]="115" dataField="userId" caption="User ID" [allowEditing]="false"></dxi-column>
+            <dxi-column [width]="120" dataField="siteCode" caption="Site"><dxo-lookup [dataSource]="sites" displayExpr="name" valueExpr="siteCode"></dxo-lookup></dxi-column>
+            <dxi-column [width]="100" dataField="roleId" caption="Role"><dxo-lookup [dataSource]="roles" displayExpr="roleName" valueExpr="id"></dxo-lookup></dxi-column>
+            <dxi-column [width]="120" dataField="companyCode" caption="Company"><dxo-lookup [dataSource]="companies" displayExpr="name" valueExpr="companyCode"></dxo-lookup></dxi-column>
+            <dxi-column [width]="100" dataField="telephone1" caption="Phone 1"></dxi-column>
+            <dxi-column [width]="100" dataField="telephone2" caption="Phone 2"></dxi-column>
+            <dxi-column [width]="125" dataField="email" caption="Email" [allowEditing]="false"></dxi-column>
+            <dxi-column [width]="100" dataField="createdBy" caption="Register By"></dxi-column>
+            <dxi-column [width]="80" dataField="createdDate" dataType="datetime" format="MM/dd/yyyy" caption="Register Date" [allowEditing]="false"></dxi-column>
+            <dxi-column [width]="80" [calculateCellValue]="calculateCellValue" dataField="status" caption="Status" alignment="center"></dxi-column>
+            <dxi-column [fixed]="true" dataField="id" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false" cellTemplate="cellTemplate"></dxi-column>
+            <div *dxTemplate="let data of 'cellTemplate'">
+              <div (click)="showMenu(data.value)" class="text-center">
+                <i class="fa fa-th-large" id="btn{{data.value}}"></i>
+              </div>
+            </div>
+          </dx-data-grid>
+          <app-context [menuVisible]="menuVisible" [target]="target" [contextItems]="contextItems" (onHideMenu)="onHideMenu()" (itemClick)="itemClick($event)"></app-context>
+          <app-confirmation [text]="text" [confVisible]="confVisible" [detail]="detail" (onHideConf)="onHideConf()"></app-confirmation>
+          <app-progress [progressVisible]="progressVisible" [progressContent]="progressContent" [progressTitle]="progressTitle" (onHideProgresss)="onHideProgress()"></app-progress>
+        </div>
+      </div>
+      <div *ngIf="addVisible">
+        <app-add-user [isEdit]="isEdit" [editItem]="target" [addVisible]="addVisible" (onHideAdd)="onHideAdd()"></app-add-user>
+      </div>
+      <app-form-confirmation [isDelete]="isDelete" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="delete()" (onHideConf)="onHideConf()"
+        (onDeleteConf)="onDeleteConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+    </div>
+    <div *ngIf="isDetail">
+      <app-detailuser [detailUsers]="detailUsers" (onHideEvent)="onHideUser()"></app-detailuser>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,442 @@
+<div class="progress" *ngIf="!isLoaded">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+    style="width:100%">
+  </div>
+</div>
+<dx-form *ngIf="isLoaded" [(formData)]="location">
+  <dxi-item itemType="tabbed">
+    <dxi-tab title="Location">
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="locationCode">
+            <p>{{location.locationCode}}</p>
+          </dxi-item>
+          <dxi-item dataField="locationName">
+            <p>{{location.locationName}}</p>
+          </dxi-item>
+          <dxi-item dataField="locationType">
+            <p>{{location.locationType.name}}</p>
+          </dxi-item>
+          <dxi-item dataField="site">
+            <p>{{location.site.siteCodeExist}} {{location.site.siteName}}</p>
+          </dxi-item>
+          <dxi-item dataField="address">
+            <p>{{location.address}}</p>
+          </dxi-item>
+          <dxi-item dataField="city">
+            <p>{{location.city}}</p>
+          </dxi-item>
+          <dxi-item dataField="province">
+            <p>{{location.province}}</p>
+          </dxi-item>
+          <dxi-item dataField="country">
+            <p>{{location.country}}</p>
+          </dxi-item>
+          <dxi-item dataField="postalCode">
+            <p>{{location.postalCode}}</p>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="phone1">
+            <p>{{location.telephone1}}</p>
+          </dxi-item>
+          <dxi-item dataField="phone2">
+            <p>{{location.telephone2}}</p>
+          </dxi-item>
+          <dxi-item dataField="faximile">
+            <p>{{location.facsimile}}</p>
+          </dxi-item>
+          <dxi-item dataField="email">
+            <p>{{location.email}}</p>
+          </dxi-item>
+          <dxi-item dataField="timeZone">
+            <p>{{location.timeZone}}</p>
+          </dxi-item>
+          <dxi-item dataField="photoUrl">
+            <img src="{{location.photoUrl}}">
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="tariff">
+            <p>{{location.tariff}}</p>
+          </dxi-item>
+          <dxi-item dataField="capacity">
+            <p>{{location.power}}</p>
+          </dxi-item>
+          <dxi-item dataField="unit">
+            <p>{{location.unit}}</p>
+          </dxi-item>
+          <dxi-item dataField="CT Ratio">
+            <p>{{location.dynamic.CT_RATIO}}</p>
+          </dxi-item>
+          <dxi-item dataField="CT Primary">
+            <p>{{location.dynamic.CT_PRIMARY}}</p>
+          </dxi-item>
+          <dxi-item dataField="CT Secondary">
+            <p>{{location.dynamic.CT_SECONDARY}}</p>
+          </dxi-item>
+          <dxi-item dataField="CT Class">
+            <p>{{location.dynamic.CT_CLASS}}</p>
+          </dxi-item>
+          <dxi-item dataField="PT Ratio">
+            <p>{{location.dynamic.PT_RATIO}}</p>
+          </dxi-item>
+          <dxi-item dataField="PT Primary">
+            <p>{{location.dynamic.PT_PRIMARY}}</p>
+          </dxi-item>
+          <dxi-item dataField="PT Secondary">
+            <p>{{location.dynamic.PT_SECONDARY}}</p>
+          </dxi-item>
+          <dxi-item dataField="PT Class">
+            <p>{{location.dynamic.PT_CLASS}}</p>
+          </dxi-item>
+          <dxi-item dataField="Tariff Category">
+            <p>{{location.dynamic.TARIFF_CATEGORY}}</p>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="substation">
+            <p>{{location.substation}}</p>
+          </dxi-item>
+          <dxi-item dataField="ContractNo">
+            <p>{{location.dynamic.NO_CONTRACT}}</p>
+          </dxi-item>
+          <dxi-item dataField="MeterFactor">
+            <p>{{location.dynamic.FACTOR_METER}}</p>
+          </dxi-item>
+          <dxi-item dataField="kWhFactor">
+            <p>{{location.dynamic.FACTOR_KWH}}</p>
+          </dxi-item>
+          <dxi-item dataField="kVArhFactor">
+            <p>{{location.dynamic.FACTOR_KVARH}}</p>
+          </dxi-item>
+          <dxi-item dataField="TrfLosesFact">
+            <p>{{location.dynamic.FACTOR_LOSES_TRF}}</p>
+          </dxi-item>
+          <dxi-item dataField="mutationDate">
+            <p>{{location.mutationDate | date:'MM/dd/yyyy HH:MM:SS'}}</p>
+          </dxi-item>
+          <dxi-item dataField="mutationCode">
+            <p>{{location.mutationCode}}</p>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group">
+        <dxi-item dataField="LocationMap">
+          <dx-map [zoom]="11" [height]="300" width="50%" [controls]="true" [markerIconSrc]="mapMarkerUrl" [markers]="markers">
+          </dx-map>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="status">
+            <p>{{location.status}}</p>
+          </dxi-item>
+          <dxi-item dataField="description">
+            <p>{{location.description}}</p>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="registerDate">
+            <p>{{location.registrationDate | date:'MM/dd/yyyy'}}</p>
+          </dxi-item>
+          <dxi-item dataField="registerBy">
+            <p>{{location.registrationBy}}</p>
+          </dxi-item>
+          <dxi-item dataField="LastModifiedBy">
+            <p>{{location.modifiedBy}}</p>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dxi-tab>
+    <dxi-tab title="Meter" [disabled]="disAssetMeter">
+      <div *ngIf="!assetMeter">
+        <p>No Meter Data Found</p>
+      </div>
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="assetCode">
+            <p>{{assetMeter?.assetCode}}</p>
+          </dxi-item>
+          <dxi-item dataField="assetType">
+            <p>{{assetMeter?.assetTypeName}}</p>
+          </dxi-item>
+          <dxi-item dataField="brand">
+            <p>{{assetMeter?.brandName}}</p>
+          </dxi-item>
+          <dxi-item dataField="brandType">
+            <p>{{assetMeter?.brandTypeName}}</p>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="status">
+            <p>{{assetMeter?.status}}</p>
+          </dxi-item>
+          <dxi-item dataField="description">
+            <p>{{assetMeter?.description}}</p>
+          </dxi-item>
+          <dxi-item dataField="photoUrl">
+            <img src="{{assetMeter?.photoUrl}}">
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item ng-show="!disAssetMeter">
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="meterClass">
+            <p>{{assetMeter?.dynamicData.METER_CLASS?.attributeValue}}</p>
+          </dxi-item>
+          <dxi-item dataField="meterProtocol">
+            <p>{{assetMeter?.dynamicData.METER_PROTOCOL?.attributeValue}}</p>
+          </dxi-item>
+          <dxi-item dataField="meterChannel">
+            <p>{{assetMeter?.dynamicData.METER_CHANNEL_GROUP?.attributeValue}}</p>
+          </dxi-item>
+          <dxi-item dataField="servicePlans">
+            <p>{{assetMeter?.dynamicData.SERVICE_PLANS?.attributeValue}}</p>
+          </dxi-item>
+          <!-- <dxi-item dataField="user">
+            <p>{{assetMeter?.dynamicData.USERNAME_METER?.attributeValue}}</p>
+          </dxi-item>
+          <dxi-item dataField="password">
+            <p>{{assetMeter?.dynamicData.PASSWORD_METER?.attributeValue}}</p>
+          </dxi-item> -->
+          <dxi-item dataField="physicalAddress">
+            <p>{{assetMeter?.dynamicData.PHYSICALADDRESS?.attributeValue}}</p>
+          </dxi-item>
+          <dxi-item dataField="logicalAddress">
+            <p>{{assetMeter?.dynamicData.LOGICALADDRESS?.attributeValue}}</p>
+          </dxi-item>
+          <dxi-item dataField="authLevel">
+            <p>{{assetMeter?.dynamicData.AUTHENTICATION_LEVEL?.attributeValue}}</p>
+          </dxi-item>
+          <dxi-item dataField="certificateID">
+            <p>{{assetMeter?.dynamicData.CERTIFICATE_ID?.attributeValue}}</p>
+          </dxi-item>
+          <dxi-item dataField="certificateDate">
+            <p>{{assetMeter?.dynamicData.CERTIFICATE_DATE?.attributeValue | date:'MM/dd/yyyy'}}</p>
+          </dxi-item>
+          <dxi-item dataField="certificateFile">
+            <p>{{assetMeter?.dynamicData.CERTIFICATE_FILE?.attributeValue}}</p>
+          </dxi-item>
+         </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="installDate">
+            <p>{{assetMeter?.installDate | date:'MM/dd/yyyy'}}</p>
+          </dxi-item>
+          <dxi-item dataField="registerDate">
+            <p>{{assetMeter?.registrationDate | date:'MM/dd/yyyy'}}</p>
+          </dxi-item>
+          <dxi-item dataField="registerBy">
+            <p>{{assetMeter?.registrationBy}}</p>
+          </dxi-item>
+          <dxi-item dataField="activationDate">
+            <p>{{assetMeter?.activationDate | date:'MM/dd/yyyy'}}</p>
+          </dxi-item>
+          <dxi-item dataField="activatedBy">
+            <p>{{assetMeter?.activationBy}}</p>
+          </dxi-item>
+          <dxi-item dataField="deactivationDate">
+            <p>{{assetMeter?.deactivationDate | date:'MM/dd/yyyy'}}</p>
+          </dxi-item>
+          <dxi-item dataField="deactivatedBy">
+            <p>{{assetMeter?.deactivationBy}}</p>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dxi-tab>
+    <dxi-tab title="Comm Device" [disabled]="disAssetCommunication">
+      <div *ngIf="!assetCommunication">
+        <p>No Comm Device Data Found</p>
+      </div>
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="assetCode">
+            <p>{{assetCommunication?.assetCode}}</p>
+          </dxi-item>
+          <dxi-item dataField="assetType">
+            <p>{{assetCommunication?.assetTypeName}}</p>
+          </dxi-item>
+          <dxi-item dataField="brand">
+            <p>{{assetCommunication?.brandName}}</p>
+          </dxi-item>
+          <dxi-item dataField="brandType">
+            <p>{{assetCommunication?.brandTypeName}}</p>
+          </dxi-item>
+          <dxi-item dataField="status">
+            <p>{{assetCommunication?.status}}</p>
+          </dxi-item>
+          <dxi-item dataField="description">
+            <p>{{assetCommunication?.description}}</p>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="communicationType">
+            <p>{{assetCommunication?.dynamicData.COMMUNICATION_TYPE?.attributeValue}}</p>
+          </dxi-item>
+          <dxi-item dataField="connectionType">
+            <p>{{assetCommunication?.dynamicData.CONNECTION_TYPE?.attributeValue}}</p>
+          </dxi-item>
+          <dxi-item dataField="communicationPort">
+            <p>{{assetCommunication?.dynamicData.COMMUNICATION_PORT?.attributeValue}}</p>
+          </dxi-item>
+          <dxi-item dataField="connectionPort">
+            <p>{{assetCommunication?.dynamicData.CONNECTION_PORT?.attributeValue}}</p>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dxi-tab>
+
+    <dxi-tab title="Sim Card" [disabled]="disAssetSim">
+      <div *ngIf="!assetSim">
+        <p>No Sim Card Data Found</p>
+      </div>
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="assetCode">
+            <p>{{assetSim?.assetCode}}</p>
+          </dxi-item>
+          <dxi-item dataField="assetType">
+            <p>{{assetSim?.assetTypeName}}</p>
+          </dxi-item>
+          <dxi-item dataField="brand">
+            <p>{{assetSim?.brandName}}</p>
+          </dxi-item>
+          <dxi-item dataField="IP Address">
+            <p>{{assetSim?.dynamicData.IP.attributeValue}}</p>
+          </dxi-item>
+                  </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="status">
+            <p>{{assetSim?.status}}</p>
+          </dxi-item>
+          <dxi-item dataField="description">
+            <p>{{assetSim?.description}}</p>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dxi-tab>
+    <dxi-tab title="Load Profile" [disabled]="disAssetMeter">
+      <app-detailloadprofile *ngIf="!disAssetMeter" [popupVisible]="popupVisible" [detailLoadprofiles]="location" [detailDataLocationCode]="allResp"
+        [detailLoadprofileGrid]="detailLoadprofileGrid" (onHideLoadprofile)="onHideLoadprofile()"></app-detailloadprofile>
+    </dxi-tab>
+    <dxi-tab title="Billing" [disabled]="disAssetMeter">
+      <app-detaibilling *ngIf="!disAssetMeter" [detailBillings]="location" [detailBillingsHeader]="allResp" [detailBillingsGrid]="detailBillingsGrid"
+        (onHideBilling)="onHideBilling()">
+      </app-detaibilling>
+    </dxi-tab>
+    <dxi-tab title="Instant" [disabled]="disAssetMeter">
+      <app-detailinstant *ngIf="!disAssetMeter" [detailInstants]="location" [detailInstantsHeader]="allResp" [detailInstantsPopup]="detailInstantsPopup"
+        (onHideInstant)="onHideInstant()"></app-detailinstant>
+    </dxi-tab>
+    <dxi-tab title="Meter Event" [disabled]="disAssetMeter">
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="LocationCode">
+            <p>{{location.locationCode}}</p>
+          </dxi-item>
+          <dxi-item dataField="MeterCode">
+            <p>{{assetMeter?.assetCode}}</p>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item itemType="group" [colCount]="2">
+            <dxi-item dataField="StartDate" editorType="dxDateBox" [editorOptions]="{ value: '', displayFormat: 'MM/dd/yyyy', width: '80%'}"></dxi-item>
+          </dxi-item>
+          <dxi-item itemType="group" [colCount]="2">
+            <dxi-item dataField="EndDate" editorType="dxDateBox" [editorOptions]="{ value: '', displayFormat: 'MM/dd/yyyy', width: '80%'}"></dxi-item>
+            <dxi-item>
+              <dx-button icon="search" text="Search" (onClick)="showInfo()"></dx-button>
+            </dxi-item>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group" [colSpan]="2">
+          <dx-data-grid id="gridContainerME" [dataSource]="locations" keyExpr="id" [showRowLines]="true" [showBorders]="true" [columnHidingEnabled]="false"
+            [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true">
+            <dxo-export [enabled]="true" fileName="Meter_Event" [allowExportSelectedData]="true"></dxo-export>
+            <dxi-column dataField="eventDate" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="eventName" [allowEditing]="false"></dxi-column>
+            <dxi-column [width]="200" dataField="Description" [allowEditing]="false"></dxi-column>
+          </dx-data-grid>
+        </dxi-item>
+      </dxi-item>
+    </dxi-tab>
+    <dxi-tab title="Comm Event" [disabled]="disAssetMeter">
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="LocationCode">
+            <p>{{location.locationCode}}</p>
+          </dxi-item>
+          <dxi-item dataField="MeterCode">
+            <p>{{assetMeter?.assetCode}}</p>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item itemType="group" [colCount]="2">
+            <dxi-item dataField="StartDate" editorType="dxDateBox" [editorOptions]="{ value: '', displayFormat: 'MM/dd/yyyy', width: '80%'}"></dxi-item>
+          </dxi-item>
+          <dxi-item itemType="group" [colCount]="2">
+            <dxi-item dataField="EndDate" editorType="dxDateBox" [editorOptions]="{ value: '', displayFormat: 'MM/dd/yyyy', width: '80%'}"></dxi-item>
+            <dxi-item>
+              <dx-button icon="search" text="Search" (onClick)="showInfo()"></dx-button>
+            </dxi-item>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group" [colSpan]="2">
+          <dx-data-grid id="gridContainerCE" [dataSource]="locations" keyExpr="id" [showRowLines]="true" [showBorders]="true" [columnHidingEnabled]="false"
+            [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true">
+            <dxo-export [enabled]="true" fileName="Comm_Event" [allowExportSelectedData]="true"></dxo-export>
+            <dxi-column dataField="eventDate" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="eventName" [allowEditing]="false"></dxi-column>
+            <dxi-column [width]="200" dataField="Description" [allowEditing]="false"></dxi-column>
+          </dx-data-grid>
+        </dxi-item>
+      </dxi-item>
+    </dxi-tab>
+    <dxi-tab title="Location Log">
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="LocationCode">
+            <p>{{location.locationCode}}</p>
+          </dxi-item>
+          <dxi-item dataField="MeterCode">
+            <p>{{assetMeter?.assetCode}}</p>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item itemType="group" [colCount]="2">
+            <dxi-item dataField="StartDate" editorType="dxDateBox" [editorOptions]="{ value: '', displayFormat: 'MM/dd/yyyy', width: '80%'}"></dxi-item>
+          </dxi-item>
+          <dxi-item itemType="group" [colCount]="2">
+            <dxi-item dataField="EndDate" editorType="dxDateBox" [editorOptions]="{ value: '', displayFormat: 'MM/dd/yyyy', width: '80%'}"></dxi-item>
+            <dxi-item>
+              <dx-button icon="search" text="Search" (onClick)="showInfo()"></dx-button>
+            </dxi-item>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group" [colSpan]="2">
+          <dx-data-grid id="gridContainerLL" [dataSource]="locations" keyExpr="id" [showRowLines]="true" [showBorders]="true" [columnHidingEnabled]="false"
+            [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true">
+            <dxo-export [enabled]="true" fileName="Location_Log" [allowExportSelectedData]="true"></dxo-export>
+            <dxi-column dataField="eventDate" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="eventName" [allowEditing]="false"></dxi-column>
+            <dxi-column [width]="200" dataField="Description" [allowEditing]="false"></dxi-column>
+          </dx-data-grid>
+        </dxi-item>
+      </dxi-item>
+    </dxi-tab>
+  </dxi-item>
+</dx-form>

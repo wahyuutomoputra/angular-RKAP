@@ -1,0 +1,70 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Limit</strong>
+    </div>
+    <div class="card-body">
+      <form action="Submit" (submit)="save($event)">
+        <!-- START FORM -->
+        <dx-form [(formData)]="limit" validationGroup="dataValidation" [alignItemLabels]="true" [alignItemLabelsInAllGroups]="true">
+          <dxi-item dataField="meterId">
+            <dxo-label text="Meter Id"></dxo-label>
+            <p>{{limit.meterId}}</p>
+          </dxi-item>
+          <dxi-item itemType="group" cssClass="first-group" [colCount]="3">
+            <dxi-item dataField="thresholdActive">
+              <dxo-label text="Threshold Active"></dxo-label>
+              <p>{{limit.thresholdActive}}</p>
+            </dxi-item>
+            <dxi-item dataField="thresholdActive" [editorOptions]="{width:'100px', disabled:'true'}">
+              <dxo-label text="Threshold Active"></dxo-label>
+            </dxi-item>
+            <dxi-item itemType="empty">
+            </dxi-item>
+            <dxi-item dataField="thresholdEmergency">
+              <dxo-label text="Threshold Emergency"></dxo-label>
+              <p>{{limit.thresholdEmergency}}</p>
+            </dxi-item>
+            <dxi-item dataField="thresholdEmergency" [editorOptions]="{width:'100px', disabled:'true'}">
+              <dxo-label text="Threshold Emergency"></dxo-label>
+            </dxi-item>
+            <dxi-item itemType="empty">
+            </dxi-item>
+            <dxi-item dataField="thresholdNormal">
+              <dxo-label text="Threshold Normal"></dxo-label>
+              <p>{{limit.thresholdNormal}}</p>
+            </dxi-item>
+            <dxi-item dataField="thresholdNormal" [editorOptions]="{width:'100px'}">
+              <dxo-label text="Threshold Normal"></dxo-label>
+            </dxi-item>
+            <dxi-item itemType="empty">
+            </dxi-item>
+            <dxi-item dataField="minUnderThresholdDuration">
+              <dxo-label text="Min Under Threshold Duration"></dxo-label>
+              <p>{{limit.minUnderThresholdDuration}}</p>
+            </dxi-item>
+            <dxi-item dataField="minUnderThresholdDuration" [editorOptions]="{width:'100px'}">
+              <dxo-label text="Min Under Threshold Duration"></dxo-label>
+            </dxi-item>
+            <dxi-item itemType="empty">
+            </dxi-item>
+            <dxi-item dataField="minOverThresholdDuration">
+              <dxo-label text="Min Over Treshold Duration"></dxo-label>
+              <p>{{limit.minOverThresholdDuration}}</p>
+            </dxi-item>
+            <dxi-item dataField="minOverThresholdDuration" [editorOptions]="{width:'100px'}">
+              <dxo-label text="Min Over Treshold Duration"></dxo-label>
+            </dxi-item>
+            <dxi-item>
+              <dx-button icon="fa fa-save" text="Limit" validationGroup="dataValidation" [useSubmitBehavior]="true">
+              </dx-button>
+            </dxi-item>
+          </dxi-item>
+        </dx-form>
+        <!-- END FORM -->
+        <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save($event)" (onHideConf)="onHideConf()"
+          (onSaveConf)="onSaveConf()"></app-form-confirmation>
+      </form>
+    </div>
+  </div>
+</div>

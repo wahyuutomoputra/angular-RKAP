@@ -1,0 +1,155 @@
+<dx-popup class="popup" width="75%" height="600" [showTitle]="true" title="Asset Detail" [dragEnabled]="false" [closeOnOutsideClick]="false"
+  [(visible)]="popupVisible" (onHiding)="hide()">
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view #scrollView id="scrollview">
+      <dx-form [formData]="asset">
+        <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+          <dxi-item itemType="group">
+
+            <dxi-item dataField="assetCode">
+              <p>{{asset?.assetCode}}</p>
+            </dxi-item>
+            <dxi-item dataField="assetType">
+              <p>{{asset?.assetTypeName}}</p>
+            </dxi-item>
+            <dxi-item dataField="brand">
+              <p>{{asset?.brandName}}</p>
+            </dxi-item>
+            <dxi-item dataField="brandType">
+              <p>{{asset?.brandTypeName}}</p>
+            </dxi-item>
+            <dxi-item dataField="status">
+              <p>{{asset?.status}}</p>
+            </dxi-item>
+            <dxi-item dataField="description">
+              <p>{{asset?.description}}</p>
+            </dxi-item>
+          </dxi-item>
+          <dxi-item itemType="group">
+            <dxi-item dataField="siteCode">
+              <p>{{asset?.siteCodeExist}}</p>
+            </dxi-item>
+            <dxi-item dataField="SiteName">
+              <p>{{asset?.siteName}}</p>
+            </dxi-item>
+            <dxi-item dataField="locationCode">
+              <p>{{asset?.locationCode}}</p>
+            </dxi-item>
+            <dxi-item dataField="locationName">
+              <p>{{asset?.locationName}}</p>
+            </dxi-item>
+            <dxi-item dataField="photoUrl">
+              <img src="{{asset?.photoUrl}}">
+            </dxi-item>
+
+          </dxi-item>
+        </dxi-item>
+
+        <dxi-item>
+          <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+        </dxi-item>
+        <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+          <dxi-item itemType="group">
+
+            <!-- METER = 1 -->
+            <dxi-item *ngIf="asset.assetTypeId == 1" dataField="dynamicData.METER_CLASS.attributeValue" disabled="true">
+              <dxo-label text="Meter Class"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 1" dataField="dynamicData.METER_PROTOCOL.attributeValue" disabled="true">
+              <dxo-label text="Meter Protocol"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 1" dataField="dynamicData.METER_CHANNEL_GROUP.attributeValue" disabled="true">
+              <dxo-label text="Meter Channel"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 1" dataField="dynamicData.SERVICE_PLANS.attributeValue" disabled="true">
+              <dxo-label text="Service Plans"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 1" dataField="dynamicData.USERNAME_METER.attributeValue" disabled="true">
+              <dxo-label text="User"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 1" dataField="dynamicData.PASSWORD_METER.attributeValue" disabled="true">
+              <dxo-label text="Password"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 1" dataField="dynamicData.PHYSICALADDRESS.attributeValue" disabled="true">
+              <dxo-label text="Physical Address"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 1" dataField="dynamicData.LOGICALADDRESS.attributeValue" disabled="true">
+              <dxo-label text="Logical Address"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 1" dataField="dynamicData.AUTHENTICATION_LEVEL.attributeValue" disabled="true">
+              <dxo-label text="Auth Level"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 1" dataField="dynamicData.CERTIFICATE_ID.attributeValue" disabled="true">
+              <dxo-label text="Certificate ID"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 1" dataField="dynamicData.CERTIFICATE_DATE.attributeValue" editorType="dxDateBox" disabled="true">
+              <dxo-label text="Certificate Date"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 1" dataField="dynamicData.CERTIFICATE_FILE.attributeValue" [template]="'certificateFileTemplate'">
+              <dxo-label text="Certificate File"></dxo-label>
+            </dxi-item>
+
+            <!-- MODEM = 2 -->
+            <dxi-item *ngIf="asset.assetTypeId == 2" dataField="dynamicData.COMMUNICATION_TYPE.attributeValue" disabled="true">
+              <dxo-label text="Communication Type*"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 2" dataField="dynamicData.CONNECTION_TYPE.attributeValue" disabled="true">
+              <dxo-label text="Connection Type*"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 2" dataField="dynamicData.COMMUNICATION_PORT.attributeValue" disabled="true">
+              <dxo-label text="Communication Port*"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 2" dataField="dynamicData.CONNECTION_PORT.attributeValue" disabled="true">
+              <dxo-label text="Connection Port*"></dxo-label>
+            </dxi-item>
+
+
+            <!-- CONVERTER = 3 -->
+            <dxi-item *ngIf="asset.assetTypeId == 3" dataField="dynamicData.CONNECTION_PORT.attributeValue" disabled="true">
+              <dxo-label text="Connection Type"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 3" dataField="dynamicData.COMMUNICATION_PORT.attributeValue" disabled="true">
+              <dxo-label text="Communication Port"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="asset.assetTypeId == 3" dataField="dynamicData.IP.attributeValue" disabled="true">
+              <dxo-label text="IP Address"></dxo-label>
+            </dxi-item>
+
+            <!-- SIM = 4 -->
+            <!-- BELUM ADA DI DB -->
+            <dxi-item *ngIf="asset.assetTypeId == 4" dataField="dynamicData.IP.attributeValue" disabled="true">
+              <dxo-label text="IP Address"></dxo-label>
+            </dxi-item>
+          </dxi-item>
+
+          <dxi-item itemType="group">
+            <dxi-item dataField="installDate" disabled="true" editorType="dxDateBox">
+            </dxi-item>
+            <dxi-item dataField="registrationDate" disabled="true" editorType="dxDateBox">
+              <dxo-label text="Register Date"></dxo-label>
+            </dxi-item>
+            <dxi-item dataField="registrationBy" disabled="true">
+              <dxo-label text="Register By"></dxo-label>
+            </dxi-item>
+            <dxi-item dataField="activationDate" disabled="true" editorType="dxDateBox">
+            </dxi-item>
+            <dxi-item dataField="activationBy" disabled="true">
+            </dxi-item>
+            <dxi-item dataField="deactivationDate" disabled="true" editorType="dxDateBox">
+            </dxi-item>
+            <dxi-item dataField="deactivationBy" disabled="true">
+            </dxi-item>
+          </dxi-item>
+
+        </dxi-item>
+
+        <div *dxTemplate="let data of 'photoTemplate'">
+          <img src="/assets/img/default.png" class="form-avatar" />
+        </div>
+        <div *dxTemplate="let data of 'certificateFileTemplate'">
+          <a href="https://www.google.com">Download Here</a>
+        </div>
+      </dx-form>
+    </dx-scroll-view>
+  </div>
+</dx-popup>

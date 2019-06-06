@@ -1,0 +1,76 @@
+<div class="animated fadeIn">
+    <div class="card" id="new47">
+        <div class="card-header">
+            <strong>Company</strong>
+        </div>
+        <!-- <div id="form-container" style="margin-right: 20px; margin-left: 20px;">
+            <dx-form id="form" itemType="group" sssClass="first-group" [colCount]="2" [formData]="search"> 
+                  <dxi-item itemType="group" [colCount]="2">
+                    <!-- <test buttoon> -->
+                    <!-- <dxi-item dataField="Site" [editorOptions]="{ disabled: false }"></dxi-item>
+                    <dxi-item>
+                        <dx-button icon="search" (onClick)="showInfo()"></dx-button>
+                    </dxi-item>
+         </dxi-item>
+         </dx-form>
+        </div>            --> 
+        <div class="card-body">
+            <div id="data-grid-demo">
+                <dx-data-grid id="gridContainer" [dataSource]="gridDataSource" keyExpr="id" [showRowLines]="true" 
+                [showBorders]="true" [columnHidingEnabled]="false" [rowAlternationEnabled]="true" 
+                [columnAutoWidth]="true" [wordWrapEnabled]="true">
+
+                    <dxo-editing mode="form" [allowUpdating]="false" [allowAdding]="false" [allowDeleting]="false" [allowResizing]="true">
+                    </dxo-editing>
+                    <dxo-filter-row [visible]="true"></dxo-filter-row>
+                    <dxo-header-filter [visible]="true"></dxo-header-filter>
+                    <dxo-paging [pageSize]="10"></dxo-paging>
+                    <dxo-pager 
+                        [showPageSizeSelector]="false"
+                        [allowedPageSizes]="[5, 10, 20]"
+                        [showInfo]="true">
+                    </dxo-pager>
+                    <!-- <dxo-column-chooser [enabled]="true"></dxo-column-chooser> -->
+                    <dxo-export [enabled]="true" fileName="Company" [allowExportSelectedData]="false"></dxo-export>
+                    <!-- <dxo-selection mode="multiple"></dxo-selection> -->
+                    <dxi-column dataField="companyCode" caption="Company Code" width="85px"></dxi-column>
+                    <dxi-column dataField="name" caption="Name" width="185px" [allowFiltering]="true" [allowSorting]="true"></dxi-column>
+                    <dxi-column dataField="shortName" caption="Short Name"  width="85px"></dxi-column>  
+                    <dxi-column dataField="address" caption="Address" width="400px"></dxi-column>
+                    <dxi-column dataField="city" caption="City" width="125px" ></dxi-column>
+                    <dxi-column dataField="province" caption="Province" width="85px"></dxi-column>
+                    <dxi-column dataField="country" caption="Country" width="100px"></dxi-column>
+                    <!-- <dxi-column dataField="postalCode" caption="Postal Code" width="100px"></dxi-column> 
+                    <dxi-column dataField="telephone1" caption="Telephone 1" width="100px"></dxi-column>
+                    <dxi-column dataField="telephone2" caption="Telephone 2" width="100px"></dxi-column>
+                    <dxi-column dataField="facsimile" caption="Facsimile" width="100px"></dxi-column>
+                    <dxi-column dataField="email" caption="Email" width="100px"></dxi-column>
+                    <dxi-column dataField="timezone" caption="Timezone" width="100px"></dxi-column> -->
+                    <dxi-column dataField="id" [fixed]="true" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false" cellTemplate="cellTemplate"></dxi-column>
+
+                    <!-- <div *dxTemplate="let data of 'cellTemplate'">
+                        <img [src]="'data:image/jpg;base64,' + data.value" onError="this.src='./assets/img/flags/Indonezia.png';" />
+                    </div> -->
+                    <div *dxTemplate="let data of 'cellTemplate'">
+                        <!-- <dx-button id="btn{{data.value}}" text="..." (onClick)="showMenu(data.value)"></dx-button> -->
+                        <div (click)="showMenu(data.value)" class="text-center">
+                            <i class="fa fa-th-large" id="btn{{data.value}}"></i>
+                          </div>
+                    </div>
+                </dx-data-grid>
+                <app-context [menuVisible]="menuVisible" [target]="target" [contextItems]="contextItems" (onHideMenu)="onHideMenu()" (itemClick)="itemClick($event)"></app-context>
+                <app-confirmation [text]="text" [confVisible]="confVisible && !isDelete" [detail]="detail" (onHideConf)="onHideConf()"></app-confirmation>
+                <app-progress [progressVisible]="progressVisible" [progressContent]="progressContent" [progressTitle]="progressTitle" (onHideProgresss)="onHideProgress()"></app-progress>
+                <app-detail-company [popupVisible]="popupVisible" [company]="details"  (onHideSite)="onHideSite()"></app-detail-company>
+            </div>
+            <div *ngIf="isEdit">
+                <app-company-edit [popupVisible]="popupVisible" [details]="details"  (onHideSite)="onHideSite()"></app-company-edit>
+            </div>
+            <div *ngIf="isAdd">
+                    <app-company-add [popupVisible]="popupVisible" [details]="details"  (onHideSite)="onHideSite()"></app-company-add>
+            </div>
+            <app-form-confirmation [isDelete]="isDelete" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="delete()" (onHideConf)="onHideConf()"
+                (onDeleteConf)="onDeleteConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+        </div>
+    </div>
+</div>

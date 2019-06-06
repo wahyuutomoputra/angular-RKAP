@@ -1,0 +1,45 @@
+<div *ngIf="addVisible">
+  <form action="Submit" (submit)="save($event)">
+    <dx-button *ngIf="!isDetail" icon="fa fa-ban" text="Cancel" (onClick)="cancel()"></dx-button>
+    <dx-button *ngIf="!isDetail" class="pull-right" icon="fa fa-save" text="Save" validationGroup="roleData" [useSubmitBehavior]="true">
+    </dx-button>
+
+    <!-- class="m-2" => add margin by 0.5rem -->
+    <div class="m-2"></div>
+    <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+    <div class="m-2"></div>
+
+    <dx-form [(formData)]="role" validationGroup="roleData" (onFieldDataChanged)="cekSasaran($event)">
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item name="cboRjpp" dataField="rjppid" editorType="dxSelectBox" [label]="{ text: 'RJPP' }" [editorOptions]="{readOnly: isDetail, items: daftarRjpp, displayExpr: 'periode', valueExpr: 'rjppid' }" [validationRules]="[{type: 'required', message: 'Display harus dipilih' }]" ></dxi-item>
+
+          <dxi-item name="txtSasaran" dataField="sasaran" caption="Sasaran" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Sasaran harus diisi' }]"></dxi-item>
+
+          <dxi-item name="txtIndikator" dataField="indikator_nilai" caption="Indikator Nilai" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Indikator Nilai harus diisi' }]"></dxi-item>
+
+          <dxi-item name="cboSatuan" dataField="satuan" editorType="dxSelectBox" [label]="{ text: 'Satuan' }" [editorOptions]="{readOnly: isDetail, items: daftarSatuan, displayExpr: 'satuan', valueExpr: 'satuanid' }" [validationRules]="[{type: 'required', message: 'Satuan harus dipilih' }]" ></dxi-item>
+
+          <dxi-item name="txtDesc" dataField="deskripsi" caption="Deskripsi" editorType="dxTextArea" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Deskripsi harus diisi' }]"></dxi-item>
+
+          <dxi-item name="txtTahun" dataField="tahun" caption="Tahun" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Tahun harus diisi' }]"></dxi-item>
+
+          <dxi-item name="cboStr" dataField="parent_ssid" editorType="dxSelectBox" [label]="{ text: 'Sasaran Strategis' }" [editorOptions]="{readOnly: isDetail, items: daftarSstrategis, displayExpr: 'satuan', valueExpr: 'sid' }" [validationRules]="[{type: 'required', message: 'Sasaran Strategis harus dipilih' }]" ></dxi-item>
+
+          <dxi-item name="txtIndikator" dataField="indikator" caption="Indikator" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Indikator harus diisi' }]"></dxi-item>
+
+          <dxi-item name="txtPerspektif" dataField="perspektif" caption="Perspektif" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Perspektif harus diisi' }]"></dxi-item>
+
+          <dxi-item name="txtArah" dataField="arah_pengembangan" caption="Arah Pengembangan" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Arah Pengembangan harus diisi' }]"></dxi-item>
+          
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item itemType="empty"></dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dx-form>
+    <br>
+    <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save()" (onHideConf)="onHideConf()"
+      (onSaveConf)="onSaveConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+  </form>
+</div>

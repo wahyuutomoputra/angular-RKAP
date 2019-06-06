@@ -1,0 +1,10 @@
+<dx-popup class="popup" [width]="400" [height]="150" [showTitle]="true" title="{{text}} Confirmation" [dragEnabled]="false"
+  [closeOnOutsideClick]="false" [(visible)]="confVisible" (onHiding)="hide()">
+  <div *dxTemplate="let data of 'content'">
+    <p>Are You Sure Want To {{text}} {{detail.transmissionName}} ?</p>
+    <div class="row">
+      <dx-button class="col-6" text="No" (onClick)="cancel()"></dx-button>
+      <dx-button class="col-6" text="Yes" (onClick)="delete()"></dx-button>
+    </div>
+  </div>
+</dx-popup>

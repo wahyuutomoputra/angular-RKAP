@@ -1,0 +1,49 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Template</strong>
+    </div>
+    <div class="card-body">
+      <div id="data-grid-demo">
+        <dx-data-grid id="gridContainer" [dataSource]="dataSource" keyExpr="tikurId" [showRowLines]="true" [showBorders]="true">
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-editing mode="form" [allowUpdating]="false" [allowAdding]="true">
+          </dxo-editing>
+          <dxo-selection mode="multiple"></dxo-selection>
+          <dxo-search-panel [visible]="true"></dxo-search-panel>
+          <dxi-column dataField="tikurId" caption="Tikur Id" [allowEditing]="false"></dxi-column>
+          <dxi-column dataField="tikurIdLength" caption="Id Length"></dxi-column>
+          <dxi-column dataField="validation" caption="Validation"></dxi-column>
+          <dxi-column dataField="templateCode" caption="Substantion Code"></dxi-column>
+          <dxi-column dataField="generationName" caption="Generation Name"></dxi-column>
+          <dxi-column dataField="transmissionName" caption="Transmission Name"></dxi-column>
+          <dxi-column dataField="tikurId" caption="Action" [allowFiltering]="false" [allowSorting]="false" cellTemplate="cellTemplate"></dxi-column>
+          <div *dxTemplate="let data of 'cellTemplate'">
+            <dx-button id="btn{{data.value}}" text="..." (onClick)="showMenu(data.value)"></dx-button>
+          </div>
+        </dx-data-grid>
+        <app-context [menuVisible]="menuVisible" [target]="target" [contextItems]="contextItems"  (onHideMenu)="onHideMenu()" (itemClick)="itemClick($event)"></app-context>
+        <app-confirmation [text]="text" [confVisible]="confVisible" [detail]="detail" (onHideConf)="onHideConf()"></app-confirmation>
+        <app-detail [popupVisible]="popupVisible" [detail]="detail" (onHidePopup)="onHidePopup()"></app-detail>
+        <app-progress [progressVisible]="progressVisible" [progressContent]="progressContent" [progressTitle]="progressTitle" (onHideProgresss)="onHideProgress()"></app-progress>
+      </div>
+      <div class="alert alert-success">
+        <strong>Success!</strong> Indicates a successful or positive action.
+      </div>
+      
+      <div class="alert alert-info">
+        <strong>Info!</strong> Indicates a neutral informative change or action.
+      </div>
+      
+      <div class="alert alert-warning">
+        <strong>Warning!</strong> Indicates a warning that might need attention.
+      </div>
+      
+      <div class="alert alert-danger">
+        <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+      </div>
+    </div>
+  </div>
+</div>

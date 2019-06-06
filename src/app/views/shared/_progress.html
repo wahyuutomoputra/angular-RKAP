@@ -1,0 +1,8 @@
+<dx-popup class="popup" [width]="400" [height]="150" [showTitle]="true" title="{{progressTitle}}" [dragEnabled]="false" [closeOnOutsideClick]="true"
+  [(visible)]="progressVisible" (onHiding)="hide()">
+  <div *dxTemplate="let data of 'content'">
+    <p>{{progressContent}}</p>
+    <dx-progress-bar [min]="0" [max]="100" [value]="50">
+    </dx-progress-bar>
+  </div>
+</dx-popup>

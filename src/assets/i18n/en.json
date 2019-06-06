@@ -1,0 +1,18 @@
+{
+    "notification": "Account",
+    "setting": {
+        "profile": "Profile",
+        "logout": "Logout"
+    },
+    "menu": {
+        "dashboard": "Dashboard",
+        "master": {
+            "title": "Master",
+            "company": "Company",
+            "site": "Site",
+            "location": "Location",
+            "asset": "Asset",
+            "substation": "Substation"
+        }
+    }
+}

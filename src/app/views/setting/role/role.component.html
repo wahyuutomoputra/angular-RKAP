@@ -1,0 +1,77 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Role <span *ngIf="(isAdd || isEdit) && !isDetail">Add / Edit</span></strong>
+      <span *ngIf="isDetail" class="pull-right">
+        <dx-button id="btnBack" text="< Back" (onClick)="back()"></dx-button>
+      </span>
+    </div>
+    <div class="card-body">
+      <div [hidden]="isDetail || isAdd || roleVisible">
+        <div id="form-container" style="margin-left: 20px; margin-right: 20px;">
+          <div *ngIf="!isAdv">
+            <dx-form id="formSearch" itemType="group" sssClass="first-group" [formData]="search" [colCount]="3">
+              <dxi-item dataField="nama" caption="Nama" [editorOptions]="{ disabled: false }" [colSpan]="2"></dxi-item>
+              <dxi-item [colSpan]="1">
+                <dx-button icon="search" text="Search" (onClick)="searching()"></dx-button>
+                <dx-button icon="{{chevron}}" (onClick)="showAdvSearch()"></dx-button>
+              </dxi-item>
+            </dx-form>
+          </div>
+          <!-- ADVANCED SEARCH -->
+          <div *ngIf="isAdv">
+            <dx-form id="form" itemType="group" sssClass="first-group" [formData]="search" [colCount]="3">
+              <dxi-item itemType="group" [colSpan]="2">
+                <dxi-item dataField="role_id" [editorOptions]="{ disabled: false }" [colSpan]="1"></dxi-item>
+                <dxi-item dataField="nama" [editorOptions]="{ disabled: false }" [colSpan]="1"></dxi-item>
+                <dxi-item dataField="keterangan" [editorOptions]="{ disabled: false }" [colSpan]="1"></dxi-item>
+                <!--<dxi-item dataField="menu" [editorOptions]="{ disabled: false }" [colSpan]="1"></dxi-item>-->
+              </dxi-item>
+              <dxi-item itemType="group">
+                <dxi-item [colSpan]="1">
+                  <dx-button icon="search" text="Search" (onClick)="advSearch()"></dx-button>
+                  <dx-button icon="{{chevron}}" (onClick)="showAdvSearch()"></dx-button>
+                </dxi-item>
+              </dxi-item>
+            </dx-form>
+          </div>
+          <!-- END ADVANCED SEARCH -->
+        </div>
+
+        <div id="data-grid-demo" style="margin-top: 20px;">
+          <dx-data-grid id="gridContainer" [dataSource]="gridDataSource" [showRowLines]="true" [showBorders]="true" [columnHidingEnabled]="false"
+                        [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true">
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true" [showNavigationButtons]="true">
+            </dxo-pager>
+            <dxo-export [enabled]="true" fileName="Role" [allowExportSelectedData]="false"></dxo-export>
+
+            <dxi-column dataField="role_id" width="70px" caption="Role Id" sortOrder="asc" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="nama" width="120px" caption="Nama Role" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="keterangan" caption="Keterangan" width="150px" [allowEditing]="false"></dxi-column>
+            <dxi-column dataField="isallowregistration" caption="Aktif?" [allowFiltering]="true"></dxi-column>
+            <dxi-column [fixed]="true" width="55px" dataField="role_id" caption="Action" [allowExporting]="false" [allowFiltering]="false" [allowSorting]="false" cellTemplate="cellTemplate"></dxi-column>
+            
+            <div *dxTemplate="let data of 'cellTemplate'">
+              <div (click)="showMenu(data.value)" class="text-center">
+                <i class="fa fa-th-large" id="btn{{data.value}}"></i>
+              </div>
+            </div>
+          </dx-data-grid>
+          <app-context [menuVisible]="menuVisible" [target]="target" [contextItems]="contextItems" (onHideMenu)="onHideMenu()" (itemClick)="itemClick($event)"></app-context>
+          <app-progress [progressVisible]="progressVisible" [progressContent]="progressContent" [progressTitle]="progressTitle" (onHideProgresss)="onHideProgress()"></app-progress>
+        </div>
+      </div>
+      <div *ngIf="addVisible">
+        <app-add-role [isEdit]="isEdit" [isDetail]="isDetail" [editItem]="target" [addVisible]="addVisible" (onHide)="onHide()"></app-add-role>
+      </div>
+      <div *ngIf="roleVisible">
+        <app-user-role [editItem]="target" (onHideAdd)="onHideAdd()" [roleVisible]="roleVisible" ></app-user-role>
+      </div>
+      <app-form-confirmation [isDelete]="isDelete" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="delete()" (onHideConf)="onHideConf()"
+                             (onDeleteConf)="onDeleteConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+    </div>
+  </div>
+</div>

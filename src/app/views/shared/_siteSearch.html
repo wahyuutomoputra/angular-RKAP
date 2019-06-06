@@ -1,0 +1,34 @@
+<div *ngIf="siteSearchVsb">
+  <div id="popup1">
+    <dx-popup class="popup" width="500" height="auto" [showTitle]="true" title="Find By Site Code" [dragEnabled]="false" [closeOnOutsideClick]="false"
+      [(visible)]="siteSearchVsb" (onHiding)="hide()">
+      <div *dxTemplate="let data of 'content'">
+        <div class="card-body">
+          <div id="data-grid-demo">
+            <dx-data-grid id="gridContainer" [dataSource]="searchSiteById" keyExpr="siteCodeExist" [showRowLines]="true" [showBorders]="true">
+              <dxo-remote-operations [filtering]="true">
+              </dxo-remote-operations>
+              <dxo-filter-row [visible]="true"></dxo-filter-row>
+              <dxo-header-filter [visible]="true"></dxo-header-filter>
+              <dxo-paging [pageSize]="10"></dxo-paging>
+              <dxo-pager 
+                  [showInfo]="true">
+	              </dxo-pager>
+                <dxi-column dataField="siteCodeExist" caption="Site Code" width="100px"></dxi-column>
+                <dxi-column dataField="createdBy" caption="Unit" width="100px" [allowFiltering]="false"></dxi-column>
+                <dxi-column dataField="name" caption="Site Name"[allowFiltering]="false" ></dxi-column>
+
+              <dxi-column [fixed]="true" dataField="siteCodeExist" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false"
+                cellTemplate="siteTemplate"></dxi-column>
+              <div *dxTemplate="let data of 'siteTemplate'">
+                <div (click)="getIdSite(data.value)" class="text-center">
+                  <i class="fa fa-thumb-tack" id="btn{{data.value}}"></i>
+                </div>
+              </div>
+            </dx-data-grid>
+          </div>
+        </div>
+      </div>
+    </dx-popup>
+  </div>
+</div>

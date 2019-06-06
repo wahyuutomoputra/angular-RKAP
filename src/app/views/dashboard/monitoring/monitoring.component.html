@@ -1,0 +1,133 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6 col-md-3">
+      <div class="card text-white bg-info">
+        <div class="card-body">
+          <div class="h1 text-muted text-right mb-4">
+            <span>Billing Success </span><i class="icon-speedometer"></i>
+          </div>
+          <div class="h4 mb-0">{{billing.success}}%</div>
+          <small class="text-muted text-uppercase font-weight-bold">Failed {{billing.failed}}%</small>
+          <div class="progress progress-white progress-xs mt-3">
+            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar" role="progressbar" [style.width.%]="billing.success"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="card text-white bg-success">
+        <div class="card-body">
+          <div class="h1 text-muted text-right mb-4">
+            <span>Profile Success </span><i class="icon-energy"></i>
+          </div>
+          <div class="h4 mb-0">{{profile.success}}%</div>
+          <small class="text-muted text-uppercase font-weight-bold">Failed {{profile.failed}}%</small>
+          <div class="progress progress-white progress-xs mt-3">
+            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar" role="progressbar" [style.width.%]="profile.success"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="card text-white bg-warning">
+        <div class="card-body">
+          <div class="h1 text-muted text-right mb-4">
+            <span>Instant Success </span><i class="icon-energy"></i>
+          </div>
+          <div class="h4 mb-0">{{instant.success}}%</div>
+          <small class="text-muted text-uppercase font-weight-bold">Failed {{instant.failed}}%</small>
+          <div class="progress progress-white progress-xs mt-3">
+            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar" role="progressbar" [style.width.%]="instant.success"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="card text-white bg-danger">
+        <div class="card-body">
+          <div class="h1 text-muted text-right mb-4">
+            <span>Failed Reading </span><i class="icon-close"></i>
+          </div>
+          <div class="h4 mb-0">{{failedReading.failed}}%</div>
+          <small class="text-muted text-uppercase font-weight-bold">Success {{failedReading.success}}%</small>
+          <div class="progress progress-white progress-xs mt-3">
+            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar" role="progressbar" [style.width.%]="failedReading.failed"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/.row-->
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <dx-pie-chart id="pie" title="REGISTERED CUSTOMER" palette="bright" [dataSource]="regCustomers" (onPointClick)="pointClickHandler($event)"
+            (onLegendClick)="legendClickHandler($event)">
+            <dxi-series argumentField="site" valueField="quantity">
+              <dxo-label [visible]="true">
+                <dxo-connector [visible]="true" [width]="1"></dxo-connector>
+              </dxo-label>
+            </dxi-series>
+            <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="top">
+            </dxo-legend>
+            <dxo-export [enabled]="true"></dxo-export>
+          </dx-pie-chart>
+          <br>
+          <dx-data-grid id="gridContainer" [dataSource]="regCustomers">
+            <dxo-export [enabled]="true" fileName="REGISTERED CUSTOMER"></dxo-export>
+            <dxi-column dataField="site"></dxi-column>
+            <dxi-column dataField="quantity" caption="Qty"></dxi-column>
+          
+            <dxo-summary>
+              <dxi-total-item column="quantity" summaryType="sum">
+              </dxi-total-item>
+            </dxo-summary>
+          
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-body">
+          <dx-chart palette="bright" [dataSource]="assetsStatus" title="OPERATING ASSET STATUS" (onLegendClick)="legendClickHandler($event)">
+            <dxi-series valueField="online" name="Online"></dxi-series>
+            <dxi-series valueField="offline" name="Offline"></dxi-series>
+            <dxi-series valueField="invChannel" name="Inv Channel"></dxi-series>
+            <dxi-series valueField="invUsrPwd" name="Inv Usr/Pwd"></dxi-series>
+            <dxi-series valueField="unregMtr" name="Unreg Mtr"></dxi-series>
+            <dxo-common-series-settings #seriesSettings argumentField="site" type="bar" hoverMode="allArgumentPoints" selectionMode="allArgumentPoints">
+            </dxo-common-series-settings>
+            <dxo-size [height]="300"></dxo-size>
+            <dxo-margin [bottom]="10"></dxo-margin>
+            <dxo-common-axis-settings>
+              <dxo-grid [visible]="true"></dxo-grid>
+            </dxo-common-axis-settings>
+            <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="top">
+            </dxo-legend>
+            <dxo-argument-axis [allowDecimals]="false" [axisDivisionFactor]="60">
+              <dxo-label>
+                <dxo-format type="decimal"></dxo-format>
+              </dxo-label>
+            </dxo-argument-axis>
+            <dxo-export [enabled]="true"></dxo-export>
+            <dxo-tooltip [enabled]="true"></dxo-tooltip>
+          </dx-chart>
+          <br>
+          <dx-data-grid id="gridContainer" [dataSource]="assetsStatus">
+            <dxo-export [enabled]="true" fileName="OPERATING ASSET STATUS"></dxo-export>
+            <dxi-column dataField="site"></dxi-column>
+            <dxi-column dataField="online"></dxi-column>
+            <dxi-column dataField="offline"></dxi-column>
+            <dxi-column dataField="invChannel"></dxi-column>
+            <dxi-column dataField="invUsrPwd" caption="Inv Usr/Pwd"></dxi-column>
+            <dxi-column dataField="unregMtr"></dxi-column>
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/.row-->
+</div>

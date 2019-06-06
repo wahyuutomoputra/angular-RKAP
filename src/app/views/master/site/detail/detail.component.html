@@ -1,0 +1,103 @@
+<!-- <div class="progress" *ngIf="!isLoaded">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+    style="width:100%">
+  </div>
+</div> -->
+<dx-popup class="popup" [height]="600" width="75%" [showTitle]="true" title="Site Detail" [dragEnabled]="false" [closeOnOutsideClick]="false"
+  [(visible)]="popupVisible" (onHiding)="hide()">
+    <div *dxTemplate="let data of 'content'">
+  <dx-scroll-view #scrollView
+        id="scrollview">
+    <dx-form [(formData)]="site">
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="companyName">
+            <p>{{site?.company.companyname}}</p>
+          </dxi-item>
+          <dxi-item dataField="siteCode">
+            <p>{{site?.siteCodeExist}}</p>
+          </dxi-item>
+          <dxi-item dataField="siteType">
+            <p>{{site?.siteType.name}}</p>
+          </dxi-item>
+          <dxi-item dataField="siteName">
+            <p>{{site?.unit}} {{site?.name}}</p>
+          </dxi-item>
+          <dxi-item dataField="shortName">
+            <p>{{site?.shortName}}</p>
+          </dxi-item>
+          <dxi-item dataField="parentSite">
+            <p>{{site?.parentSite.siteCodeExist}} {{site?.parentSite.siteName}}</p>
+          </dxi-item>
+          <dxi-item dataField="address">
+            <p>{{site?.address}}</p>
+          </dxi-item>
+          <dxi-item dataField="city">
+            <p>{{site?.city}}</p>
+          </dxi-item>
+          <dxi-item dataField="province">
+            <p>{{site?.province}}</p>
+          </dxi-item>
+          <dxi-item dataField="postalCode">
+            <p>{{site?.postalCode}}</p>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="phone1">
+            <p>{{site?.telephone1}}</p>
+          </dxi-item>
+          <dxi-item dataField="phone2">
+            <p>{{site?.telephone2}}</p>
+          </dxi-item>
+          <dxi-item dataField="faximile">
+            <p>{{site?.facsimile}}</p>
+          </dxi-item>
+          <dxi-item dataField="email">
+            <p>{{site?.email}}</p>
+          </dxi-item>
+          <dxi-item dataField="timezone">
+            <p>{{site?.timeZone}}</p>
+          </dxi-item>
+          <dxi-item dataField="photoUrl">
+            <img src="{{site?.photoUrl}}">
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+      
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group">
+        <dxi-item dataField="MapLocation">
+          <dx-map [zoom]="11" [height]="300" width="50%" [controls]="true" [markerIconSrc]="mapMarkerUrl" [markers]="markers">
+          </dx-map>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="active">
+            <p>{{site?.status}}</p>
+          </dxi-item>
+          <dxi-item dataField="description">
+            <p>{{site?.description}}</p>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="registerDate">
+            <p>{{site?.createdDate | date:'MM/dd/yyyy'}}</p>
+          </dxi-item>
+          <dxi-item dataField="registerBy">
+            <p>{{site?.createdBy}}</p>
+          </dxi-item>
+          <dxi-item dataField="LastModifiedBy">
+            <p>{{site?.modifiedBy}}</p>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dx-form>
+  </dx-scroll-view>  
+</div>
+</dx-popup>

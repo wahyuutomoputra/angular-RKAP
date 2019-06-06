@@ -1,0 +1,55 @@
+<div *ngIf="addVisible">
+  <form action="Submit" (submit)="save($event)">
+    <dx-button *ngIf="!isDetail" icon="fa fa-ban" text="Cancel" (onClick)="cancel()"></dx-button>
+    <dx-button *ngIf="!isDetail" class="pull-right" icon="fa fa-save" text="Save" validationGroup="roleData" [useSubmitBehavior]="true">
+    </dx-button>
+
+    <!-- class="m-2" => add margin by 0.5rem -->
+    <div class="m-2"></div>
+    <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+    <div class="m-2"></div>
+
+    <dx-form [(formData)]="role" validationGroup="roleData">
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item name="txtRoleID" dataField="role_id" caption="Role Id" editorType="dxTextBox" [editorOptions]="{readOnly: true}"></dxi-item>
+          <dxi-item name="txtNama" dataField="nama" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}">
+                <dxi-validation-rule type="required" message="Role Name is required"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item name="txtKeterangan" dataField="keterangan" caption="Keterangan" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Keterangan harus diisi' }]"></dxi-item>
+          <dxi-item name="cboAktif" dataField="isallowregistration" helpText="harus diisi" isRequired = "true" editorType="dxSelectBox" [label]="{ text: 'Aktif' }" [editorOptions]="{readOnly: isDetail, dataSource: simpleProducts }" ></dxi-item>
+          <dxi-item name="cboDislay" dataField="isdisplayed" editorType="dxSelectBox" [label]="{ text: 'Display?' }" [editorOptions]="{readOnly: isDetail, items: daftarKategori, displayExpr: 'Nama', valueExpr: 'ID' }" [validationRules]="[{type: 'required', message: 'Display harus dipilih' }]" ></dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item itemType="empty"></dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dx-form>
+    <br>
+    <p>Menu Access :</p>
+    <dx-tree-list
+      [dataSource]="menuTree"
+      itemsExpr="items"
+      keyExpr="menuId"
+      parentIdExpr="menuParent"
+      [showRowLines]="true"
+      [columnAutoWidth]="true"
+      [rowAlternationEnabled]="true"
+      autoExpandAll="true"
+      (onToolbarPreparing)="toolbarPreparing($event)"
+      (onCellClick)="cellClick($event)"
+      (onRowUpdated)="rowUpdated($event)">
+      <dxo-editing
+        mode="batch"
+        [allowAdding]="false"
+        [allowUpdating]="!isDetail"
+        [allowDeleting]="false">
+      </dxo-editing>
+      <dxi-column dataField="text" caption="Menu" [allowEditing]="false"></dxi-column>
+      <dxi-column dataField="read"></dxi-column>
+      <dxi-column dataField="write"></dxi-column>
+    </dx-tree-list>
+    <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save()" (onHideConf)="onHideConf()"
+      (onSaveConf)="onSaveConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+  </form>
+</div>

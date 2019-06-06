@@ -1,0 +1,89 @@
+
+#form-container {
+    margin: 10px;
+}
+
+#button {
+    float: right;
+    margin-top: 20px;
+}
+
+.dx-field-label {
+    width: 100px;
+}
+
+.dx-field-value {
+    width: 400px;
+    margin-left: 5px;
+}
+.dx-field-label{
+    text-align: left;
+}
+
+.dx-field-value, .dx-field-label {
+    text-align: left;
+}
+
+.dx-fieldset-column {
+    float: left;
+    width: 33.3333%;
+}
+
+.clear {
+    clear: both;
+}
+
+
+/* /deep/ #accordion h1 {
+    font-size: 20px;
+}
+/deep/ .options,
+/deep/ .selected-data {    
+    padding: 20px;
+    background-color: rgba(191, 191, 191, 0.15);
+    margin-top: 20px;
+}
+/deep/ .selected-data {
+    position: relative;
+    height: 36px;
+}
+/deep/ .selected-data > .caption {
+    position: relative;
+    top: 5px;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 115%;
+}
+/deep/ .selected-data > .dx-widget {
+    position: absolute;
+    left: 140px;
+    right: 20px;
+    top: 20px;    
+}
+/deep/ .options > .caption {
+    font-weight: 500;
+    font-size: 18px;
+}
+/deep/ .option {
+    margin-top: 10px;
+} */
+
+#popup {
+    padding: 10px;
+}
+ #popup ul {
+    list-style-type: none;
+    text-align: center;
+}
+#popup ul li {
+    display: inline-block;
+    width: 160px;
+    margin: 10px;
+}
+.button-info {
+    margin: 10px;
+}
+.popup p {
+    margin-bottom: 10px;
+    margin-top: 50;
+}

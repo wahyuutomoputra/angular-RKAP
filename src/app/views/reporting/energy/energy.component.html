@@ -1,0 +1,58 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <div class="long-title">
+        <strong>Energy</strong>
+      </div>
+    </div>
+    <div id="pivot-container" style="margin-left: 20px; margin-right: 20px;">
+      <div class="card" style="padding: 10px;">
+        <dx-form id="form" itemType="group" sssClass="first-group" [formData]="site" [colCount]="3">
+          <dxi-item itemType="group" [colCount]="3">
+            <dxi-item dataField="Site" [editorOptions]="{ disabled: false }" [colSpan]="2">
+              <dxo-label text="Site Code"></dxo-label>
+            </dxi-item>
+            <dxi-item [colSpan]="1">
+              <dx-button icon="search" (onClick)="showInfo()"></dx-button>
+            </dxi-item>
+          </dxi-item>
+          <dxi-item itemType="group">
+            <dxi-item dataField="MonthPeriode" editorType="dxDateBox" [editorOptions]="{ value: defValue, displayFormat: 'MM/yyyy', width: '80%', maxZoomLevel:'year',
+                                          minZoomLevel:'century', min:minimums, max:maximums}">
+              <dxi-validation-rule type="required" message="Month is required"></dxi-validation-rule>
+            </dxi-item>
+          </dxi-item>
+          <dxi-item [colSpan]="1">
+            <dx-button text="Search" (onClick)="doSearch()" type="default"></dx-button>
+          </dxi-item>
+        </dx-form>
+        <div *ngIf="isShowInfo">
+          <app-search-site [siteSearchVsb]="siteSearchVsb" (onHideSiteSearch)="onHideSiteSearch($event, $event2)"></app-search-site>
+        </div>
+      </div>
+      <dx-chart id="customer-chart">
+        <dxo-common-series-settings type="bar"></dxo-common-series-settings>
+        <dxo-size [height]="350"></dxo-size>
+        <dxo-adaptive-layout [width]="150"></dxo-adaptive-layout>
+        <dxo-tooltip [enabled]="true"></dxo-tooltip>
+        <dxo-legend
+          verticalAlignment="bottom"
+          horizontalAlignment="center"></dxo-legend>
+      </dx-chart>
+
+      <dx-pivot-grid id="pivotgrid"
+                     [allowFiltering]="true"
+                     [showBorders]="true"
+                     [allowSortingBySummary]="true"
+                     [showColumnGrandTotals]="false"
+                     [showRowGrandTotals]="false"
+                     [showRowTotals]="false"
+                     [showColumnTotals]="false"
+                     [dataSource]="pivotGridDataSource">
+        <dxo-field-chooser [enabled]="true" [height]="400"></dxo-field-chooser>
+        <dxo-export [enabled]="true" fileName="Energy"></dxo-export>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+      </dx-pivot-grid>
+    </div>
+  </div>
+</div>

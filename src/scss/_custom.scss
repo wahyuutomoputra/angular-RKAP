@@ -1,0 +1,63 @@
+// Here you can add other styles  
+.dx-item-selected {
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+.sidebar .nav-dropdown-items .nav-item {
+  padding-left: 10px;
+}
+
+.sidebar-nav {
+  &::-webkit-scrollbar-track {
+    background-color: lighten(#12a2bd, 5%);
+    border-right: 1px solid darken(#12a2bd, 5%);
+    border-left: 1px solid darken(#12a2bd, 5%);
+  }
+}
+
+.sidebar {
+  background: #12a2bd;
+}
+
+.sidebar .nav-title {
+  color: #fff;
+}
+
+.sidebar .nav-item {
+  color: #fff;
+}
+
+.sidebar .nav-link {
+  color: #fff;
+}
+
+.sidebar .nav-link.active {
+  background: #12a2bd;
+  color: #fff;
+}
+
+.sidebar .nav-dropdown.open {
+  background: #12a2bd;
+}
+
+.sidebar .nav-dropdown.open .nav-item {
+  color: #fff;
+}
+
+.sidebar .nav-dropdown.open .nav-link {
+  color: #fff;
+}
+
+.sidebar .nav-dropdown.open .nav-link.active {
+  background: #12a2bd;
+  color: #fff;
+}
+
+html * {
+  font-size: 14px !important; 
+}
+
+.dx-texteditor-input {
+  min-height: 30px
+}

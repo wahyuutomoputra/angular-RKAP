@@ -1,0 +1,322 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Asset Add/Edit</strong>
+    </div>
+    <div class="card-body">
+      <form action="Submit" (submit)="save($event)">
+        <dx-button icon="fa fa-ban" text="Cancel" (onClick)="cancel()"></dx-button>
+        <dx-button class="pull-right" icon="fa fa-save" text="Save" validationGroup="assetData" [useSubmitBehavior]="true">
+        </dx-button>
+        <!-- class="m-2" => add margin by 0.5rem -->
+        <div class="m-2"></div>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+        <div class="m-2"></div>
+        <!-- START FORM -->
+        <dx-form *ngIf="asset" [(formData)]="asset" validationGroup="assetData" [alignItemLabels]="true" [alignItemLabelsInAllGroups]="true">
+          <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+            <dxi-item itemType="group">
+              <dxi-item dataField="assetCode">
+                <dxo-label text="Asset Code"></dxo-label>
+                <dxi-validation-rule type="required" message="Asset Code is required"></dxi-validation-rule>
+              </dxi-item>
+              <dxi-item dataField="assetTypeId" [template]="'assetTypeTemplate'" [isRequired]="true">
+                <dxo-label text="Asset Type"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="brandId" [template]="'brandTemplate'" [isRequired]="true">
+                <dxo-label text="Brand"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="brandTypeId" [template]="'brandTypeTemplate'">
+                <dxo-label text="Brand Type"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="description">
+                <dxo-label text="Description"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="status">
+                <p>{{asset.status}}</p>
+              </dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group">
+              <!-- <dxi-item dataField="siteId" [template]="'siteTemplate'">
+              <dxo-label text="Site"></dxo-label>
+            </dxi-item> -->
+              <dxi-item itemType="group" [colCount]="2">
+                <dxi-item dataField="siteCodeExist">
+                  <dxo-label text="Site"></dxo-label>
+                  <dxi-validation-rule type="required" message="Site is required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item [template]="'siteSearchTemplate'">
+                </dxi-item>
+              </dxi-item>
+              <dxi-item dataField="photo" [template]="'photoTemplate'">
+              </dxi-item>
+            </dxi-item>
+          </dxi-item>
+
+          <dxi-item itemType="group" cssClass="second-group" [colCount]="2" caption=" ">
+            <!-- METER = 1 -->
+            <dxi-item itemType="group" *ngIf="!isChanged">
+              <dxi-item itemType="empty"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" *ngIf="isMeter">
+              <dxi-item dataField="dynamicData.METER_CLASS.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.METER_CLASS.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.METER_CLASS.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.METER_CLASS.attributeValue" [template]="'meterClassTemplate'" [isRequired]="true">
+                <dxo-label text="Meter Class"></dxo-label>
+              </dxi-item>
+              <!-- <dxi-item dataField="dynamicData.METER_CLASS.attributeValue" editorType="dxSelectBox" [isRequired]="true"
+                 [editorOptions]="{ isValid: isValidClass, dataSource: meterClass, displayExpr: className, valueExpr: className, onValueChanged: changeMeterClass($event) }">
+                <dxo-label text="Meter Class"></dxo-label>
+                <dxi-validation-rule type="required" message="Meter Class is required"></dxi-validation-rule>
+              </dxi-item> -->
+              <dxi-item dataField="dynamicData.METER_PROTOCOL.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.METER_PROTOCOL.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.METER_PROTOCOL.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.METER_PROTOCOL.attributeValue" [template]="'meterProtocolTemplate'" [isRequired]="true">
+                <dxo-label text="Meter Protocol"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="dynamicData.METER_CHANNEL_GROUP.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.METER_CHANNEL_GROUP.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.METER_CHANNEL_GROUP.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.METER_CHANNEL_GROUP.attributeValue">
+                <dxo-label text="Meter Channel"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="dynamicData.SERVICE_PLANS.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.SERVICE_PLANS.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.SERVICE_PLANS.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.SERVICE_PLANS.attributeValue" [template]="'servicePlansTemplate'">
+                <dxo-label text="Service Plans"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="dynamicData.USERNAME_METER.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.USERNAME_METER.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.USERNAME_METER.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.USERNAME_METER.attributeValue">
+                <dxo-label text="User"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="dynamicData.PASSWORD_METER.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.PASSWORD_METER.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.PASSWORD_METER.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.PASSWORD_METER.attributeValue" editorType="dxTextBox" [editorOptions]="{ mode: 'password' }">
+                <dxo-label text="Password"></dxo-label>
+              </dxi-item>
+              <dxi-item *ngIf="asset.brandId != 1" dataField="dynamicData.AUTHENTICATION_LEVEL.attributeId" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId != 1" dataField="dynamicData.AUTHENTICATION_LEVEL.attributeName" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId != 1" dataField="dynamicData.AUTHENTICATION_LEVEL.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId != 1" dataField="dynamicData.AUTHENTICATION_LEVEL.attributeValue" [template]="'authLevelTemplate'">
+                <dxo-label text="Auth Level"></dxo-label>
+              </dxi-item>
+              <dxi-item *ngIf="asset.brandId != 1" dataField="dynamicData.PHYSICALADDRESS.attributeId" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId != 1" dataField="dynamicData.PHYSICALADDRESS.attributeName" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId != 1" dataField="dynamicData.PHYSICALADDRESS.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId != 1" dataField="dynamicData.PHYSICALADDRESS.attributeValue">
+                <dxo-label text="Physical Address"></dxo-label>
+              </dxi-item>
+              <dxi-item *ngIf="asset.brandId != 1" dataField="dynamicData.LOGICALADDRESS.attributeId" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId != 1" dataField="dynamicData.LOGICALADDRESS.attributeName" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId != 1" dataField="dynamicData.LOGICALADDRESS.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId != 1" dataField="dynamicData.LOGICALADDRESS.attributeValue">
+                <dxo-label text="Logical Address"></dxo-label>
+              </dxi-item>
+              <dxi-item *ngIf="asset.brandId === 5" dataField="dynamicData.USERNAME_VERIFICATION.attributeId" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId === 5" dataField="dynamicData.USERNAME_VERIFICATION.attributeName" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId === 5" dataField="dynamicData.USERNAME_VERIFICATION.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId === 5" dataField="dynamicData.USERNAME_VERIFICATION.attributeValue">
+                <dxo-label text="User Verification"></dxo-label>
+              </dxi-item>
+              <dxi-item *ngIf="asset.brandId === 5" dataField="dynamicData.PASSWORD_VERIFICATION.attributeId" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId === 5" dataField="dynamicData.PASSWORD_VERIFICATION.attributeName" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId === 5" dataField="dynamicData.PASSWORD_VERIFICATION.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item *ngIf="asset.brandId === 5" dataField="dynamicData.PASSWORD_VERIFICATION.attributeValue" editorType="dxTextBox" [editorOptions]="{ mode: 'password' }">
+                <dxo-label text="Password Verification"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="dynamicData.CERTIFICATE_ID.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CERTIFICATE_ID.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CERTIFICATE_ID.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CERTIFICATE_ID.attributeValue">
+                <dxo-label text="Certificate ID"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="dynamicData.CERTIFICATE_DATE.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CERTIFICATE_DATE.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CERTIFICATE_DATE.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CERTIFICATE_DATE.attributeValue" editorType="dxDateBox">
+                <dxo-label text="Certificate Date"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="dynamicData.CERTIFICATE_FILE.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CERTIFICATE_FILE.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CERTIFICATE_FILE.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CERTIFICATE_FILE.attributeValue">
+                <dxo-label text="Certificate File"></dxo-label>
+              </dxi-item>
+            </dxi-item>
+            <!-- MODEM = 2 -->
+            <dxi-item itemType="group" *ngIf="isModem">
+              <dxi-item dataField="dynamicData.COMMUNICATION_TYPE.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.COMMUNICATION_TYPE.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.COMMUNICATION_TYPE.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.COMMUNICATION_TYPE.attributeValue" [template]="'commTypeTemplate'">
+                <dxo-label text="Communication Type"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="dynamicData.CONNECTION_TYPE.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CONNECTION_TYPE.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CONNECTION_TYPE.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CONNECTION_TYPE.attributeValue" [template]="'connTypeTemplate'">
+                <dxo-label text="Connection Type"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="dynamicData.COMMUNICATION_PORT.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.COMMUNICATION_PORT.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.COMMUNICATION_PORT.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.COMMUNICATION_PORT.attributeValue">
+                <dxo-label text="Communication Port"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="dynamicData.CONNECTION_PORT.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CONNECTION_PORT.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CONNECTION_PORT.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CONNECTION_PORT.attributeValue" [template]="'connPortTemplate'">
+                <dxo-label text="Connection Port"></dxo-label>
+              </dxi-item>
+
+            </dxi-item>
+            <!-- CONVERTER = 3 -->
+            <dxi-item itemType="group" *ngIf="isConverter">
+              <dxi-item dataField="dynamicData.CONNECTION_PORT.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CONNECTION_PORT.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CONNECTION_PORT.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.CONNECTION_PORT.attributeValue"  [template]="'connPortTemplate'">
+                <dxo-label text="Connection Port"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="dynamicData.COMMUNICATION_PORT.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.COMMUNICATION_PORT.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.COMMUNICATION_PORT.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.COMMUNICATION_PORT.attributeValue">
+                <dxo-label text="Communication Port"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="dynamicData.IP.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.IP.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.IP.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.IP.attributeValue">
+                <dxo-label text="IP Address"></dxo-label>
+              </dxi-item>
+            </dxi-item>
+            <!-- SIM = 4 -->
+            <dxi-item itemType="group" *ngIf="isSim">
+              <dxi-item dataField="dynamicData.IP.attributeId" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.IP.attributeName" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.IP.attributeDataType" [visible]="false"></dxi-item>
+              <dxi-item dataField="dynamicData.IP.attributeValue">
+                <dxo-label text="IP Address"></dxo-label>
+              </dxi-item>
+            </dxi-item>
+            <!-- END ASSET SPESIFIC ATTRIBUTE -->
+            <dxi-item itemType="group">
+              <dxi-item dataField="installDate" editorType="dxDateBox">
+              </dxi-item>
+            </dxi-item>
+          </dxi-item>
+
+          <!-- CUSTOM TEMPLATES -->
+          <div *dxTemplate="let data of 'assetTypeTemplate'">
+            <dx-select-box id="selectBoxAsset" [isValid]="isValidAsset" [dataSource]="assetTypes" [(value)]="data.component.option('formData')[data.dataField]"
+              displayExpr="name" valueExpr="id" (onValueChanged)="changeAssetType($event)">
+              <dx-validator>
+                <dxi-validation-rule type="required" message="Asset Type is required"></dxi-validation-rule>
+              </dx-validator>
+            </dx-select-box>
+          </div>
+          <div *dxTemplate="let data of 'brandTemplate'">
+            <dx-select-box id="selectBoxBrand" [isValid]="isValidBrand" [dataSource]="brands" [(value)]="data.component.option('formData')[data.dataField]"
+              displayExpr="brandName" valueExpr="id" (onValueChanged)="changeBrand($event)">
+            </dx-select-box>
+            <dxi-validation-rule type="required" message="Brand is required"></dxi-validation-rule>
+          </div>
+          <div *dxTemplate="let data of 'brandTypeTemplate'">
+            <dx-select-box [dataSource]="brandTypes" [(value)]="data.component.option('formData')[data.dataField]" displayExpr="typeName"
+              valueExpr="id">
+            </dx-select-box>
+          </div>
+          <!-- <div *dxTemplate="let data of 'siteTemplate'">
+          <dx-select-box [dataSource]="sites" [(value)]="data.component.option('formData')[data.dataField]" displayExpr="name" valueExpr="id"
+            [searchEnabled]="true">
+          </dx-select-box>
+        </div> -->
+          <div *dxTemplate="let data of 'siteSearchTemplate'">
+            <dx-button icon="search" (onClick)="showInfo()"></dx-button>
+          </div>
+          <div *dxTemplate="let data of 'photoTemplate'">
+            <img src="" onError="this.src='/assets/img/default.png'" class="form-avatar" />
+            <dx-file-uploader name="file" uploadMode="useButtons" uploadUrl="http://10.14.153.41:1366/asset/v2/upload" selectButtonText="Upload Photo"
+              labelText="">
+            </dx-file-uploader>
+          </div>
+          <div *dxTemplate="let data of 'meterClassTemplate'">
+            <dx-select-box *ngIf="editId === null" id="addMeterClass" [isValid]="isValidClass" [dataSource]="meterClass" displayExpr="className"
+              valueExpr="className" (onValueChanged)="changeMeterClass($event)">
+              <dx-validator>
+                <dxi-validation-rule type="required" message="Meter Class is required"></dxi-validation-rule>
+              </dx-validator>
+            </dx-select-box>
+            <dx-select-box *ngIf="editId !== null" id="addMeterClass" [isValid]="isValidClass" [dataSource]="meterClass" displayExpr="className"
+              valueExpr="className" (onValueChanged)="changeMeterClass($event)" [(value)]="asset.dynamicData.METER_CLASS.attributeValue">
+              <dx-validator>
+                <dxi-validation-rule type="required" message="Meter Class is required"></dxi-validation-rule>
+              </dx-validator>
+            </dx-select-box>
+          </div>
+          <div *dxTemplate="let data of 'meterProtocolTemplate'">
+            <dx-select-box *ngIf="editId === null" id="meterProtocol" [isValid]="isValidProtocol" [dataSource]="meterProtocol" displayExpr="meterProtocol"
+              valueExpr="meterProtocol" (onValueChanged)="changeMeterProtocol($event)">
+              <dx-validator>
+                <dxi-validation-rule type="required" message="Meter Protocol is required"></dxi-validation-rule>
+              </dx-validator>
+            </dx-select-box>
+            <dx-select-box *ngIf="editId !== null" id="meterProtocol" [isValid]="isValidProtocol" [dataSource]="meterProtocol" displayExpr="meterProtocol"
+              valueExpr="meterProtocol" (onValueChanged)="changeMeterProtocol($event)" [(value)]="asset.dynamicData.METER_PROTOCOL.attributeValue">
+              <dx-validator>
+                <dxi-validation-rule type="required" message="Meter Protocol is required"></dxi-validation-rule>
+              </dx-validator>
+            </dx-select-box>
+          </div>
+          <div *dxTemplate="let data of 'authLevelTemplate'">
+            <dx-select-box *ngIf="editId === null" id="selAuthLevel" (onValueChanged)="changeAuthLevel($event)" [dataSource]="authLevel" displayExpr="name" valueExpr="name">
+            </dx-select-box>
+            <dx-select-box *ngIf="editId !== null" id="selAuthLevel" (onValueChanged)="changeAuthLevel($event)" [dataSource]="authLevel" displayExpr="name" valueExpr="name" [(value)]="asset.dynamicData.AUTHENTICATION_LEVEL.attributeValue">
+            </dx-select-box>
+          </div>
+
+          <div *dxTemplate="let data of 'servicePlansTemplate'">
+            <dx-select-box *ngIf="editId === null" id="selServicePlans" (onValueChanged)="changeServicePlans($event)" [dataSource]="servicePlans" displayExpr="servicePlans" valueExpr="servicePlans">
+            </dx-select-box>
+            <dx-select-box *ngIf="editId !== null" id="selServicePlans" (onValueChanged)="changeServicePlans($event)" [dataSource]="servicePlans" displayExpr="servicePlans" valueExpr="servicePlans"
+              [(value)]="asset.dynamicData.SERVICE_PLANS.attributeValue">
+            </dx-select-box>
+          </div>
+          <div *dxTemplate="let data of 'commTypeTemplate'">
+            <dx-select-box *ngIf="editId === null" id="selCommType" (onValueChanged)="changeCommType($event)" [dataSource]="commType" displayExpr="communication" valueExpr="communication">
+            </dx-select-box>
+            <dx-select-box *ngIf="editId !== null" id="selCommType" (onValueChanged)="changeCommType($event)" [dataSource]="commType" displayExpr="communication" valueExpr="communication"
+              [(value)]="asset.dynamicData.COMMUNICATION_TYPE.attributeValue">
+            </dx-select-box>
+          </div>
+          <div *dxTemplate="let data of 'connTypeTemplate'">
+            <dx-select-box *ngIf="editId === null" id="selConnType" (onValueChanged)="changeConnType($event)" [dataSource]="connType" displayExpr="connectionType" valueExpr="connectionType">
+            </dx-select-box>
+            <dx-select-box *ngIf="editId !== null" id="selConnType" (onValueChanged)="changeConnType($event)" [dataSource]="connType" displayExpr="connectionType" valueExpr="connectionType"
+              [(value)]="asset.dynamicData.CONNECTION_TYPE.attributeValue">
+            </dx-select-box>
+          </div>
+          <div *dxTemplate="let data of 'connPortTemplate'">
+            <dx-select-box *ngIf="editId === null" id="selConnPort" (onValueChanged)="changeConnPort($event)" [dataSource]="connPort" displayExpr="name" valueExpr="name">
+            </dx-select-box>
+            <dx-select-box *ngIf="editId !== null" id="selConnPort" (onValueChanged)="changeConnPort($event)" [dataSource]="connPort" displayExpr="name" valueExpr="name"
+              [(value)]="asset.dynamicData.CONNECTION_PORT.attributeValue">
+            </dx-select-box>
+          </div>
+        </dx-form>
+        <!-- END FORM -->
+        <app-site-search [siteSearchVsb]="siteSearchVsb" (onHideSiteSearch)="onHideSiteSearch($event)"></app-site-search>
+        <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save($event)" (onHideConf)="onHideConf()"
+          (onSaveConf)="onSaveConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+      </form>
+    </div>
+  </div>
+</div>

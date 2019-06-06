@@ -1,0 +1,99 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <div class="long-title">
+        <h3><strong>Customer Growth</strong></h3>
+      </div>
+    </div>
+    <div id="pivot-container" style="margin-left: 20px; margin-right: 20px;">
+      <div class="card" style="padding: 10px;">
+        <dx-form id="form" itemType="group" sssClass="first-group" [formData]="site" [colCount]="3">
+          <dxi-item itemType="group" [colCount]="2">
+            <dxi-item dataField="Site"></dxi-item>
+            <dxi-item>
+              <dx-button icon="search" (onClick)="showInfo()"></dx-button>
+            </dxi-item>
+          </dxi-item>
+          <dxi-item itemType="group">
+            <dxi-item dataField="MonthPeriode" editorType="dxDateBox" [editorOptions]="{ value: defValue, displayFormat: 'MM/yyyy', width: '80%', maxZoomLevel:'year',
+                                minZoomLevel:'century', min:minimums, max:maximums}">
+              <dxi-validation-rule type="required" message="Month is required"></dxi-validation-rule>
+            </dxi-item>
+          </dxi-item>
+          <dxi-item>
+            <div style="float: right">
+              <dx-button icon="search" text="Search" (onClick)="search()"></dx-button>
+            </div>
+          </dxi-item>
+        </dx-form>
+      </div>
+      <!--<dx-button icon="export" text="Export" (onClick)="buttonClicked()" style="margin-bottom: 10px; float: right"></dx-button>-->
+      <dx-chart id="customer-chart" (onLegendClick)="legendClickHandler($event)">
+        <dxo-common-series-settings #seriesSettings type="bar" hoverMode="allArgumentPoints" selectionMode="allArgumentPoints">
+        </dxo-common-series-settings>
+        <dxo-size [height]="300"></dxo-size>
+        <dxo-margin [bottom]="10"></dxo-margin>
+        <dxo-common-axis-settings>
+          <dxo-grid [visible]="true"></dxo-grid>
+        </dxo-common-axis-settings>
+        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="top">
+        </dxo-legend>
+        <dxo-argument-axis [allowDecimals]="false" [axisDivisionFactor]="60">
+          <dxo-label>
+            <dxo-format type="decimal"></dxo-format>
+          </dxo-label>
+        </dxo-argument-axis>
+        <dxo-export [enabled]="true"></dxo-export>
+        <dxo-tooltip [enabled]="true"></dxo-tooltip>
+      </dx-chart>
+
+      <dx-pivot-grid id="pivotgrid"
+                     [allowFiltering]="true"
+                     [showBorders]="true"
+                     [allowSortingBySummary]="true"
+                     [showColumnGrandTotals]="false"
+                     [showRowGrandTotals]="false"
+                     [showRowTotals]="false"
+                     [showColumnTotals]="false"
+                     [dataSource]="pivotGridDataSource">
+        <dxo-export [enabled]="true" fileName="Customer Growth"></dxo-export>
+        <dxo-field-chooser [enabled]="true" [height]="400"></dxo-field-chooser>
+        <dxo-scrolling mode="virtual"></dxo-scrolling>
+      </dx-pivot-grid>
+    </div>
+  </div>
+</div>
+
+<!-- pop up -->
+<div *ngIf="siteSearchVsb">
+  <div id="popup1">
+    <dx-popup class="popup" width="500" height="auto" [showTitle]="true" title="Find By Site Code" [dragEnabled]="false" [closeOnOutsideClick]="true"
+      [(visible)]="siteSearchVsb" (onHiding)="hideAdd()">
+      <div *dxTemplate="let data of 'content'">
+        <div class="card-body">
+          <div id="data-grid-demo">
+            <dx-data-grid id="gridContainer" [dataSource]="searchSiteById" keyExpr="siteCode" [showRowLines]="true" [showBorders]="true">
+              <dxo-remote-operations [filtering]="true">
+              </dxo-remote-operations>
+              <dxo-filter-row [visible]="true"></dxo-filter-row>
+              <dxo-header-filter [visible]="true"></dxo-header-filter>
+              <dxo-paging [pageSize]="5"></dxo-paging>
+              <dxo-pager [showInfo]="true">
+              </dxo-pager>
+              <dxi-column dataField="siteCode" caption="Site Code" width="85px"></dxi-column>
+              <dxi-column dataField="name" caption="Site Name" width="100px" [allowFiltering]="false"></dxi-column>
+              <dxi-column dataField="unit" caption="Unit" width="75px" [allowFiltering]="false"></dxi-column>
+              <dxi-column dataField="parent" caption="Parent" width="110px" [allowFiltering]="false"></dxi-column>
+              <dxi-column [fixed]="true" dataField="siteCode" caption="Action" width="50px" [allowFiltering]="false" cellTemplate="siteTemplate"></dxi-column>
+              <div *dxTemplate="let data of 'siteTemplate'">
+                <div (click)="getIdSite(data.value)" class="text-center">
+                  <i class="fa fa-thumb-tack" id="btn{{data.value}}"></i>
+                </div>
+              </div>
+            </dx-data-grid>
+          </div>
+        </div>
+      </div>
+    </dx-popup>
+  </div>
+</div>

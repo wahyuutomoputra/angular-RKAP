@@ -1,0 +1,112 @@
+<dx-popup class="popup" [height]="600" width="75%" [showTitle]="true" title="Detail Manufacture" [dragEnabled]="false" [closeOnOutsideClick]="false"
+  [(visible)]="popupManufacture" (onHiding)="hide()">
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view #scrollView id="scrollview">
+      <dx-form [(formData)]="manufacture">
+        <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+          <dxi-item itemType="group">
+            <dxi-item dataField="manufacturName" caption="Manufacture Name">
+              <p>{{manufacture?.manufacturName}}</p>
+            </dxi-item>
+            <dxi-item dataField="address" caption="Address">
+              <p>{{manufacture?.address}}</p>
+            </dxi-item>
+            <dxi-item dataField="city" caption="City">
+              <p>{{manufacture?.city}}</p>
+            </dxi-item>
+            <dxi-item dataField="province" caption="Province">
+              <p>{{manufacture?.province}}</p>
+            </dxi-item>
+            <dxi-item dataField="country" caption="Country">
+              <p>{{manufacture?.country}}</p>
+            </dxi-item>
+            <dxi-item dataField="postalCode" caption="Postal Code">
+              <p>{{manufacture?.postalCode}}</p>
+            </dxi-item>
+            <dxi-item dataField="telephone1" caption="Telephone 1">
+              <p>{{manufacture?.telephone1}}</p>
+            </dxi-item>
+            <dxi-item dataField="telephone2" caption="Telephone 2">
+              <p>{{manufacture?.telephone2}}</p>
+            </dxi-item>
+          </dxi-item>
+
+          <dxi-item itemType="group">
+            <dxi-item dataField="faximile" caption="Faximile">
+              <p>{{manufacture?.facsimile}}</p>
+            </dxi-item>
+            <dxi-item dataField="email" caption="Email">
+              <p>{{manufacture?.email}}</p>
+            </dxi-item>
+            <dxi-item dataField="director" caption="Director">
+              <p>{{manufacture?.director}}</p>
+            </dxi-item>
+            <dxi-item dataField="directorEmail" caption="Director">
+              <p>{{manufacture?.directorEmail}}</p>
+            </dxi-item>
+            <dxi-item dataField="marketingEmail" caption="Marketing Director">
+              <p>{{manufacture?.marketingEmail}}</p>
+            </dxi-item>
+            <dxi-item dataField="engineering" caption="Engineering">
+              <p>{{manufacture?.engineeringEmail}}</p>
+            </dxi-item>
+            <dxi-item dataField="engineeringPhone" caption="Engineering Phone">
+              <p>{{manufacture?.engineeringPhone}}</p>
+            </dxi-item>
+            <dxi-item dataField="photorUrl" caption="Photo Url">
+              <img src="{{manufacture?.photoUrl}}">
+            </dxi-item>
+          </dxi-item>
+        </dxi-item>
+
+        <dxi-item>
+          <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+        </dxi-item>
+        <dxi-item itemType="group" cssClass="second-group">
+          <dxi-item dataField="MapLocation">
+            <dx-map [zoom]="9" [height]="300" width="50%" [controls]="true" [markerIconSrc]="mapMarkerUrl" [markers]="markers">
+            </dx-map>
+          </dxi-item>
+        </dxi-item>
+
+        <dxi-item>
+          <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+        </dxi-item>
+        <dxi-item itemType="group" cssClass="third-group" [colCount]="2">
+          <dxi-item itemType="group">
+            <dxi-item dataField="activationCode" caption="Activate">
+              <p>{{manufacture?.activationCode}}</p>
+            </dxi-item>
+            <dxi-item dataField="description" caption="Description">
+              <p>{{manufacture?.description}}</p>
+            </dxi-item>
+            <dxi-item dataField="registrationBy" caption="Registration By">
+              <p>{{manufacture?.registrationBy}}</p>
+            </dxi-item>
+            <dxi-item dataField="registrationDate" caption="Registration Date">
+              <p>{{manufacture?.registrationDate}}</p>
+            </dxi-item>
+          </dxi-item>
+
+          <dxi-item itemType="group">
+            <dxi-item dataField="activationBy" caption="Activation By">
+              <p>{{manufacture?.activationBy}}</p>
+            </dxi-item>
+            <dxi-item dataField="activationDate" caption="Activation Date">
+              <p>{{manufacture?.activationDate}}</p>
+            </dxi-item>
+            <dxi-item dataField="deactivationBy" caption="Deactivation By">
+              <p>{{manufacture?.deactivationBy}}</p>
+            </dxi-item>
+            <dxi-item dataField="deactivationDate" caption="Deactivation Date">
+              <p>{{manufacture?.deactivationDate}}</p>
+            </dxi-item>
+            <dxi-item dataField="modifiedBy" caption="Modified By">
+              <p>{{manufacture?.modifiedBy}}</p>
+            </dxi-item>
+          </dxi-item>
+        </dxi-item>
+      </dx-form>
+    </dx-scroll-view>
+  </div>
+</dx-popup>

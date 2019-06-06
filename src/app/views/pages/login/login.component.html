@@ -1,0 +1,40 @@
+<div class="back"></div>
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-lg-4 col-sm-8 col-md-6 col-md-offset-3 col-lg-offset-4 col-sm-offset-2">
+            <div class="account-wall">
+                <h2 class="text-center">ICoFR - Internal Control over Financial Reporting</h2>
+                <h3 class="text-center">PT Indonesia Comnets Plus</h3>
+                <p class="logo" alt=""></p>
+                <form class="form-signin" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control"  placeholder="username" name="username" [(ngModel)]="model.username" #username="ngModel" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control"placeholder="password" type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">
+                        Login
+                    </button>
+                    <p class="text-center">
+                        <a [routerLink]="['/register']" class="btn btn-link">Register</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row copyright">
+        <div class="col-md-8 col-md-offset-2">
+            Copyright &copy;
+            <a href="https://www.iconpln.co.id/" class="link-footer">
+                <strong>
+                    PT Indonesia Comnets Plus
+                </strong>
+            </a>
+        </div>
+    </div>
+</div>

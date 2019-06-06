@@ -1,0 +1,22 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <div class="long-title">
+        <strong>Scheduler Setting</strong>
+      </div>
+    </div>
+    <div class="card-body">
+      <!--<dx-button icon="close" (onClick)="buttonClicked()" style="margin-bottom: 10px"></dx-button>
+      <dx-button icon="save" (onClick)="buttonClicked()" style="margin-bottom: 10px; float: right"></dx-button>-->
+      <dx-data-grid id="gridContainer" [dataSource]="schedulelist" [showRowLines]="true" [showBorders]="true"  (onContentReady)="onContentReady($event)" (onCellPrepared)="onCellPrepared($event)" (onRowUpdated)="RowUpdated($event)">
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-editing mode="row" [allowUpdating]="true"></dxo-editing>
+        <dxi-column caption="Time" dataField="schedTime" [editorOptions]="{disabled: true, readonly: true}" alignment="center" sortOrder="asc"></dxi-column>
+        <dxi-column caption="Load Profile" dataField="loadprofile" alignment="center"></dxi-column>
+        <dxi-column caption="Billing" dataField="billing" alignment="center"></dxi-column>
+        <dxi-column caption="Instant" dataField="instant" alignment="center"></dxi-column>
+        <dxi-column caption="Event" dataField="event" alignment="center"></dxi-column>
+      </dx-data-grid>
+    </div>
+  </div>
+</div>

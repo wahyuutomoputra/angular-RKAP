@@ -1,0 +1,61 @@
+<div class="progress" *ngIf="!isLoaded">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+    style="width:100%">
+  </div>
+</div>
+<div *ngIf="isLoaded">
+  <div id="form-container" style="margin-left:20px; margin-right: 20px; margin-top: 20px;">
+    <dx-form id="form" [formData]="detailEvents">
+        <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+            <dxi-item itemType="group">
+              <dxi-item dataField="Site"><p>{{detailEvents.siteCodeExist}} - {{detailEvents.siteName}}</p></dxi-item>
+              <dxi-item dataField="location"><p>{{detailEvents.locationCode}} - {{detailEvents.locationName}}</p></dxi-item>
+              <dxi-item dataField="Tariff / Power"><p>{{datasourceHeader.location.tariff}} / {{datasourceHeader.location.power}}</p></dxi-item>
+              <dxi-item dataField="meterNo"><p>{{detailEvents.meterCode}}</p></dxi-item>
+              <dxi-item dataField="Meter Brand / Type"><p>{{datasourceHeader.assetMeter.brandName}} / {{datasourceHeader.assetMeter.brandTypeName}}</p></dxi-item>
+            </dxi-item>
+            
+            <dxi-item itemType="group">
+              <dxi-item dataField="{{datasourceHeader.assetCommunication.assetTypeName}} No"><p>{{datasourceHeader.assetCommunication.assetCode}}</p></dxi-item>
+              <dxi-item dataField="{{datasourceHeader.assetCommunication.assetTypeName}} Brand / Type"><p>{{datasourceHeader.assetCommunication.brandName}} / {{datasourceHeader.assetCommunication.brandTypeName}}</p></dxi-item>
+              <dxi-item dataField="SIM Card"><p>{{datasourceHeader.assetSim.assetCode}}</p></dxi-item>
+              <dxi-item dataField="IP Address"><p>{{datasourceHeader.assetSim.dynamicData.IP.attributeValue}}</p></dxi-item>
+          </dxi-item>
+        </dxi-item>
+          </dx-form>
+        </div>
+
+  <div class="card-body">
+    <div id="data-grid-demo">
+
+      <dx-data-grid id="gridContainer" 
+          keyExpr="id" 
+        [showRowLines]="true" 
+        [dataSource]="detailEventss" 
+        [showBorders]="true"
+        [rowAlternationEnabled]="true" [columnAutoWidth]="true" [wordWrapEnabled]="true" style="max-width: 985px"> 
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager 
+        [showPageSizeSelector]="true"
+        [allowedPageSizes]="[10, 25, 50]"
+        [showInfo]="true">
+        </dxo-pager>
+        <dxo-export [enabled]="true" fileName="Detail Event" [allowExportSelectedData]="false"></dxo-export>
+
+        <dxi-column name="No" cellTemplate="NoTemplate" caption="No" width='35px'></dxi-column>
+        <div *dxTemplate="let data of 'NoTemplate'">
+          <a>
+            {{ data.component.pageIndex() * data.component.pageSize() + data.rowIndex + 1 }}
+          </a>
+        </div>
+        <dxi-column dataField="readDate" caption="Event Date" dataType="datetime" format="M/d/yyy HH:mm" width='100px'></dxi-column>
+        <dxi-column dataField="createdDate" caption="Insert Date" dataType="datetime" format="M/d/yyyy HH:mm" width='100px'></dxi-column>
+        <dxi-column dataField="event.eventCategory" caption="Event Category" width='100px'></dxi-column>
+        <dxi-column dataField="event.eventDisplay" caption="Event Name" width='100px'></dxi-column>
+        <dxi-column dataField="event.eventName" caption="Message"></dxi-column>
+      </dx-data-grid>
+    </div>
+  </div>
+</div>

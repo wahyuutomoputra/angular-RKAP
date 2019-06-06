@@ -1,0 +1,57 @@
+<div *ngIf="addVisible">
+  <form action="Submit" (submit)="save($event)">
+    <dx-button *ngIf="!isDetail" icon="fa fa-ban" text="Cancel" type="danger" (onClick)="cancel()"></dx-button>
+    <dx-button *ngIf="!isDetail" class="pull-right" icon="fa fa-save" text="Save" type="success" validationGroup="roleData" [useSubmitBehavior]="true">
+    </dx-button>
+
+    <!-- class="m-2" => add margin by 0.5rem -->
+    <div class="m-2"></div>
+    <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+    <div class="m-2"></div>
+
+    <dx-form [(formData)]="role" validationGroup="roleData" >
+      <!-- (onFieldDataChanged)="change($event)" -->
+      <dxi-item itemType="group" [colCount]="2">
+
+        <dxi-item itemType="group" caption="Data Diri">
+          <!-- <dxi-item name="txtUserId" dataField="userid" caption="User Id" editorType="dxTextBox" [editorOptions]="{readOnly: true}"></dxi-item> -->
+
+          <dxi-item name="txtUsername" dataField="username" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}">
+            <dxi-validation-rule type="custom" [validationCallback]="validateLogin" message="Username sudah ada">
+            </dxi-validation-rule>
+                <!-- <dxi-validation-rule type="required" message="Username is required"></dxi-validation-rule> -->
+          </dxi-item>
+          <dxi-item name="txtpass" dataField="password" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}">
+                <dxi-validation-rule type="required" message="Password is required"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item name="txtNama" dataField="nama" caption="Nama" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Nama harus diisi' }]"></dxi-item>
+
+         <!--  <dxi-item name="txtKeterangan" dataField="role_id" caption="Role Id" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Keterangan harus diisi' }]"></dxi-item> -->
+          <dxi-item name="aktif" dataField="active" editorType="dxSelectBox" [label]="{ text: 'Aktif ?' }" [editorOptions]="{readOnly: isDetail, items: daftarKategori, displayExpr: 'Nama', valueExpr: 'ID' }" [validationRules]="[{type: 'required', message: 'Display harus dipilih' }]" ></dxi-item>
+
+          <dxi-item name="cboDislay" dataField="role_id" editorType="dxSelectBox" [label]="{ text: 'Role' }" [editorOptions]="{readOnly: isDetail, items: daftarRole, displayExpr: 'nama', valueExpr: 'role_id' }" [validationRules]="[{type: 'required', message: 'Display harus dipilih' }]" ></dxi-item>
+        </dxi-item>
+        <!-- <dxi-item itemType="group">
+          <dxi-item itemType="empty"></dxi-item>
+        </dxi-item> -->
+      </dxi-item>
+      <dxi-item itemType="group" caption="Alamat" [colCount]="2">
+        <dxi-item name="txtKota" dataField="kecamatan" caption="Kecamatan" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Kecamatan harus diisi' }]"></dxi-item>
+
+        <dxi-item name="txtKelurahan" dataField="kelurahan" caption="Kelurahan" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Kelurahan harus diisi' }]"></dxi-item>
+
+        <dxi-item name="txtKodepos" dataField="kodepos" caption="Kode pos" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Kodepos harus diisi' }]"></dxi-item>
+
+        <dxi-item name="txtKota" dataField="kota" caption="Kota" editorType="dxTextBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Kota harus diisi' }]"></dxi-item>
+
+        <dxi-item name="provinsi" dataField="propinsi" editorType="dxSelectBox" [label]="{ text: 'provinsi' }" [editorOptions]="{readOnly: isDetail, items: daftarProvinsi, displayExpr: 'province', valueExpr: 'province' }" [validationRules]="[{type: 'required', message: 'Provinsi harus dipilih' }]" ></dxi-item>
+        
+      </dxi-item>  
+
+      <dxi-item name="txtAlamat" dataField="alamat" caption="Alamat" editorType="dxTextArea" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Alamat harus diisi' }]"></dxi-item>
+    </dx-form>
+    <br>
+    <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save()" (onHideConf)="onHideConf()"
+      (onSaveConf)="onSaveConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+  </form>
+</div>

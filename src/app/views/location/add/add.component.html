@@ -1,0 +1,131 @@
+<div *ngIf="addVisible">
+  <form action="Submit" (submit)="save($event)">
+    <dx-button icon="fa fa-ban" text="Cancel" (onClick)="cancel()"></dx-button>
+    <dx-button class="pull-right" icon="fa fa-save" text="Save" validationGroup="customerData" [useSubmitBehavior]="true">
+    </dx-button>
+
+    <!-- class="m-2" => add margin by 0.5rem -->
+    <div class="m-2"></div>
+    <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+    <div class="m-2"></div>
+
+    <dx-form [(formData)]="location" validationGroup="customerData">
+      <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="locationCode">
+            <dxi-validation-rule type="required" message="Location Code is required"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="name">
+            <dxo-label text="Location Name"></dxo-label>
+            <dxi-validation-rule type="required" message="Location Name is required"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item dataField="locationType" caption="" editorType="dxSelectBox" [editorOptions]="{ items: LocationTypes, value: '' }">
+            <dxo-label text="Location Type"></dxo-label>
+            <dxi-validation-rule type="required" message="Location Type is required"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item itemType="group" [colCount]="2">
+            <dxi-item dataField="siteCode">
+              <dxo-label text="Site"></dxo-label>
+              <dxi-validation-rule type="required" message="Site is required"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item>
+              <dx-button icon="search" (onClick)="showInfo()" ></dx-button>
+            </dxi-item>
+          </dxi-item>
+          
+          <!-- Pending SelectBox Type -->
+          <!-- editorType="dxSelectBox" [editorOptions]="{ items: Cities, value: '' }" -->
+          
+          <dxi-item dataField="address"></dxi-item>
+          <dxi-item dataField="city"></dxi-item>
+          <dxi-item dataField="province"></dxi-item>
+          <dxi-item dataField="country"></dxi-item>
+          <dxi-item dataField="postalCode"></dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item dataField="telephone1"><dxo-label text="Phone 1"></dxo-label></dxi-item>
+          <dxi-item dataField="telephone2"><dxo-label text="Phone 2"></dxo-label></dxi-item>
+          <dxi-item dataField="facsimile"><dxo-label text="Faximile"></dxo-label></dxi-item>
+          <dxi-item dataField="email"></dxi-item>
+          <dxi-item dataField="timeZone"><dxo-label text="Time Zone"></dxo-label></dxi-item>
+          <dxi-item dataField="photo">
+            <dx-file-uploader selectButtonText="Select photo" labelText="" accept="image/*" uploadMode="useForm">
+            </dx-file-uploader>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+        <dxi-item itemType="group">
+          <dxi-item dataField="tariff"></dxi-item>
+          <dxi-item dataField="capacity"></dxi-item>
+          <dxi-item dataField="unit" editorType="dxSelectBox" [editorOptions]="{ items: Units, value: '' }"></dxi-item>
+          <dxi-item dataField="cTRatio">
+            <dxo-label text="CT Ratio"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="cTPrimary">
+            <dxo-label text="CT Primary"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="cTSecondary">
+            <dxo-label text="CT Secondary"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="cTClass">
+            <dxo-label text="CT Class"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="pTRatio">
+            <dxo-label text="PT Ratio"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="pTPrimary">
+            <dxo-label text="PT Primary"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="pTSecondary">
+            <dxo-label text="PT Secondary"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="pTClass">
+            <dxo-label text="PT Class"></dxo-label>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item itemType="group" [colCount]="2">
+            <dxi-item dataField="substation">
+              <dxo-label text="Substation"></dxo-label>
+            </dxi-item>
+            <dxi-item>
+              <dx-button icon="search" (onClick)="showSubstation()"></dx-button>
+            </dxi-item>
+          </dxi-item>
+          <dxi-item dataField="contractNo"></dxi-item>
+          <dxi-item dataField="meterFactor"></dxi-item>
+          <dxi-item dataField="kWhFactor"><dxo-label text="kWh Factor"></dxo-label></dxi-item>
+          <dxi-item dataField="kVArhFactor"><dxo-label text="kVArh Factor"></dxo-label></dxi-item>
+          <dxi-item dataField="trfLosesFact"></dxi-item>
+          <dxi-item dataField="mutationDate" editorType="dxDateBox" [editorOptions]="{ value: '', displayFormat: 'dd/MM/yyyy', width: '100%'}"></dxi-item>
+          <!-- <dxi-item dataField="mutationCode"></dxi-item> -->
+        </dxi-item>
+      </dxi-item>
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group">
+        <dxi-item dataField="LocationMap">
+          <dx-map [zoom]="11" [height]="300" width="50%" [controls]="true" [markerIconSrc]="mapMarkerUrl" [markers]="markers">
+          </dx-map>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item>
+        <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+      </dxi-item>
+      <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+        <dxi-item dataField="status"></dxi-item>
+        <dxi-item dataField="description"></dxi-item>
+      </dxi-item>
+    </dx-form>
+
+    <app-site-search [siteSearchVsb]="siteSearchVsb" (onHideSiteSearch)="onHideSiteSearch($event)"></app-site-search>
+    <app-substation-search [substationSearchVsb]="substationSearchVsb" (onHideSubstationSearch)="onHideSubstationSearch($event)"></app-substation-search>
+    <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save()" (onHideConf)="onHideConf()"
+      (onSaveConf)="onSaveConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+  </form>
+</div>

@@ -1,0 +1,29 @@
+<dx-popup class="popup" [width]="475" [height]="250" [showTitle]="true" title="Detail Template" [dragEnabled]="false" [closeOnOutsideClick]="false"
+  [(visible)]="popupVisible" (onHiding)="hide()">
+  <div *dxTemplate="let data of 'content'">
+    <div class="row">
+      <span class="col-4">Tikur Id</span>
+      <span class="col">{{detail.tikurId}}</span>
+    </div>
+    <div class="row">
+      <span class="col-4">Id Length</span>
+      <span class="col">{{detail.tikurIdLength}}</span>
+    </div>
+    <div class="row">
+      <span class="col-4">Validation</span>
+      <span class="col">{{detail.validation}}</span>
+    </div>
+    <div class="row">
+      <span class="col-4">Substantion Code</span>
+      <span class="col">{{detail.templateCode}}</span>
+    </div>
+    <div class="row">
+      <span class="col-4">Generation Name</span>
+      <span class="col">{{detail.generationName}}</span>
+    </div>
+    <div class="row">
+      <span class="col-4">Transmission Name</span>
+      <span class="col">{{detail.transmissionName}}</span>
+    </div>
+  </div>
+</dx-popup>

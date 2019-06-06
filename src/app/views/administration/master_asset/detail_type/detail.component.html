@@ -1,0 +1,41 @@
+  <dx-popup class="popup" [height]="500" width="60%" [showTitle]="true" title="Detail Brand Type" [dragEnabled]="false" [closeOnOutsideClick]="false"
+  [(visible)]="popupType" (onHiding)="hide()">
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view #scrollView id="scrollview">
+      <dx-form [(formData)]="type">
+        <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+          <dxi-item itemType="group">
+            <dxi-item dataField="assetType" caption="Asset Type"><p>{{type?.masterAssetBrand.assetType.name}}</p></dxi-item>
+            <dxi-item dataField="manufacturName" caption="Manufacture Name"><p>{{type?.masterAssetBrand.masterAssetManufactur.manufacturName}}</p></dxi-item>
+            <dxi-item dataField="brandName" caption="Brand Name"><p>{{type?.masterAssetBrand.brandName}}</p></dxi-item>
+            <dxi-item dataField="brandType" caption="Brand Type"><p>{{type?.typeName}}</p></dxi-item>
+          </dxi-item>
+
+          <dxi-item itemType="group">
+            <dxi-item dataField="photorUrl" caption="Photo Url"><img src="{{type?.photoUrl}}"></dxi-item>
+          </dxi-item>
+        </dxi-item>
+               
+        <dxi-item>
+          <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+        </dxi-item>
+        <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+          <dxi-item itemType="group">
+            <dxi-item dataField="activationCode" caption="Activate"><p>{{type?.activationCode}}</p></dxi-item>
+            <dxi-item dataField="description" caption="Description"><p>{{type?.description}}</p></dxi-item>
+            <dxi-item dataField="registrationBy" caption="Registration By"><p>{{type?.createBy}}</p></dxi-item>
+            <dxi-item dataField="registrationDate" caption="Registration Date"><p>{{type?.createDate}}</p></dxi-item>
+            <!-- <dxi-item dataField="activationBy" caption="Activation By"><p>{{type?.activationBy}}</p></dxi-item>
+            <dxi-item dataField="activationDate" caption="Activation Date"><p>{{type?.activationDate}}</p></dxi-item> -->
+          </dxi-item>
+
+          <dxi-item itemType="group">
+            <dxi-item dataField="deactivationBy" caption="Deactivation By"><p>{{type?.deactivationBy}}</p></dxi-item>
+            <dxi-item dataField="deactivationDate" caption="Deactivation Date"><p>{{type?.deactivationDate}}</p></dxi-item>
+            <dxi-item dataField="modifiedBy" caption="Modified By"><p>{{type?.modifiedBy}}</p></dxi-item>
+          </dxi-item>
+        </dxi-item>
+      </dx-form>
+    </dx-scroll-view>
+  </div>
+</dx-popup>

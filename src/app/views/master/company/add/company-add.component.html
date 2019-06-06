@@ -1,0 +1,77 @@
+<div *ngIf="isLoaded">
+  <div class="animated fadeIn">
+    <div class="card" id="new47">
+      <div class="card-header">
+        <strong>Add New Company</strong>
+      </div>
+      <!-- {{details}} -->
+      <div class="card-body">
+
+        <div class="d-table w-100">
+          <div class="d-table-cell">
+            <dx-button text="Cancel" (onClick)="cancel()" icon="fa fa-ban"></dx-button>
+          </div>
+          <div class="d-table-cell tar">
+            <dx-button text="Save" (onClick)="save()" icon="fa fa-save"></dx-button>
+          </div>
+        </div>
+        <dx-form [(formData)]="company">
+          <dxi-item itemType="group" cssClass="first-group" [colCount]="2">
+            <dxi-item itemType="group">
+
+              <dxi-item dataField="name">
+                <dxo-label text="Name"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="shortName">
+                <dxo-label text="Short Name"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="address">
+                <dxo-label text="Address"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="city">
+                <dxo-label text="City"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="province">
+                <dxo-label text="Province"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="country">
+                <dxo-label text="Country"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="postalCode">
+                <dxo-label text="Postal Code"></dxo-label>
+              </dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group">
+              <dxi-item dataField="telephone1">
+                <dxo-label text="Phone 1"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="telephone2">
+                <dxo-label text="Phone 2"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="facsimile">
+                <dxo-label text="Faximile"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="email">
+                <dxo-label text="Email"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="timeZone">
+                <dxo-label text="Time Zone"></dxo-label>
+              </dxi-item>
+              <dxi-item dataField="photoUrl">
+                <dxo-label text="Photo Url"></dxo-label>
+              </dxi-item>
+              <dxi-item>
+                <!-- <img src="{{details?.photoUrl}}" onError="this.src='/assets/img/default.png'"  /> -->
+                <dx-file-uploader name="file" uploadMode="useButtons" uploadUrl="http://10.14.153.41:1366/asset/v2/upload" selectButtonText="Upload Photo"
+                  labelText="">
+                </dx-file-uploader>
+              </dxi-item>
+              <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save()" (onHideConf)="onHideConf()"
+                (onSaveConf)="onSaveConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+            </dxi-item>
+          </dxi-item>
+        </dx-form>
+      </div>
+    </div>
+  </div>
+</div>

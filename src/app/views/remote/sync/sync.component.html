@@ -1,0 +1,47 @@
+<div class="animated fadeIn">
+  <div class="card" id="new47">
+    <div class="card-header">
+      <strong>Sync</strong>
+    </div>
+    <div class="card-body">
+      <form action="Submit" (submit)="save($event)">
+        <!-- START FORM -->
+        <dx-form [(formData)]="timeData" validationGroup="dataValidation" [alignItemLabels]="true" [alignItemLabelsInAllGroups]="true">
+          <dxi-item itemType="group" cssClass="first-group">
+            <dxi-item dataField="meterId">
+              <dxo-label text="Meter Id"></dxo-label>
+              <p>{{timeData.meterId}}</p>
+            </dxi-item>
+          </dxi-item>
+          <dxi-item itemType="group" cssClass="first-group" [colCount]="3">
+            <dxi-item>
+              <dxo-label text="Meter Time"></dxo-label>
+              <p>{{meterDate}}</p>
+            </dxi-item>
+            <dxi-item dataField="updatedDate">
+              <dxo-label text="Sync Time"></dxo-label>
+              <dx-date-box [(value)]="timeData.updatedDate" type="datetime">
+              </dx-date-box>
+            </dxi-item>
+            <!-- <dxi-item itemType="empty">
+            </dxi-item> -->
+            <!-- <dxi-item dataField="timezone">
+              <dxo-label text="Timezone"></dxo-label>
+              <p>{{timeData.timezone}}</p>
+            </dxi-item> -->
+            <!-- <dxi-item dataField="timezone" [editorOptions]="{width:'188px'}">
+              <dxo-label text="Timezone"></dxo-label>
+            </dxi-item> -->
+            <dxi-item>
+              <dx-button icon="fa fa-save" text="Sync" validationGroup="dataValidation" [useSubmitBehavior]="true">
+              </dx-button>
+            </dxi-item>
+          </dxi-item>
+        </dx-form>
+        <!-- END FORM -->
+        <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save($event)" (onHideConf)="onHideConf()"
+          (onSaveConf)="onSaveConf()" ></app-form-confirmation>
+      </form>
+    </div>
+  </div>
+</div>

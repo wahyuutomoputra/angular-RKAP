@@ -1,0 +1,52 @@
+<div class="animated fadeIn">
+    <div class="card" id="new47">
+        <div class="card-header">
+            <strong>Notification</strong>
+        </div>
+
+        <div class="card-body">
+            <div id="data-grid-demo">
+                <dx-data-grid id="gridContainer" [dataSource]="gridDataSource" keyExpr="id" [showRowLines]="true" 
+                [showBorders]="true" [columnHidingEnabled]="false" [rowAlternationEnabled]="true" 
+                [columnAutoWidth]="true" [wordWrapEnabled]="true">
+                <dxo-remote-operations [paging]="true">
+                </dxo-remote-operations>
+
+                    <dxo-editing mode="form" [allowUpdating]="false" [allowAdding]="false" [allowDeleting]="false" [allowResizing]="true">
+                    </dxo-editing>
+                    <dxo-filter-row [visible]="true"></dxo-filter-row>
+                    <dxo-header-filter [visible]="true"></dxo-header-filter>
+                    <dxo-paging [pageSize]="10"></dxo-paging>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true" [showNavigationButtons]="true">
+                    </dxo-pager>
+                    <dxo-export [enabled]="true" fileName="Notification" [allowExportSelectedData]="false"></dxo-export>
+                    <dxi-column dataField="" caption="Short Text" width="85px"></dxi-column>
+                    <dxi-column dataField="message" caption="Message" width="185px" [allowFiltering]="true" [allowSorting]="true"></dxi-column>
+                    <dxi-column dataField="createdDate" caption="Date/Time"  width="85px"></dxi-column>  
+                    <dxi-column dataField="" caption="Page" width="400px"></dxi-column>
+                    <dxi-column dataField="" [fixed]="true" caption="Action" width="55px" [allowFiltering]="false" [allowSorting]="false" cellTemplate="cellTemplate"></dxi-column>
+                    <div *dxTemplate="let data of 'cellTemplate'">
+                        <div (click)="showMenu(data.value)" class="text-center">
+                            <i class="fa fa-th-large" id="btn{{data.value}}"></i>
+                          </div>
+                    </div>
+                </dx-data-grid>
+                <!-- <app-context [menuVisible]="menuVisible" [target]="target" [contextItems]="contextItems" (onHideMenu)="onHideMenu()" (itemClick)="itemClick($event)"></app-context>
+                <app-confirmation [text]="text" [confVisible]="confVisible" [detail]="detail" (onHideConf)="onHideConf()"></app-confirmation>
+                <app-progress [progressVisible]="progressVisible" [progressContent]="progressContent" [progressTitle]="progressTitle" (onHideProgresss)="onHideProgress()"></app-progress>
+                <app-detail-company [popupVisible]="popupVisible" [company]="details"  (onHideSite)="onHideSite()"></app-detail-company> -->
+            </div>
+            <!-- <div *ngIf="isEdit">
+                <app-company-edit [popupVisible]="popupVisible" [details]="details"  (onHideSite)="onHideSite()"></app-company-edit>
+            </div>
+            <div *ngIf="isAdd">
+                    <app-company-add [popupVisible]="popupVisible" [details]="details"  (onHideSite)="onHideSite()"></app-company-add>
+            </div> -->
+
+            <!-- <div id="toastContainer"> -->
+                <div class="alert alert-success">
+                {{ Notification }}
+            </div>
+        </div>
+    </div>
+</div>

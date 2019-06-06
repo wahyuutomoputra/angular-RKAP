@@ -1,0 +1,31 @@
+<div *ngIf="addVisible">
+  <form action="Submit" (submit)="save($event)" style="margin-left:100px; margin-right: 100px; margin-bottom: 30px; margin-top: 30px;">
+    <dx-button *ngIf="!isDetail" icon="fa fa-ban" text="Cancel" type="danger" (onClick)="cancel()"></dx-button>
+    <dx-button *ngIf="!isDetail" class="pull-right" icon="fa fa-save" text="Save" type="success" validationGroup="roleData" [useSubmitBehavior]="true">
+    </dx-button>
+
+    <div class="m-2"></div>
+    <p style="border-top: 1px rgb(196, 196, 196) solid; padding: 0px; margin: 0px;"></p>
+    <div class="m-2"></div>
+
+    <dx-form [(formData)]="role" validationGroup="roleData">
+      <dxi-item itemType="group" [colCount]="1">
+        <dxi-item itemType="group">
+
+          <dxi-item name="tahun" dataField="tahun" [label]="{ text: 'Tahun' }" editorType="dxSelectBox"  placeholder="--Tahun--" [editorOptions]="{readOnly: isDetail, dataSource: Tahun}" [validationRules]="[{type: 'required', message: 'Tahun harus diisi' }]" ></dxi-item>
+          <dxi-item name="cboRjpp" dataField="rjppid" editorType="dxSelectBox" [label]="{ text: 'RJPP' }" [editorOptions]="{readOnly: isDetail, items: daftarRjpp, displayExpr: 'periode', valueExpr: 'rjppid' }" [validationRules]="[{type: 'required', message: 'Display harus dipilih' }]" ></dxi-item>
+          <dxi-item name="cboSasaran" dataField="sid" editorType="dxSelectBox" [label]="{ text: 'Sasaran' }" [editorOptions]="{readOnly: isDetail, items: daftarSasaran, displayExpr: 'sasaran', valueExpr: 'sid' }" [validationRules]="[{type: 'required', message: 'Display harus dipilih' }]" ></dxi-item>
+          <dxi-item name="txtKeterangan" dataField="indikator_nilai" caption="Indikator Nilai" editorType="dxNumberBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Indikator Nilai harus diisi' }]"></dxi-item>
+          <dxi-item name="txtKeterangan" dataField="indikator_satuan" caption="Indikator Satuan" editorType="dxNumberBox" [editorOptions]="{readOnly: isDetail}" [validationRules]="[{type: 'required', message: 'Indikator Satuan harus diisi' }]"></dxi-item>
+          
+        </dxi-item>
+        <dxi-item itemType="group">
+          <dxi-item itemType="empty"></dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dx-form>
+    <br>
+    <app-form-confirmation [isSave]="isSave" [isCancel]="isCancel" [confVisible]="confVisible" (onYesConf)="save()" (onHideConf)="onHideConf()"
+      (onSaveConf)="onSaveConf()" (onCancelConf)="onCancelConf()"></app-form-confirmation>
+  </form>
+</div>
